@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🦘 MathKangaroo — Local Test</title>
+<title>🦘 MathKangaroo</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root {
   --jenn: #FFD93D;       /* Chick yellow */
@@ -432,7 +432,7 @@ select:focus-visible,
     <p class="app-sub">Alberta Math Challenge · Grade 4</p>
   </header>
   <div class="test-banner">
-    🧪 LOCAL TEST BUILD · <span id="sync-indicator" style="font-size:13px;" title="Sync status">📱</span> Data saved to browser only
+    ☁️ Cloud Sync: <span id="sync-indicator" style="font-size:13px;" title="Sync status">📱 Connecting…</span>
     <button class="reset-btn" onclick="resetAllData()">Reset all</button>
   </div>
   <div style="text-align:center; margin-bottom:20px;">
@@ -679,47 +679,50 @@ select:focus-visible,
 
 <script>
 // ═══════════════════════════════════════════════════════
-// FIREBASE INIT
+// FIREBASE INIT  (Firestore — same project as Chore Tracker & French Adventure)
 // ═══════════════════════════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyBvasH4OqU76196ZmZSXX_e8-L2PYnvyaY",
   authDomain: "chore-tracker-a461b.firebaseapp.com",
-  databaseURL: "https://chore-tracker-a461b-default-rtdb.firebaseio.com",
   projectId: "chore-tracker-a461b",
   storageBucket: "chore-tracker-a461b.firebasestorage.app",
   messagingSenderId: "282740057913",
   appId: "1:282740057913:web:72defcf2e53ae13237eae8"
 };
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const db = firebase.firestore();
+
+// Firestore document path: math_game / progress
+const PROGRESS_DOC = db.collection('math_game').doc('progress');
+
 let firebaseOnline = false;
 // True ONLY while we are merging a snapshot from the realtime listener into
-// local state. While true, saveState() must NOT schedule a Firebase write —
+// local state. While true, saveState() must NOT schedule a Firestore write —
 // otherwise we echo remote data back, possibly stomping a newer write made on
 // another device in the meantime.
 let applyingRemote = false;
-// Has the initial snapshot from Firebase been received yet?
-// We must NOT write to Firebase before this — otherwise a freshly-opened
+// Has the initial snapshot from Firestore been received yet?
+// We must NOT write to Firestore before this — otherwise a freshly-opened
 // device with stale localStorage would overwrite the authoritative cloud copy.
 let initialSyncDone = false;
-// Server timestamp (ms since epoch, set by Firebase) of the most recent state
-// we have applied. Compared against new snapshots to decide whether to merge.
+// Server timestamp (ms since epoch) of the most recent state we have applied.
+// Compared against new snapshots to decide whether to merge.
 let lastKnownServerTs = 0;
 // If a save is requested before initialSyncDone, defer it until after.
 let pendingSaveAfterSync = false;
 
-// Connection monitor
-db.ref('.info/connected').on('value', snap => {
-  firebaseOnline = snap.val() === true;
+// Online/offline monitor via Firestore network status
+db.enableNetwork().then(() => {
+  firebaseOnline = true;
   const indicator = document.getElementById('sync-indicator');
-  if (indicator) indicator.textContent = firebaseOnline ? '☁️' : '📱';
-});
+  if (indicator) indicator.textContent = '☁️ Synced';
+}).catch(() => {});
 
-// Debounced Firebase save (avoids writes on every keystroke)
+// Debounced Firestore save (avoids writes on every keystroke)
 let _saveTimeout = null;
 function scheduleFirebaseSave() {
   if (applyingRemote) return;            // never echo remote writes
-  if (!initialSyncDone) {                // queue until first sync completes
+  if (!initialSyncDone) {               // queue until first sync completes
     pendingSaveAfterSync = true;
     return;
   }
@@ -728,7 +731,6 @@ function scheduleFirebaseSave() {
 }
 
 function saveToFirebase() {
-  if (!firebaseOnline) return;
   if (applyingRemote) return;
   if (!initialSyncDone) { pendingSaveAfterSync = true; return; }
   try {
@@ -738,27 +740,38 @@ function saveToFirebase() {
       battle: state.battle,
       currentProfile: state.currentProfile,
       _version: SCHEMA_VERSION,
-      _updatedAt: firebase.database.ServerValue.TIMESTAMP
+      _updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
-    db.ref('progress').set(data).catch(e => console.warn('FB write failed', e));
+    PROGRESS_DOC.set(data).then(() => {
+      firebaseOnline = true;
+      const indicator = document.getElementById('sync-indicator');
+      if (indicator) indicator.textContent = '☁️ Synced';
+    }).catch(e => {
+      console.warn('Firestore write failed', e);
+      const indicator = document.getElementById('sync-indicator');
+      if (indicator) indicator.textContent = '📱 Offline';
+    });
   } catch(e) { console.warn('Firebase save failed', e); }
 }
 
-// Single source of truth for sync: this listener handles BOTH the initial
-// load AND every subsequent remote change. There is no separate one-shot
-// read at startup — that previously raced with this listener.
-//
-// We never write to Firebase until this listener has fired at least once
-// (the initialSyncDone gate above). That's how we stop a freshly-opened
-// device with stale localStorage from clobbering newer cloud data.
-db.ref('progress').on('value', snap => {
-  const data = snap.val();
-  const remoteTs = (data && typeof data._updatedAt === 'number') ? data._updatedAt : 0;
+// Single source of truth for sync: this real-time listener handles BOTH the
+// initial load AND every subsequent remote change.
+// We never write to Firestore until this listener has fired at least once
+// (the initialSyncDone gate). That stops a freshly-opened device with stale
+// localStorage from clobbering newer cloud data.
+PROGRESS_DOC.onSnapshot(snap => {
+  const data = snap.exists ? snap.data() : null;
+
+  // Firestore serverTimestamp() comes back as a Timestamp object.
+  // Convert to ms for comparison; fall back to 0 if missing/pending.
+  const remoteTs = (data && data._updatedAt && typeof data._updatedAt.toMillis === 'function')
+    ? data._updatedAt.toMillis()
+    : 0;
 
   // Decide whether remote should overwrite local.
   //   - Cloud empty: keep local, mark sync done, push local up to seed cloud.
   //   - remoteTs > lastKnownServerTs: apply (it's a real new write).
-  //   - remoteTs <= lastKnownServerTs: ignore (it's our own echo or older).
+  //   - remoteTs <= lastKnownServerTs: ignore (our own echo or older).
   let shouldApply = false;
   let shouldSeed = false;
 
@@ -777,8 +790,11 @@ db.ref('progress').on('value', snap => {
       if (data.currentProfile) state.currentProfile = data.currentProfile;
       state._version = SCHEMA_VERSION;
       lastKnownServerTs = remoteTs;
+      firebaseOnline = true;
+      const indicator = document.getElementById('sync-indicator');
+      if (indicator) indicator.textContent = '☁️ Synced';
       // Persist locally WITHOUT going through saveState() — saveState would
-      // (correctly) schedule a Firebase write, which would echo this snapshot.
+      // (correctly) schedule a Firestore write, which would echo this snapshot.
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
 
       // Re-render whatever's on screen so the user sees the update.
@@ -790,7 +806,7 @@ db.ref('progress').on('value', snap => {
         else if (id === 'screen-battle') renderBattle();
       }
       if (typeof renderMinibelts === 'function') renderMinibelts();
-      console.log('Firebase sync: applied remote @', remoteTs);
+      console.log('Firestore sync: applied remote @', remoteTs);
     } finally {
       applyingRemote = false;
     }
@@ -799,13 +815,20 @@ db.ref('progress').on('value', snap => {
   // Mark first-sync complete and flush any queued save.
   if (!initialSyncDone) {
     initialSyncDone = true;
-    console.log('Initial Firebase sync complete. Cloud has data:', !!data);
+    console.log('Initial Firestore sync complete. Cloud has data:', !!data);
     if (shouldSeed || pendingSaveAfterSync) {
       pendingSaveAfterSync = false;
       // Slight delay so any in-flight UI-triggered saves coalesce into one.
       setTimeout(saveToFirebase, 100);
     }
   }
+}, err => {
+  console.warn('Firestore listener error:', err);
+  firebaseOnline = false;
+  const indicator = document.getElementById('sync-indicator');
+  if (indicator) indicator.textContent = '📱 Offline';
+  // Still mark initial sync done so saves are not blocked indefinitely
+  if (!initialSyncDone) { initialSyncDone = true; }
 });
 // ═══════════════════════════════════════════════════════
 // TOPIC DEFINITIONS (24 topics, 8 per grade)
@@ -1245,7 +1268,7 @@ function saveState() {
   try {
     state._version = SCHEMA_VERSION;
     // NOTE: do NOT set state._updatedAt here. The authoritative timestamp is
-    // assigned by Firebase ServerValue.TIMESTAMP on write, then mirrored back
+    // assigned by Firestore FieldValue.serverTimestamp() on write, then mirrored back
     // into lastKnownServerTs by the realtime listener. Using a local clock
     // here would cause cross-device clock skew to corrupt last-write-wins.
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1260,9 +1283,7 @@ function resetAllData() {
   // Reset our sync bookkeeping so the cloud-empty snapshot doesn't get
   // mistaken for a "stale" remote and ignored on the next listener fire.
   lastKnownServerTs = 0;
-  if (firebaseOnline) {
-    db.ref('progress').remove().catch(e => console.warn('Cloud reset failed', e));
-  }
+  PROGRESS_DOC.delete().catch(e => console.warn('Cloud reset failed', e));
   state = loadState();
   renderMinibelts();
   alert('Reset complete!');
