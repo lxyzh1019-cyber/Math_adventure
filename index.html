@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦘 MathKangaroo — Local Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<style>
+:root {
+  --jenn: #FFD93D;       /* Chick yellow */
+  --jenn-light: #FFF8E1;
+  --jenn-dark: #F57F17;
+  --jess: #FF8C42;       /* Fox orange */
+  --jess-light: #FFF3E0;
+  --jess-dark: #E65100;
+  --gold: #FFD93D;
+  --purple: #9B59B6;
+  --teal: #4ECDC4;
+  --bg: #F7F3FF;
+  --card: #FFFFFF;
+  --text: #2D2D44;
+  --muted: #6E6E99;
+  --border: rgba(0,0,0,0.08);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.14);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --success: #27AE60;
+  --danger: #E74C3C;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+body::before {
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(ellipse at 20% 20%, rgba(155,89,182,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 80%, rgba(78,205,196,0.08) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+.app-shell { max-width:480px; margin:0 auto; position:relative; z-index:1; }
+.screen { display:none; min-height:100vh; padding:20px 18px 90px; animation:fadeIn 0.35s ease; }
+.screen.active { display:flex; flex-direction:column; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* HEADER */
+.app-header { text-align:center; margin-bottom:24px; }
+.app-logo { font-family:'Baloo 2',cursive; font-size:28px; font-weight:800; background:linear-gradient(135deg,#9B59B6,#4ECDC4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.app-sub { font-size:13px; color:var(--muted); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-top:2px; }
+
+/* PROFILE SELECT */
+.profile-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 auto 20px; }
+.profile-card {
+  border-radius:var(--radius); padding:24px 14px; text-align:center; cursor:pointer;
+  border:3px solid transparent; transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative; overflow:hidden;
+}
+.profile-card.jenn { background:var(--jenn-light); border-color:var(--jenn); }
+.profile-card.jess { background:var(--jess-light); border-color:var(--jess); }
+.profile-card:hover { transform:translateY(-4px) scale(1.02); box-shadow:var(--shadow-hover); }
+.profile-avatar { width:72px; height:72px; border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:38px; }
+.profile-card.jenn .profile-avatar { background:var(--jenn); }
+.profile-card.jess .profile-avatar { background:var(--jess); }
+.profile-name { font-family:'Baloo 2',cursive; font-size:22px; font-weight:800; }
+.profile-card.jenn .profile-name { color:var(--jenn-dark); }
+.profile-card.jess .profile-name { color:var(--jess-dark); }
+.profile-grade { font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:2px; }
+.profile-belts { display:flex; gap:4px; justify-content:center; margin-top:10px; flex-wrap:wrap; }
+.mini-belt { width:14px; height:14px; border-radius:50%; border:2px solid white; }
+
+/* HOME */
+.greeting { font-family:'Baloo 2',cursive; font-size:26px; font-weight:800; margin-bottom:4px; }
+.greeting-sub { font-size:14px; color:var(--muted); font-weight:600; margin-bottom:18px; }
+.stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+.stat-card { background:var(--card); border-radius:var(--radius-sm); padding:14px 8px; text-align:center; box-shadow:var(--shadow); }
+.stat-val { font-family:'Baloo 2',cursive; font-size:22px; font-weight:800; }
+.stat-lbl { font-size:10px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px; }
+
+/* TABS */
+.tab-row { display:flex; gap:6px; background:var(--card); padding:4px; border-radius:99px; margin-bottom:18px; box-shadow:var(--shadow); overflow-x:auto; scrollbar-width:none; }
+.tab-row::-webkit-scrollbar { display:none; }
+.tab-btn { flex:1; padding:8px 14px; border-radius:99px; border:none; background:transparent; font-family:'Nunito',sans-serif; font-size:12px; font-weight:800; color:var(--muted); cursor:pointer; white-space:nowrap; transition:all 0.2s; }
+.tab-btn.active { background:linear-gradient(135deg,var(--purple),#6C3483); color:white; box-shadow:0 2px 8px rgba(155,89,182,0.3); }
+
+/* WALL BATTLE BANNER */
+.battle-banner {
+  border-radius:var(--radius); padding:16px; margin-bottom:20px;
+  background:linear-gradient(135deg,#1a1a2e,#16213e); color:white;
+  display:flex; align-items:center; gap:12px; cursor:pointer; position:relative; overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2); transition:transform 0.2s;
+}
+.battle-banner:hover { transform:scale(1.01); }
+.battle-banner::before {
+  content:'🧱'; position:absolute; right:-10px; top:-10px; font-size:80px; opacity:0.1;
+}
+.bb-icon { font-size:28px; z-index:1; }
+.bb-content { flex:1; z-index:1; }
+.bb-title { font-family:'Baloo 2',cursive; font-size:15px; font-weight:800; }
+.bb-sub { font-size:11px; opacity:0.8; font-weight:600; margin-top:2px; }
+.bb-mini-walls { display:flex; gap:12px; margin-top:6px; font-size:11px; font-weight:700; }
+
+/* TOPIC CARDS */
+.section-title { font-family:'Baloo 2',cursive; font-size:18px; font-weight:800; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.topic-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.topic-card {
+  background:var(--card); border-radius:var(--radius-sm); padding:12px; cursor:pointer;
+  box-shadow:var(--shadow); border:2px solid transparent; transition:all 0.2s;
+  position:relative; overflow:hidden; min-height:98px;
+}
+.topic-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+.topic-card.exhausted { opacity:0.55; cursor:not-allowed; }
+.topic-card.exhausted::after {
+  content:'🌙'; position:absolute; top:8px; right:8px; font-size:16px;
+}
+.tc-grade { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+.tc-name { font-size:12.5px; font-weight:800; color:var(--text); line-height:1.3; padding-right:28px; }
+.tc-belt { position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; border:2px solid white; }
+.tc-progress { margin-top:8px; background:#F0EEF8; border-radius:99px; height:4px; overflow:hidden; }
+.tc-bar { height:100%; border-radius:99px; transition:width 0.4s ease; }
+.tc-meta { font-size:10px; color:var(--muted); font-weight:700; margin-top:3px; display:flex; justify-content:space-between; }
+
+.belt-unranked { background:#E0E0E0; }
+.belt-bronze { background:linear-gradient(135deg,#CD7F32,#A0522D); }
+.belt-silver { background:linear-gradient(135deg,#C0C0C0,#888); }
+.belt-gold { background:linear-gradient(135deg,#FFD700,#FFA500); }
+.belt-kangaroo { background:linear-gradient(135deg,#4ECDC4,#2A9D94); }
+.belt-elite { background:linear-gradient(135deg,#9B59B6,#6C3483); }
+
+/* VAULT */
+.vault-btn {
+  background:var(--card); border-radius:var(--radius-sm); padding:14px 16px;
+  display:flex; align-items:center; gap:12px; cursor:pointer; box-shadow:var(--shadow);
+  border:2px dashed var(--border); transition:all 0.2s; margin-bottom:14px;
+}
+.vault-btn:hover { border-color:var(--purple); }
+.vault-icon { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#9B59B6,#6C3483); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.vault-info-title { font-size:14px; font-weight:800; }
+.vault-info-sub { font-size:12px; color:var(--muted); font-weight:600; }
+.vault-count { margin-left:auto; background:var(--purple); color:white; font-size:13px; font-weight:800; padding:4px 12px; border-radius:99px; }
+
+/* NAV */
+.bottom-nav { position:fixed; bottom:0; left:0; right:0; background:var(--card); border-top:1px solid var(--border); display:flex; justify-content:space-around; padding:8px 0 10px; z-index:100; max-width:480px; margin:0 auto; box-shadow:0 -4px 20px rgba(0,0,0,0.06); }
+.nav-btn { display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; padding:6px 14px; border-radius:var(--radius-sm); transition:all 0.2s; border:none; background:transparent; }
+.nav-btn.active { background:rgba(155,89,182,0.12); }
+.nav-icon { font-size:20px; }
+.nav-lbl { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); }
+.nav-btn.active .nav-lbl { color:var(--purple); }
+
+/* BACK BUTTON */
+.back-btn { display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px; font-weight:800; color:var(--muted); margin-bottom:16px; transition:color 0.2s; width:fit-content; }
+.back-btn:hover { color:var(--text); }
+
+/* TOPIC DETAIL */
+.topic-hero { background:var(--card); border-radius:var(--radius); padding:20px; margin-bottom:18px; box-shadow:var(--shadow); text-align:center; }
+.topic-hero-icon { font-size:40px; margin-bottom:6px; }
+.topic-hero-name { font-family:'Baloo 2',cursive; font-size:20px; font-weight:800; }
+.topic-hero-grade { font-size:12px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; }
+.belt-display { display:flex; justify-content:center; gap:8px; margin-bottom:4px; }
+.belt-pip { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; border:3px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+.belt-pip.inactive { background:#E8E8F0; filter:grayscale(1); opacity:0.4; }
+.belt-pip-lbl { font-size:9px; font-weight:800; color:var(--muted); text-align:center; width:34px; }
+.belt-labels { display:flex; justify-content:center; gap:8px; margin-top:4px; }
+.counter-info { margin-top:10px; font-size:12px; color:var(--muted); font-weight:700; }
+
+.session-len { display:flex; gap:8px; margin-bottom:16px; }
+.len-btn { flex:1; padding:10px; border-radius:var(--radius-sm); border:2px solid var(--border); background:var(--card); font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; cursor:pointer; transition:all 0.18s; }
+.len-btn.selected { border-color:var(--purple); background:#F3E5FF; color:var(--purple); }
+
+.tier-select-grid { display:grid; gap:10px; margin-bottom:16px; }
+.tier-btn {
+  border-radius:var(--radius-sm); padding:14px 16px; cursor:pointer; border:2px solid transparent;
+  background:var(--card); box-shadow:var(--shadow); display:flex; align-items:center; gap:12px;
+  transition:all 0.2s;
+}
+.tier-btn:hover:not(.locked) { transform:translateX(3px); box-shadow:var(--shadow-hover); }
+.tier-btn.locked { opacity:0.5; cursor:not-allowed; }
+.tier-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.tier-1-icon { background:#EAF3DE; }
+.tier-2-icon { background:#E6F1FB; }
+.tier-3-icon { background:#F3E5FF; }
+.tier-info { flex:1; }
+.tier-name { font-size:14px; font-weight:800; }
+.tier-desc { font-size:11px; color:var(--muted); font-weight:600; margin-top:2px; }
+.tier-progress { font-size:10px; color:var(--muted); font-weight:700; margin-top:4px; }
+
+/* QUESTION */
+.q-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:10px; }
+.q-progress-wrap { flex:1; background:#E8E8F0; border-radius:99px; height:8px; overflow:hidden; }
+.q-progress-bar { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--purple),var(--teal)); transition:width 0.4s ease; }
+.q-counter { font-size:12px; font-weight:800; color:var(--muted); white-space:nowrap; }
+.q-timer { font-family:'Baloo 2',cursive; font-size:16px; font-weight:800; color:var(--purple); }
+
+.q-card { background:var(--card); border-radius:var(--radius); padding:22px; margin-bottom:14px; box-shadow:var(--shadow); }
+.q-tier-tag { display:inline-block; font-size:11px; font-weight:800; padding:3px 10px; border-radius:99px; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em; }
+.q-text { font-family:'Baloo 2',cursive; font-size:17px; font-weight:700; line-height:1.5; color:var(--text); }
+
+.choices-grid { display:grid; gap:10px; margin-bottom:14px; }
+.choice-btn {
+  background:var(--card); border:2px solid var(--border); border-radius:var(--radius-sm);
+  padding:14px 16px; cursor:pointer; font-family:'Nunito',sans-serif; font-size:14.5px; font-weight:700;
+  text-align:left; display:flex; align-items:center; gap:12px; transition:all 0.18s;
+  box-shadow:var(--shadow); width:100%;
+}
+.choice-btn:hover:not(:disabled) { border-color:var(--purple); background:#F9F6FF; transform:translateX(2px); }
+.choice-btn.correct { border-color:var(--success); background:#EAFAF1; color:#1E8449; }
+.choice-btn.wrong { border-color:var(--danger); background:#FDEDEC; color:#C0392B; }
+.choice-btn:disabled { cursor:default; }
+.choice-letter { width:26px; height:26px; border-radius:8px; background:#F0EEF8; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:var(--purple); flex-shrink:0; }
+.choice-btn.correct .choice-letter { background:var(--success); color:white; }
+.choice-btn.wrong .choice-letter { background:var(--danger); color:white; }
+
+.free-entry { display:flex; gap:10px; margin-bottom:14px; }
+.free-input { flex:1; border:2px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; font-family:'Baloo 2',cursive; font-size:18px; font-weight:700; color:var(--text); background:var(--card); outline:2px solid transparent; box-shadow:var(--shadow); transition:border-color 0.18s; min-width:0; }
+.free-input:focus-visible { border-color:var(--purple); outline-color:var(--purple); outline-offset:2px; }
+.submit-btn { padding:14px 20px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--purple),#6C3483); color:white; font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; border:none; cursor:pointer; box-shadow:0 4px 14px rgba(155,89,182,0.35); transition:all 0.2s; flex-shrink:0; }
+.submit-btn:hover { transform:translateY(-2px); }
+.submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+.feedback-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.explain-btn { padding:9px 14px; border-radius:var(--radius-sm); border:2px solid var(--purple); background:white; color:var(--purple); font-family:'Nunito',sans-serif; font-size:12.5px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.2s; }
+.explain-btn:hover { background:#F3E5FF; }
+.easy-btn { padding:9px 14px; border-radius:var(--radius-sm); border:2px solid #F39C12; background:white; color:#F39C12; font-family:'Nunito',sans-serif; font-size:12.5px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.2s; }
+.easy-btn:hover { background:#FFF5E6; }
+.easy-btn.active { background:#F39C12; color:white; }
+.next-btn { padding:10px 20px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--purple),#6C3483); color:white; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; border:none; cursor:pointer; margin-left:auto; transition:all 0.2s; box-shadow:0 3px 12px rgba(155,89,182,0.3); }
+.next-btn:hover { transform:translateY(-1px); }
+.vault-tag { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--muted); font-weight:700; margin-top:8px; }
+.success-tag { display:flex; align-items:center; gap:6px; font-size:14px; font-weight:800; color:var(--success); }
+
+.explain-box { background:#F9F6FF; border:2px solid #D8C8F0; border-radius:var(--radius-sm); padding:14px; margin-top:12px; font-size:13.5px; line-height:1.7; color:var(--text); animation:fadeIn 0.3s ease; }
+.explain-loading { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; font-weight:700; }
+.dot-pulse { display:flex; gap:4px; }
+.dot-pulse span { width:6px; height:6px; border-radius:50%; background:var(--purple); animation:pulse 1.2s infinite; }
+.dot-pulse span:nth-child(2) { animation-delay:0.2s; }
+.dot-pulse span:nth-child(3) { animation-delay:0.4s; }
+@keyframes pulse { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1);opacity:1} }
+
+/* MULTI-SELECT */
+.multi-hint { font-size:12px; font-weight:700; color:var(--muted); margin-bottom:8px; background:#FFF5E6; padding:6px 10px; border-radius:8px; display:inline-block; }
+.choice-btn.multi-selected { border-color:var(--purple); background:#F3E5FF; color:var(--purple); }
+.choice-btn.multi-selected .choice-letter { background:var(--purple); color:white; }
+
+/* RESULTS */
+.result-hero { text-align:center; padding:24px 0 14px; }
+.result-emoji { font-size:60px; animation:bounceIn 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes bounceIn { 0%{transform:scale(0)} 100%{transform:scale(1)} }
+.result-title { font-family:'Baloo 2',cursive; font-size:26px; font-weight:800; margin-top:8px; }
+.result-score { font-family:'Baloo 2',cursive; font-size:46px; font-weight:900; background:linear-gradient(135deg,var(--purple),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.result-sub { font-size:14px; color:var(--muted); font-weight:600; }
+.result-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:18px 0; }
+.result-stat { background:var(--card); border-radius:var(--radius-sm); padding:12px 8px; text-align:center; box-shadow:var(--shadow); }
+.result-stat .rv { font-family:'Baloo 2',cursive; font-size:20px; font-weight:800; }
+.result-stat .rl { font-size:10px; color:var(--muted); font-weight:700; text-transform:uppercase; }
+.belt-earned { background:linear-gradient(135deg,#9B59B6,#6C3483); border-radius:var(--radius); padding:16px; text-align:center; color:white; margin-bottom:14px; }
+.belt-earned-icon { font-size:36px; }
+.belt-earned-txt { font-family:'Baloo 2',cursive; font-size:15px; font-weight:800; margin-top:4px; }
+.action-btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.action-btn { padding:14px; border-radius:var(--radius-sm); font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; border:none; transition:all 0.2s; }
+.action-primary { background:linear-gradient(135deg,var(--purple),#6C3483); color:white; box-shadow:0 4px 14px rgba(155,89,182,0.35); }
+.action-secondary { background:var(--card); color:var(--text); border:2px solid var(--border); box-shadow:var(--shadow); }
+
+/* PARENT */
+.parent-header { background:linear-gradient(135deg,#2D2D44,#1A1A2E); border-radius:var(--radius); padding:18px; margin-bottom:18px; color:white; display:flex; align-items:center; gap:12px; }
+.parent-icon { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; }
+.parent-title { font-family:'Baloo 2',cursive; font-size:18px; font-weight:800; }
+.parent-sub { font-size:11px; opacity:0.65; font-weight:600; margin-top:2px; }
+.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+.compare-card { border-radius:var(--radius-sm); padding:14px; box-shadow:var(--shadow); }
+.compare-card.jenn-card { background:var(--jenn-light); border:2px solid var(--jenn); }
+.compare-card.jess-card { background:var(--jess-light); border:2px solid var(--jess); }
+.cc-name { font-family:'Baloo 2',cursive; font-size:17px; font-weight:800; }
+.jenn-card .cc-name { color:var(--jenn-dark); }
+.jess-card .cc-name { color:var(--jess-dark); }
+.cc-stat { font-size:11.5px; font-weight:700; color:var(--muted); margin-top:5px; }
+.cc-stat b { color:var(--text); font-weight:800; }
+
+/* WALL BATTLE SCREEN */
+.battle-arena { background:linear-gradient(180deg,#1a1a2e 0%,#2d1b4e 100%); border-radius:var(--radius); padding:20px 16px; margin-bottom:16px; position:relative; overflow:hidden; }
+.battle-arena::before {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:30%;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,0.3));
+}
+.wall-field { display:flex; justify-content:space-between; align-items:flex-end; gap:10px; position:relative; z-index:1; }
+.wall-side { text-align:center; flex:1; }
+.wall-avatar { font-size:32px; margin-bottom:8px; }
+.wall-structure { display:flex; flex-direction:column; gap:2px; align-items:center; margin-bottom:6px; }
+.brick-row-b { display:flex; gap:2px; }
+.brick-cell { width:16px; height:9px; border-radius:1px; }
+.brick-cell.intact-jenn { background:#FFD93D; border:0.5px solid #F57F17; box-shadow:inset 0 -1px 0 rgba(0,0,0,0.1); }
+.brick-cell.intact-jess { background:#FF8C42; border:0.5px solid #E65100; box-shadow:inset 0 -1px 0 rgba(0,0,0,0.1); }
+.brick-cell.destroyed { background:#333; border:0.5px solid #444; opacity:0.3; }
+.wall-name { font-family:'Baloo 2',cursive; font-size:13px; font-weight:800; color:white; }
+.wall-count { font-size:11px; font-weight:700; opacity:0.7; color:white; }
+.vs-middle { display:flex; flex-direction:column; align-items:center; gap:4px; padding:0 4px; }
+.vs-cannon { font-size:22px; }
+.vs-text { font-family:'Baloo 2',cursive; font-size:11px; font-weight:800; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+
+.battle-status { margin-top:14px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:var(--radius-sm); text-align:center; position:relative; z-index:1; }
+.bs-text { font-size:12px; color:white; font-weight:700; opacity:0.9; }
+
+.slot-info { background:var(--card); border-radius:var(--radius-sm); padding:14px; margin-bottom:12px; box-shadow:var(--shadow); }
+.slot-title { font-size:13px; font-weight:800; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.slot-detail { font-size:12px; color:var(--muted); font-weight:600; margin:2px 0; }
+.slot-action { margin-top:10px; padding:10px 14px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--purple),#6C3483); color:white; border:none; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; width:100%; }
+.slot-action:disabled { opacity:0.4; cursor:not-allowed; }
+
+.setup-step { background:var(--card); border-radius:var(--radius-sm); padding:16px; margin-bottom:12px; box-shadow:var(--shadow); }
+.step-num { display:inline-block; width:24px; height:24px; border-radius:50%; background:var(--purple); color:white; text-align:center; line-height:24px; font-size:12px; font-weight:800; margin-right:8px; }
+.step-title { font-size:14px; font-weight:800; margin-bottom:10px; }
+.opt-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.opt-btn { padding:10px; border-radius:var(--radius-sm); border:2px solid var(--border); background:var(--card); font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.18s; }
+.opt-btn.selected { border-color:var(--purple); background:#F3E5FF; color:var(--purple); font-weight:800; }
+.prize-grid-sel { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.custom-prize-input { width:100%; padding:10px 12px; border-radius:var(--radius-sm); border:2px solid var(--border); font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; margin-top:6px; outline:2px solid transparent; }
+.custom-prize-input:focus-visible { border-color:var(--purple); outline-color:var(--purple); outline-offset:2px; }
+
+/* VAULT SCREEN */
+.vault-empty { text-align:center; padding:40px 20px; color:var(--muted); }
+.vault-empty-emoji { font-size:48px; margin-bottom:10px; }
+.vault-empty-text { font-size:14px; font-weight:700; }
+.vault-item { background:var(--card); border-radius:var(--radius-sm); padding:14px; margin-bottom:10px; box-shadow:var(--shadow); border-left:4px solid var(--purple); }
+.vault-q-topic { font-size:11px; font-weight:800; color:var(--purple); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; }
+.vault-q-text { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; line-height:1.5; }
+.vault-q-actions { display:flex; gap:8px; }
+.vault-btn-flip { flex:1; padding:8px; border-radius:var(--radius-sm); border:2px solid var(--purple); background:white; color:var(--purple); font-family:'Nunito',sans-serif; font-size:12px; font-weight:800; cursor:pointer; }
+.vault-btn-retry { flex:1; padding:8px; border-radius:var(--radius-sm); border:none; background:linear-gradient(135deg,var(--purple),#6C3483); color:white; font-family:'Nunito',sans-serif; font-size:12px; font-weight:800; cursor:pointer; }
+.vault-answer { margin-top:8px; padding:8px; background:#EAFAF1; border-radius:8px; font-size:13px; font-weight:800; color:#1E8449; }
+
+/* MONTHLY CHALLENGE */
+.challenge-card { background:linear-gradient(135deg,#F39C12,#E67E22); border-radius:var(--radius); padding:18px; margin-bottom:16px; color:white; }
+.cc-title { font-family:'Baloo 2',cursive; font-size:18px; font-weight:800; }
+.cc-sub { font-size:12px; opacity:0.85; font-weight:600; margin-top:2px; }
+.cc-scores { margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.cc-score-card { background:rgba(255,255,255,0.2); border-radius:10px; padding:10px; text-align:center; }
+.cc-score-name { font-size:11px; font-weight:800; opacity:0.9; }
+.cc-score-val { font-family:'Baloo 2',cursive; font-size:24px; font-weight:800; margin-top:2px; }
+
+/* CONFETTI */
+.confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:999; }
+.confetti-piece { position:absolute; width:10px; height:10px; border-radius:2px; animation:fall linear forwards; }
+@keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:0} }
+
+/* CANNON ANIMATION */
+.cannon-fire { position:fixed; font-size:24px; z-index:500; pointer-events:none; animation:cannonFly 0.6s ease-out forwards; }
+@keyframes cannonFly {
+  0% { opacity:1; transform:translateX(0) scale(0.8); }
+  100% { opacity:0; transform:translateX(300px) scale(1.2); }
+}
+
+/* TEST BANNER */
+.test-banner { background:#FFF8E1; border:1px dashed #F57F17; border-radius:10px; padding:8px 12px; margin-bottom:14px; font-size:11px; color:#F57F17; font-weight:700; text-align:center; }
+.reset-btn { background:none; border:1px solid var(--border); border-radius:6px; padding:3px 8px; font-size:10px; color:var(--muted); cursor:pointer; margin-left:6px; font-weight:700; }
+.reset-btn:hover { background:var(--danger); color:white; border-color:var(--danger); }
+
+/* FOCUS-VISIBLE (universal) */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+.tab-btn:focus-visible,
+.choice-btn:focus-visible,
+.len-btn:focus-visible,
+.tier-btn:focus-visible,
+.opt-btn:focus-visible,
+.nav-btn:focus-visible,
+.back-btn:focus-visible,
+.vault-btn:focus-visible,
+.battle-banner:focus-visible,
+.topic-card:focus-visible,
+.profile-card:focus-visible,
+.vault-btn-flip:focus-visible,
+.vault-btn-retry:focus-visible { outline:2px solid var(--purple); outline-offset:2px; }
+
+.skip-link { position:absolute; top:-100px; left:10px; background:var(--purple); color:white; padding:8px 16px; border-radius:0 0 8px 8px; font-weight:800; font-size:13px; z-index:1000; text-decoration:none; }
+.skip-link:focus { top:0; }
+
+/* LECTURE VIEWER */
+.lecture-section { margin-top:20px; }
+.lecture-toggle {
+  width:100%; padding:14px 16px; border-radius:var(--radius-sm); border:2px solid var(--purple);
+  background:linear-gradient(135deg,#F3E5FF,white); font-family:'Baloo 2',cursive; font-size:16px;
+  font-weight:800; color:var(--purple); cursor:pointer; display:flex; align-items:center; gap:8px;
+  box-shadow:var(--shadow); transition:all 0.2s;
+}
+.lecture-toggle:hover { box-shadow:var(--shadow-hover); }
+.lecture-toggle:disabled { opacity:0.6; cursor:default; }
+.lecture-toggle .toggle-arrow { margin-left:auto; transition:transform 0.3s; font-size:14px; }
+.lecture-toggle.open .toggle-arrow { transform:rotate(180deg); }
+
+.lecture-body { display:none; margin-top:10px; }
+.lecture-body.open { display:block; animation:fadeIn 0.3s ease; }
+
+.lecture-card {
+  background:var(--card); border-radius:var(--radius-sm); padding:16px; margin-bottom:10px;
+  box-shadow:var(--shadow); border-left:4px solid var(--purple);
+}
+.lecture-card h4 { font-family:'Baloo 2',cursive; font-size:15px; font-weight:800; color:var(--purple); margin-bottom:6px; }
+.lecture-card p { font-size:13.5px; line-height:1.7; color:var(--text); font-weight:600; }
+
+.lecture-tips {
+  background:linear-gradient(135deg,#FFF8E1,#FFF3E0); border-radius:var(--radius-sm); padding:16px;
+  border:2px dashed #F39C12; margin-top:4px;
+}
+.lecture-tips h4 { font-family:'Baloo 2',cursive; font-size:14px; font-weight:800; color:#E67E22; margin-bottom:8px; }
+.lecture-tips li { font-size:12.5px; color:var(--text); font-weight:600; margin-bottom:6px; margin-left:18px; line-height:1.5; }
+
+/* PARENT HELP BUTTON */
+.parent-help-btn {
+  display:flex; align-items:center; gap:8px; width:100%; padding:12px 16px;
+  border-radius:var(--radius-sm); border:2px dashed #E67E22;
+  background:linear-gradient(135deg,#FFF8E1,#FFF3E0);
+  font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; color:#E67E22;
+  cursor:pointer; margin-top:12px; transition:all 0.2s;
+}
+.parent-help-btn:hover { background:linear-gradient(135deg,#FFF3E0,#FFE0B2); border-color:#D35400; }
+.parent-help-msg {
+  margin-top:8px; padding:12px; background:#FFF8E1; border-radius:8px;
+  border:1px solid #F39C12; font-size:12.5px; color:var(--text); font-weight:600;
+  display:none; line-height:1.6;
+}
+.parent-help-msg.show { display:block; animation:fadeIn 0.3s ease; }
+</style>
+</head>
+<body>
+<a href="#screen-home" class="skip-link">Skip to content</a>
+<main class="app-shell">
+
+<!-- PROFILE SELECT -->
+<section class="screen active" id="screen-profile" aria-label="Profile selection">
+  <header class="app-header">
+    <h1 class="app-logo">🦘 MathKangaroo</h1>
+    <p class="app-sub">Alberta Math Challenge · Grade 4</p>
+  </header>
+  <div class="test-banner">
+    🧪 LOCAL TEST BUILD · <span id="sync-indicator" style="font-size:13px;" title="Sync status">📱</span> Data saved to browser only
+    <button class="reset-btn" onclick="resetAllData()">Reset all</button>
+  </div>
+  <div style="text-align:center; margin-bottom:20px;">
+    <h2 style="font-family:'Baloo 2',cursive; font-size:20px; font-weight:800; margin-bottom:4px;">Who's training today?</h2>
+    <p style="font-size:13px; color:var(--muted); font-weight:600; margin:0;">Pick your profile to continue</p>
+  </div>
+  <div class="profile-grid">
+    <div class="profile-card jenn" role="button" tabindex="0" aria-label="Select Jenn's profile" onclick="selectProfile('jenn')" onkeydown="if(event.key==='Enter'||event.key===' ')selectProfile('jenn')">
+      <div class="profile-avatar">🐥</div>
+      <div class="profile-name">Jenn</div>
+      <div class="profile-grade">Grade 4</div>
+      <div class="profile-belts" id="jenn-mini-belts"></div>
+    </div>
+    <div class="profile-card jess" role="button" tabindex="0" aria-label="Select Jess's profile" onclick="selectProfile('jess')" onkeydown="if(event.key==='Enter'||event.key===' ')selectProfile('jess')">
+      <div class="profile-avatar">🦊</div>
+      <div class="profile-name">Jess</div>
+      <div class="profile-grade">Grade 4</div>
+      <div class="profile-belts" id="jess-mini-belts"></div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:8px;">
+    <button onclick="showScreen('screen-parent')" style="background:none;border:none;cursor:pointer;font-size:12px;font-weight:800;color:var(--muted);padding:8px 16px;border-radius:99px;transition:background 0.2s;">
+      🔒 Parent Dashboard
+    </button>
+  </div>
+</section>
+
+<!-- HOME -->
+<section class="screen" id="screen-home" aria-label="Home dashboard">
+  <h2 class="greeting" id="home-greeting">Hey Jenn! 👋</h2>
+  <p class="greeting-sub" id="home-sub">Keep up the training streak!</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-val" id="stat-streak" style="color:var(--gold)">🔥 0</div>
+      <div class="stat-lbl">Day Streak</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-sessions" style="color:var(--purple)">0</div>
+      <div class="stat-lbl">This Week</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-belts" style="color:var(--gold)">0</div>
+      <div class="stat-lbl">Belts</div>
+    </div>
+  </div>
+
+  <div class="battle-banner" role="button" tabindex="0" aria-label="Open Wall Battle arena" onclick="showScreen('screen-battle')" onkeydown="if(event.key==='Enter'||event.key===' ')showScreen('screen-battle')">
+    <div class="bb-icon">⚔️</div>
+    <div class="bb-content">
+      <div class="bb-title">Wall Battle Campaign</div>
+      <div class="bb-sub" id="battle-sub">Tap to enter the arena</div>
+      <div class="bb-mini-walls" id="battle-walls-mini">🐥 30 · 🦊 30</div>
+    </div>
+    <div style="font-size:20px; z-index:1;">›</div>
+  </div>
+
+  <div class="challenge-card" id="monthly-card">
+    <div class="cc-title">🏆 Monthly Challenge</div>
+    <div class="cc-sub">Total correct answers this month</div>
+    <div class="cc-scores">
+      <div class="cc-score-card">
+        <div class="cc-score-name">🐥 Jenn</div>
+        <div class="cc-score-val" id="monthly-jenn">0</div>
+      </div>
+      <div class="cc-score-card">
+        <div class="cc-score-name">🦊 Jess</div>
+        <div class="cc-score-val" id="monthly-jess">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-row" id="grade-tabs" role="tablist" aria-label="Grade filter">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="all" onclick="setTab('all')">All Topics</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="4" onclick="setTab('4')">Grade 4</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="5" onclick="setTab('5')">Grade 5</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="6" onclick="setTab('6')">Grade 6</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="vault" onclick="setTab('vault')">🔐 Vault</button>
+  </div>
+
+  <div id="content-area"></div>
+</section>
+
+<!-- TOPIC -->
+<section class="screen" id="screen-topic" aria-label="Topic detail">
+  <div class="back-btn" role="button" tabindex="0" onclick="showScreen('screen-home')" onkeydown="if(event.key==='Enter'||event.key===' ')showScreen('screen-home')">← Back</div>
+  <div class="topic-hero">
+    <div class="topic-hero-icon" id="th-icon">🔢</div>
+    <div class="topic-hero-name" id="th-name">Topic</div>
+    <div class="topic-hero-grade" id="th-grade">Grade 4</div>
+    <div class="belt-display" id="belt-display"></div>
+    <div class="belt-labels">
+      <div class="belt-pip-lbl">Bronze</div>
+      <div class="belt-pip-lbl">Silver</div>
+      <div class="belt-pip-lbl">Gold</div>
+      <div class="belt-pip-lbl">🦘</div>
+      <div class="belt-pip-lbl">Elite</div>
+    </div>
+    <div class="counter-info" id="counter-info">Tier 1: 0/60 correct</div>
+  </div>
+
+  <div class="section-title" style="margin-bottom:8px;">⏱️ Session Length</div>
+  <div class="session-len" style="margin-bottom:14px;">
+    <button class="len-btn selected" onclick="selectLen(10,this)">10 Qs</button>
+    <button class="len-btn" onclick="selectLen(15,this)">15 Qs</button>
+    <button class="len-btn" onclick="selectLen(20,this)">20 Qs</button>
+  </div>
+
+  <div class="section-title" style="margin-bottom:8px;">🎯 Choose Your Tier</div>
+  <div class="tier-select-grid" id="tier-select-grid"></div>
+
+  <div class="lecture-section" id="lecture-section">
+    <button class="lecture-toggle" id="lecture-toggle" onclick="toggleLecture()" aria-expanded="false">
+      📖 Review Lesson <span class="toggle-arrow">▼</span>
+    </button>
+    <div class="lecture-body" id="lecture-body"></div>
+    <button class="parent-help-btn" id="parent-help-btn" onclick="toggleParentHelp()" aria-expanded="false" aria-label="Ask a parent for help with this topic">
+      👨‍👩‍👧 Need help? Ask a parent!
+    </button>
+    <div class="parent-help-msg" id="parent-help-msg"></div>
+  </div>
+</section>
+
+<!-- QUESTION -->
+<section class="screen" id="screen-question" aria-label="Question player">
+  <div class="q-header">
+    <div class="q-timer" id="q-timer" role="timer" aria-live="polite" aria-atomic="true">⏱ 0:00</div>
+    <div class="q-progress-wrap"><div class="q-progress-bar" id="q-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:0%"></div></div>
+    <div class="q-counter" id="q-counter">1 / 10</div>
+  </div>
+  <div class="q-card">
+    <div class="q-tier-tag" id="q-tier-tag">Tier 1</div>
+    <div id="multi-hint-slot"></div>
+    <div class="q-text" id="q-text">Loading question...</div>
+  </div>
+  <div id="choices-area"></div>
+  <div id="feedback-area"></div>
+</section>
+
+<!-- RESULTS -->
+<section class="screen" id="screen-result" aria-label="Session results">
+  <div class="result-hero">
+    <div class="result-emoji" id="result-emoji" aria-hidden="true">🎉</div>
+    <div class="result-title" id="result-title">Great session!</div>
+    <div class="result-score" id="result-score">8/10</div>
+    <div class="result-sub" id="result-sub">80% accuracy</div>
+  </div>
+  <div class="result-cards">
+    <div class="result-stat"><div class="rv" id="r-correct" style="color:var(--success)">—</div><div class="rl">Correct</div></div>
+    <div class="result-stat"><div class="rv" id="r-wrong" style="color:var(--danger)">—</div><div class="rl">Wrong</div></div>
+    <div class="result-stat"><div class="rv" id="r-vault" style="color:var(--purple)">—</div><div class="rl">To Vault</div></div>
+  </div>
+  <div class="belt-earned" id="belt-earned-box" style="display:none;">
+    <div class="belt-earned-icon" id="belt-earned-icon">🏅</div>
+    <div class="belt-earned-txt" id="belt-earned-txt">Belt Earned!</div>
+  </div>
+  <div class="action-btns">
+    <button class="action-btn action-primary" onclick="replaySession()">🔁 Train Again</button>
+    <button class="action-btn action-secondary" onclick="showScreen('screen-home')">🏠 Home</button>
+  </div>
+</section>
+
+<!-- PARENT -->
+<section class="screen" id="screen-parent" aria-label="Parent dashboard">
+  <div class="back-btn" role="button" tabindex="0" onclick="showScreen('screen-profile')" onkeydown="if(event.key==='Enter'||event.key===' ')showScreen('screen-profile')">← Back</div>
+  <div class="parent-header">
+    <div class="parent-icon">📊</div>
+    <div>
+      <div class="parent-title">Parent Dashboard</div>
+      <div class="parent-sub" id="parent-week-label">Week view</div>
+    </div>
+  </div>
+  <div class="section-title">📈 This Week</div>
+  <div class="compare-grid">
+    <div class="compare-card jenn-card">
+      <div class="cc-name">🐥 Jenn</div>
+      <div class="cc-stat">Sessions: <b id="p-jenn-sessions">0</b></div>
+      <div class="cc-stat">Accuracy: <b id="p-jenn-acc">—</b></div>
+      <div class="cc-stat">Vault: <b id="p-jenn-vault">0</b> items</div>
+      <div class="cc-stat">Top Belt: <b id="p-jenn-belt">—</b></div>
+    </div>
+    <div class="compare-card jess-card">
+      <div class="cc-name">🦊 Jess</div>
+      <div class="cc-stat">Sessions: <b id="p-jess-sessions">0</b></div>
+      <div class="cc-stat">Accuracy: <b id="p-jess-acc">—</b></div>
+      <div class="cc-stat">Vault: <b id="p-jess-vault">0</b> items</div>
+      <div class="cc-stat">Top Belt: <b id="p-jess-belt">—</b></div>
+    </div>
+  </div>
+  <div class="section-title">🏅 Belt Progress</div>
+  <div id="parent-belt-board"></div>
+</section>
+
+<!-- WALL BATTLE -->
+<section class="screen" id="screen-battle" aria-label="Wall Battle arena">
+  <div class="back-btn" role="button" tabindex="0" onclick="showScreen('screen-home')" onkeydown="if(event.key==='Enter'||event.key===' ')showScreen('screen-home')">← Back</div>
+  <div style="font-family:'Baloo 2',cursive; font-size:22px; font-weight:800; margin-bottom:14px;">⚔️ Wall Battle</div>
+
+  <div class="battle-arena">
+    <div class="wall-field">
+      <div class="wall-side">
+        <div class="wall-avatar">🐥</div>
+        <div class="wall-structure" id="wall-jenn"></div>
+        <div class="wall-name" style="color:var(--jenn)">Jenn</div>
+        <div class="wall-count" id="wall-jenn-count">30 bricks</div>
+      </div>
+      <div class="vs-middle">
+        <div class="vs-cannon">💣</div>
+        <div class="vs-text">VS</div>
+        <div class="vs-cannon" style="transform:scaleX(-1)">💣</div>
+      </div>
+      <div class="wall-side">
+        <div class="wall-avatar">🦊</div>
+        <div class="wall-structure" id="wall-jess"></div>
+        <div class="wall-name" style="color:var(--jess)">Jess</div>
+        <div class="wall-count" id="wall-jess-count">30 bricks</div>
+      </div>
+    </div>
+    <div class="battle-status"><div class="bs-text" id="battle-status-text">Campaign in progress</div></div>
+  </div>
+
+  <div id="battle-content"></div>
+</section>
+
+<!-- VAULT QUESTION SCREEN (reuses question screen flow via same ids when retrying) -->
+
+<nav class="bottom-nav" id="bottom-nav" style="display:none;" aria-label="Main navigation">
+  <button class="nav-btn active" data-nav="home" onclick="showScreen('screen-home')" aria-label="Home">
+    <span class="nav-icon" aria-hidden="true">🏠</span><span class="nav-lbl">Home</span>
+  </button>
+  <button class="nav-btn" data-nav="battle" onclick="showScreen('screen-battle')" aria-label="Battle">
+    <span class="nav-icon" aria-hidden="true">⚔️</span><span class="nav-lbl">Battle</span>
+  </button>
+  <button class="nav-btn" data-nav="parent" onclick="showScreen('screen-parent')" aria-label="Parent dashboard">
+    <span class="nav-icon" aria-hidden="true">📊</span><span class="nav-lbl">Parent</span>
+  </button>
+  <button class="nav-btn" data-nav="switch" onclick="showScreen('screen-profile')" aria-label="Switch profile">
+    <span class="nav-icon" aria-hidden="true">👤</span><span class="nav-lbl">Switch</span>
+  </button>
+</nav>
+
+</main>
+<div class="confetti-wrap" id="confetti-wrap"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// FIREBASE INIT
+// ═══════════════════════════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyBvasH4OqU76196ZmZSXX_e8-L2PYnvyaY",
+  authDomain: "chore-tracker-a461b.firebaseapp.com",
+  databaseURL: "https://chore-tracker-a461b-default-rtdb.firebaseio.com",
+  projectId: "chore-tracker-a461b",
+  storageBucket: "chore-tracker-a461b.firebasestorage.app",
+  messagingSenderId: "282740057913",
+  appId: "1:282740057913:web:72defcf2e53ae13237eae8"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+let firebaseOnline = false;
+let firebaseSyncing = false;
+
+// Connection monitor
+db.ref('.info/connected').on('value', snap => {
+  firebaseOnline = snap.val() === true;
+  const indicator = document.getElementById('sync-indicator');
+  if (indicator) indicator.textContent = firebaseOnline ? '☁️' : '📱';
+});
+
+// Debounced Firebase save (avoids writes on every keystroke)
+let _saveTimeout = null;
+function scheduleFirebaseSave() {
+  clearTimeout(_saveTimeout);
+  _saveTimeout = setTimeout(saveToFirebase, 800);
+}
+
+function saveToFirebase() {
+  if (!firebaseOnline || firebaseSyncing) return;
+  try {
+    const data = {
+      jenn: state.jenn,
+      jess: state.jess,
+      battle: state.battle,
+      currentProfile: state.currentProfile,
+      _version: SCHEMA_VERSION,
+      _updatedAt: firebase.database.ServerValue.TIMESTAMP
+    };
+    db.ref('progress').set(data);
+  } catch(e) { console.warn('Firebase save failed', e); }
+}
+
+async function loadFromFirebase() {
+  try {
+    const snap = await db.ref('progress').once('value');
+    const data = snap.val();
+    if (data && data._version) {
+      // Merge Firebase data into state (preserve local keys if needed)
+      if (data.jenn) state.jenn = { ...defaultProfile(), ...data.jenn };
+      if (data.jess) state.jess = { ...defaultProfile(), ...data.jess };
+      if (data.battle) state.battle = { ...defaultBattle(), ...data.battle };
+      if (data.currentProfile) state.currentProfile = data.currentProfile;
+      state._version = SCHEMA_VERSION;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      console.log('Firebase loaded');
+      return true;
+    }
+  } catch(e) { console.warn('Firebase load failed, using localStorage', e.message); }
+  return false;
+}
+
+// Real-time listener: when another device changes data, reload
+db.ref('progress').on('value', snap => {
+  if (firebaseSyncing) return; // don't react to our own writes
+  const data = snap.val();
+  if (!data || !data._version) return;
+  // Don't overwrite if our local state is newer (compare timestamps)
+  if (data._updatedAt && state._updatedAt && data._updatedAt <= state._updatedAt) return;
+  firebaseSyncing = true;
+  if (data.jenn) state.jenn = { ...defaultProfile(), ...data.jenn };
+  if (data.jess) state.jess = { ...defaultProfile(), ...data.jess };
+  if (data.battle) state.battle = { ...defaultBattle(), ...data.battle };
+  if (data.currentProfile) state.currentProfile = data.currentProfile;
+  state._updatedAt = data._updatedAt;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  // Re-render current screen
+  const activeScreen = document.querySelector('.screen.active');
+  if (activeScreen) {
+    const id = activeScreen.id;
+    if (id === 'screen-home') renderHome();
+    else if (id === 'screen-parent') renderParent();
+    else if (id === 'screen-battle') renderBattle();
+  }
+  renderMinibelts();
+  firebaseSyncing = false;
+  console.log('Firebase sync: updated from remote');
+});
+
+// ═══════════════════════════════════════════════════════
+// TOPIC DEFINITIONS (24 topics, 8 per grade)
+// ═══════════════════════════════════════════════════════
+// TOPICS is populated at init from grade4.json + inline Grade 5-6 below
+const TOPICS = [
+  // Grade 4 (topic defs inline; questions loaded from grade4.json)
+  { id:'g4-multdiv', name:'Multiplication & Division', icon:'✖️', grade:4, color:'#27AE60' },
+  { id:'g4-fractions', name:'Fractions — Intro', icon:'½', grade:4, color:'#E67E22' },
+  { id:'g4-decimals', name:'Decimals — Intro', icon:'0.1', grade:4, color:'#16A085' },
+  { id:'g4-patterns', name:'Patterns & Relations', icon:'🔁', grade:4, color:'#9B59B6' },
+  { id:'g4-measurement', name:'Measurement', icon:'📐', grade:4, color:'#2980B9' },
+  { id:'g4-geometry2d', name:'Geometry — 2D', icon:'📦', grade:4, color:'#8E44AD' },
+  { id:'g4-data', name:'Data & Graphs', icon:'📊', grade:4, color:'#D35400' },
+  { id:'g4-probability', name:'Probability — Intro', icon:'🎲', grade:4, color:'#C0392B' },
+  // Grade 5
+  { id:'g5-multdiv', name:'Multi-digit Mult/Div', icon:'✖️', grade:5, color:'#27AE60' },
+  { id:'g5-fractionops', name:'Fraction Operations', icon:'½', grade:5, color:'#E67E22' },
+  { id:'g5-decimalops', name:'Decimal Operations', icon:'0.1', grade:5, color:'#16A085' },
+  { id:'g5-ratio', name:'Ratio & Rate', icon:'%', grade:5, color:'#D35400' },
+  { id:'g5-equations', name:'Expressions & Equations', icon:'x=', grade:5, color:'#1ABC9C' },
+  { id:'g5-geometry3d', name:'Geometry — 3D', icon:'📦', grade:5, color:'#8E44AD' },
+  { id:'g5-areavolume', name:'Area & Volume', icon:'📐', grade:5, color:'#2980B9' },
+  { id:'g5-statistics', name:'Statistics', icon:'📊', grade:5, color:'#D35400' },
+  // Grade 6
+  { id:'g6-integers', name:'Integers', icon:'±', grade:6, color:'#C0392B' },
+  { id:'g6-percent', name:'Percent', icon:'%', grade:6, color:'#D35400' },
+  { id:'g6-fracdiv', name:'Fraction Division', icon:'½÷', grade:6, color:'#E67E22' },
+  { id:'g6-equations', name:'Two-step Equations', icon:'x=', grade:6, color:'#1ABC9C' },
+  { id:'g6-proportion', name:'Proportional Reasoning', icon:'∝', grade:6, color:'#16A085' },
+  { id:'g6-circle', name:'Circle Geometry', icon:'⭕', grade:6, color:'#2980B9' },
+  { id:'g6-volume3d', name:'3D Volume', icon:'📦', grade:6, color:'#8E44AD' },
+  { id:'g6-probadv', name:'Probability — Advanced', icon:'🎲', grade:6, color:'#C0392B' },
+];
+
+const BELT_LEVELS = ['unranked','bronze','silver','gold','kangaroo','elite'];
+const BELT_EMOJIS = { unranked:'⬜', bronze:'🥉', silver:'🥈', gold:'🥇', kangaroo:'🦘', elite:'⭐' };
+const BELT_COLORS = { unranked:'#E0E0E0', bronze:'#CD7F32', silver:'#C0C0C0', gold:'#FFD700', kangaroo:'#4ECDC4', elite:'#9B59B6' };
+
+const TIER1_TO_T2 = 60;   // correct answers needed on T1 to unlock T2
+const TIER2_TO_T3 = 40;   // correct answers needed on T2 to unlock T3
+const DAILY_ROUND_CAP = 2;
+const NO_REPEAT_DAYS = 7;
+const WALL_BRICKS = 30;
+const WALL_COLS = 6;
+
+// ═══════════════════════════════════════════════════════
+// QUESTION BANK (sample set — expandable)
+// ═══════════════════════════════════════════════════════
+// QB is populated at init from grade4.json + inline Grade 5-6 below
+const QB = {
+  // Grade 5-6: seed samples
+  'g5-multdiv': { 1:[{ id:'g5md-1-01', q:'What is 248 × 3?', type:'free', ans:'744' }], 2:[{ id:'g5md-2-01', q:'What is 936 ÷ 12?', type:'free', ans:'78' }], 3:[{ id:'g5md-3-01', q:'A number × 14 = 1,134. What is the number?', type:'free', ans:'81' }] },
+  'g5-fractionops': { 1:[{ id:'g5fr-1-01', q:'What is 2/3 + 1/6? (as: 5/6)', type:'free', ans:'5/6' }], 2:[{ id:'g5fr-2-01', q:'3½ − 1¾ = ? (as: 1 3/4)', type:'free', ans:'1 3/4' }], 3:[{ id:'g5fr-3-01', q:'2/3 × 3/4 = ? (as: 1/2)', type:'free', ans:'1/2' }] },
+  'g5-decimalops': { 1:[{ id:'g5de-1-01', q:'3.45 + 2.7 = ?', type:'free', ans:'6.15' }], 2:[{ id:'g5de-2-01', q:'4.5 ÷ 0.75 = ?', type:'free', ans:'6' }], 3:[{ id:'g5de-3-01', q:'0.1 × 0.1 × 0.1 = ?', type:'free', ans:'0.001' }] },
+  'g5-ratio': { 1:[{ id:'g5ra-1-01', q:'Ratio 3:5, 24 total. How many of the 5 part?', type:'free', ans:'15' }], 2:[{ id:'g5ra-2-01', q:'3 apples cost $1.50. Cost of 7 apples?', type:'free', ans:'3.50' }], 3:[{ id:'g5ra-3-01', q:'If 2:3 = 14:x, find x.', type:'free', ans:'21' }] },
+  'g5-equations': { 1:[{ id:'g5eq-1-01', q:'If x + 7 = 15, x = ?', type:'free', ans:'8' }], 2:[{ id:'g5eq-2-01', q:'3x = 48. x = ?', type:'free', ans:'16' }], 3:[{ id:'g5eq-3-01', q:'2x + 5 = 17. x = ?', type:'free', ans:'6' }] },
+  'g5-geometry3d': { 1:[{ id:'g5g3-1-01', q:'How many faces does a cube have?', type:'free', ans:'6' }], 2:[{ id:'g5g3-2-01', q:'Volume of cube with side 4 cm?', type:'free', ans:'64' }], 3:[{ id:'g5g3-3-01', q:'Surface area of 5×5×5 cube?', type:'free', ans:'150' }] },
+  'g5-areavolume': { 1:[{ id:'g5av-1-01', q:'Area of rectangle 7 × 9 cm?', type:'free', ans:'63' }], 2:[{ id:'g5av-2-01', q:'Area of triangle base 8, height 5?', type:'free', ans:'20' }], 3:[{ id:'g5av-3-01', q:'Volume of prism 6×4×3?', type:'free', ans:'72' }] },
+  'g5-statistics': { 1:[{ id:'g5st-1-01', q:'Median of 3, 7, 5, 9, 1?', type:'free', ans:'5' }], 2:[{ id:'g5st-2-01', q:'Mode of 2, 5, 5, 7, 9, 5, 3?', type:'free', ans:'5' }], 3:[{ id:'g5st-3-01', q:'Mean of 6 numbers is 14. Sum?', type:'free', ans:'84' }] },
+  'g6-integers': { 1:[{ id:'g6in-1-01', q:'−5 + 8 = ?', choices:['−3','3','−13','13'], ans:1, type:'mcq' }], 2:[{ id:'g6in-2-01', q:'Monday: −8°C, rose 15°C by Thursday. Thursday temp?', type:'free', ans:'7' }], 3:[{ id:'g6in-3-01', q:'Sum of all integers from −5 to 5?', type:'free', ans:'0' }] },
+  'g6-percent': { 1:[{ id:'g6pc-1-01', q:'25% of 80?', type:'free', ans:'20' }], 2:[{ id:'g6pc-2-01', q:'18/30 students are girls. % of boys?', type:'free', ans:'40' }], 3:[{ id:'g6pc-3-01', q:'Up 20%, down 20%. Net % change?', type:'free', ans:'-4' }] },
+  'g6-fracdiv': { 1:[{ id:'g6fd-1-01', q:'½ ÷ ¼ = ?', type:'free', ans:'2' }], 2:[{ id:'g6fd-2-01', q:'2⅓ ÷ ½ = ? (as: 4 2/3)', type:'free', ans:'4 2/3' }], 3:[{ id:'g6fd-3-01', q:'¾ ÷ 2/5 = ? (as: 1 7/8)', type:'free', ans:'1 7/8' }] },
+  'g6-equations': { 1:[{ id:'g6eq-1-01', q:'2x + 3 = 11. x = ?', type:'free', ans:'4' }], 2:[{ id:'g6eq-2-01', q:'3(x − 2) = 15. x = ?', type:'free', ans:'7' }], 3:[{ id:'g6eq-3-01', q:'4x − 7 = 2x + 9. x = ?', type:'free', ans:'8' }] },
+  'g6-proportion': { 1:[{ id:'g6pp-1-01', q:'2 kg costs $6. Cost of 5 kg?', type:'free', ans:'15' }], 2:[{ id:'g6pp-2-01', q:'Car: 180 km in 3 hrs. 5 hrs at same speed?', type:'free', ans:'300' }], 3:[{ id:'g6pp-3-01', q:'Ratio 5:8 = x:40. x = ?', type:'free', ans:'25' }] },
+  'g6-circle': { 1:[{ id:'g6ci-1-01', q:'Radius 5, diameter?', type:'free', ans:'10' }], 2:[{ id:'g6ci-2-01', q:'Circumference of circle radius 7 (use π=22/7)?', type:'free', ans:'44' }], 3:[{ id:'g6ci-3-01', q:'Area of circle radius 10 (use π=3.14)?', type:'free', ans:'314' }] },
+  'g6-volume3d': { 1:[{ id:'g6v3-1-01', q:'Volume of cube side 5?', type:'free', ans:'125' }], 2:[{ id:'g6v3-2-01', q:'Triangular prism: base area 12, height 8. Volume?', type:'free', ans:'96' }], 3:[{ id:'g6v3-3-01', q:'Cylinder r=3, h=10 (π=3.14). Volume?', type:'free', ans:'282.6' }] },
+  'g6-probadv': { 1:[{ id:'g6pa-1-01', q:'Deck of 52. P(red card)? (as: 1/2)', type:'free', ans:'1/2' }], 2:[{ id:'g6pa-2-01', q:'Two dice rolled. P(sum = 7)? (as: 1/6)', type:'free', ans:'1/6' }], 3:[{ id:'g6pa-3-01', q:'3 coins flipped. P(exactly 2 heads)? (as: 3/8)', type:'free', ans:'3/8' }] },
+};
+
+// ═══════════════════════════════════════════════════════
+// STATE + PERSISTENCE
+// ═══════════════════════════════════════════════════════
+const STORAGE_KEY = 'mathkangaroo-v2';
+const SCHEMA_VERSION = 2;
+const PROFILES = ['jenn', 'jess'];
+let state = loadState();
+let selectedLen = 10;
+let currentTab = 'all';
+let explainInFlight = false;  // bug fix: prevent double-tap API calls
+const LECTURES = {
+  'g4-multdiv': {
+    title: 'Multiplication & Division Made Easy! 🧮',
+    sections: [
+      {heading:'What is Multiplication?', body:'Multiplication is just a fast way of adding the same number over and over! If you have 4 bags with 3 apples in each bag, instead of adding 3+3+3+3, you can multiply: 4 × 3 = 12. The × symbol means "groups of." So 4 × 3 means "4 groups of 3."'},
+      {heading:'What is Division?', body:'Division is the opposite of multiplication — it\'s about sharing equally! If you have 12 cookies and want to share them with 3 friends, how many does each friend get? 12 ÷ 3 = 4. Each friend gets 4 cookies! The ÷ symbol means "shared equally among."'},
+      {heading:'The Two Are Best Friends!', body:'Multiplication and division are inverse operations — they undo each other, just like addition and subtraction. If 6 × 4 = 24, then 24 ÷ 4 = 6 and 24 ÷ 6 = 4. Understanding this relationship makes both operations much easier!'},
+      {heading:'Mental Math Tricks', body:'You can break big multiplication problems into smaller ones! For 7 × 8, if you know 7 × 4 = 28, then double it: 28 + 28 = 56. For 9s facts, use your fingers or remember that the digits always add up to 9 (like 9×7=63, and 6+3=9).'},
+      {heading:'Place Value Helpers', body:'When multiplying by 10, just add a zero! 24 × 10 = 240. When multiplying by 100, add two zeros: 24 × 100 = 2,400. This is because each place value is 10 times bigger than the one before it.'}
+    ],
+    tips: ['Practice your times tables up to 10×10 until they become automatic — it makes everything else easier!','Always check your work by doing the reverse operation (multiply to check division, divide to check multiplication).','Draw pictures! Arrays (rows and columns of dots) help you SEE what multiplication means.']
+  },
+  'g4-fractions': {
+    title: 'Fractions — Your First Look at Parts of a Whole 🍕',
+    sections: [
+      {heading:'What is a Fraction?', body:'A fraction shows a PART of a whole. If you cut a pizza into 8 equal slices and eat 3, you ate 3/8 (three-eighths) of the pizza. The top number (numerator) tells HOW MANY parts you have. The bottom number (denominator) tells HOW MANY equal parts the whole is divided into.'},
+      {heading:'Numerator and Denominator', body:'Think of the fraction bar (the line) as meaning "out of." So 3/4 means "3 out of 4 equal parts." The denominator can NEVER be zero — you can\'t divide something into zero parts!'},
+      {heading:'Types of Fractions', body:'Proper fractions: The numerator is smaller than the denominator (like 3/4) — these are less than 1 whole. Improper fractions: The numerator is bigger (like 7/4) — these are more than 1 whole. Mixed numbers: A whole number plus a fraction (like 1 3/4). Unit fractions: The numerator is 1 (like 1/3).'},
+      {heading:'Comparing Fractions', body:'With unit fractions (all have 1 on top), the BIGGER the denominator, the SMALLER the piece! 1/10 is smaller than 1/4 because the whole is cut into more pieces. When denominators are the same, just compare the numerators — 3/8 is bigger than 1/8.'},
+      {heading:'Fractions in Real Life', body:'Fractions are everywhere! A quarter of an hour is 15 minutes (1/4 of 60). Recipes use fractions: 1/2 cup of milk. Your video game progress bar might show 3/4 complete. Fractions help us describe amounts that aren\'t whole numbers.'}
+    ],
+    tips: ['Always make sure the parts are EQUAL when talking about fractions — a fraction only makes sense when the whole is divided into equal pieces.','Use food like pizza, cake, or chocolate bars to practice fractions — it\'s the tastiest way to learn!','Remember: denominator = DOWN (both start with D). Numerator is up top!']
+  },
+  'g4-decimals': {
+    title: 'Decimals — Numbers Smaller Than One 🔢',
+    sections: [
+      {heading:'What are Decimals?', body:'Decimals are another way to write fractions! Instead of writing 3/10, we can write 0.3. The decimal point separates whole numbers from parts of a whole. Everything to the right of the decimal point is less than one.'},
+      {heading:'Tenths and Hundredths', body:'The first place after the decimal is tenths (1/10). The second place is hundredths (1/100). So 0.3 means "3 tenths" — the same as 3/10. And 0.25 means "25 hundredths" — the same as 25/100. Think of money: $0.25 is 25 cents, which is 25/100 of a dollar!'},
+      {heading:'Reading Decimals', body:'Read decimals by saying the place value. 0.7 is "seven tenths." 0.45 is "forty-five hundredths." 2.3 is "two and three tenths." Saying them this way helps you understand what the decimal really means instead of just saying "point seven."'},
+      {heading:'Decimals and Fractions Are Friends', body:'Decimals and fractions are just two ways of writing the same thing! 0.5 = 1/2, 0.25 = 1/4, 0.75 = 3/4, 0.1 = 1/10. Learning to switch between them helps you solve problems in whichever way is easier.'},
+      {heading:'Comparing Decimals', body:'To compare decimals, line up the decimal points and compare digits from left to right. Is 0.45 bigger than 0.5? No! 0.5 = 0.50, and 50 hundredths > 45 hundredths. Adding zeros to the right of the last decimal digit doesn\'t change the value — 0.5 = 0.50 = 0.500.'}
+    ],
+    tips: ['Money is the best way to practice decimals! Count your change and think about tenths and hundredths of a dollar.','Always line up the decimal points when comparing or adding decimals — this keeps the place values aligned.','A zero at the end of a decimal (like 0.50) doesn\'t change its value, but a zero between the decimal point and other digits (like 0.05) is very important!']
+  },
+  'g4-patterns': {
+    title: 'Patterns & Relations — Finding the Hidden Rules 🔍',
+    sections: [
+      {heading:'What are Number Patterns?', body:'A pattern is a sequence that follows a rule. In math, we look at how numbers change from one to the next. For example: 3, 6, 9, 12, 15... The rule is "add 3 each time." Finding the rule helps you predict what comes next!'},
+      {heading:'Input/Output Tables', body:'An input/output table is like a machine — you put a number IN, the rule transforms it, and a new number comes OUT! If the rule is "multiply by 2 and add 1," then input 3 → output 7 (because 3×2+1=7). Your job is to figure out the hidden rule by looking at the pairs.'},
+      {heading:'How to Find a Pattern Rule', body:'Step 1: Look at how the numbers change. Are they getting bigger (addition or multiplication) or smaller (subtraction or division)? Step 2: Check if the change is always the same amount. Step 3: Test your rule on ALL the pairs to make sure it works every time. If it fails on even one pair, it\'s not the right rule!'},
+      {heading:'Growing Shape Patterns', body:'Patterns aren\'t just numbers — shapes can grow in patterns too! A row of squares might grow by adding 2 squares each time. Count how many in step 1, step 2, step 3... and find the number pattern hidden in the shapes.'},
+      {heading:'Why Patterns Matter', body:'Patterns are everywhere in math and in life! The times tables follow patterns. Days of the week repeat in a pattern. Even nature has patterns — flower petals, pinecones, and snowflakes all follow mathematical rules. Understanding patterns helps you solve problems and make predictions.'}
+    ],
+    tips: ['Always test your pattern rule on at least 3 pairs to make sure it\'s correct.','Draw a table to organize input and output numbers — it makes the pattern much easier to see.','Look for TWO operations: some patterns use both multiplication and addition (like "×2 then +1").']
+  },
+  'g4-measurement': {
+    title: 'Measurement — How Big, How Heavy, How Much? 📏',
+    sections: [
+      {heading:'Length — How Long?', body:'Length tells you how long something is. In Canada, we use metric units: millimetres (mm) for tiny things, centimetres (cm) for small things, metres (m) for bigger things, and kilometres (km) for long distances. 10 mm = 1 cm. 100 cm = 1 m. 1,000 m = 1 km. A pencil is about 15 cm long. A soccer field is about 100 m long.'},
+      {heading:'Mass — How Heavy?', body:'Mass (often called weight) tells you how heavy something is. We use grams (g) for light things and kilograms (kg) for heavier things. 1,000 g = 1 kg. A paperclip weighs about 1 gram. A textbook weighs about 1 kilogram. A car weighs about 1,000 kg!'},
+      {heading:'Capacity — How Much Can It Hold?', body:'Capacity measures how much liquid a container can hold. We use millilitres (mL) for small amounts and litres (L) for larger amounts. 1,000 mL = 1 L. A teaspoon holds about 5 mL. A water bottle holds about 500 mL. A big milk jug holds 4 L.'},
+      {heading:'Area — How Much Space?', body:'Area tells you how much flat space a shape covers. For a rectangle, multiply length × width. If a rug is 3 metres long and 2 metres wide, its area is 3 × 2 = 6 square metres (6 m²). Area is measured in square units — imagine how many 1 cm × 1 cm tiles would cover the shape.'},
+      {heading:'Converting Between Units', body:'When you need to change from one unit to another, remember: to go from a BIG unit to a SMALL unit, MULTIPLY (because you need more small units). To go from SMALL to BIG, DIVIDE. For example: 3 m to cm = 3 × 100 = 300 cm. 500 cm to m = 500 ÷ 100 = 5 m.'}
+    ],
+    tips: ['Always pick the right unit for what you\'re measuring — don\'t measure a pencil in kilometres!','When converting, remember the "King Henry" trick: Kilo (1,000), Hecto (100), Deka (10), Base (1), Deci (0.1), Centi (0.01), Milli (0.001).','Check your answers by asking: "Does this make sense?" A person cannot be 150 m tall!']
+  },
+  'g4-geometry2d': {
+    title: '2D Geometry — Flat Shapes All Around Us 📐',
+    sections: [
+      {heading:'What is a Polygon?', body:'A polygon is a closed, flat shape made of straight lines. The word comes from Greek: "poly" means many and "gon" means angles. Triangles have 3 sides, quadrilaterals have 4 sides, pentagons have 5, hexagons have 6. The name tells you how many sides!'},
+      {heading:'Triangles — 3-Sided Friends', body:'Triangles can be sorted by their SIDES: Equilateral (all 3 sides equal, all angles 60°), Isosceles (2 sides equal), Scalene (all sides different). They can also be sorted by their ANGLES: Acute (all angles < 90°), Right (one 90° angle), Obtuse (one angle > 90°). The sum of all three angles in ANY triangle is always exactly 180°!'},
+      {heading:'Quadrilaterals — 4-Sided Shapes', body:'Quadrilaterals are shapes with 4 sides and 4 angles. The sum of their angles is always 360°. There are several types: Square (4 equal sides, 4 right angles), Rectangle (opposite sides equal, 4 right angles), Rhombus (4 equal sides, angles not necessarily 90°), Parallelogram (opposite sides parallel and equal), Trapezoid (exactly one pair of parallel sides). Every square is a rectangle, but not every rectangle is a square!'},
+      {heading:'Angles — How Wide?', body:'An angle measures how much something turns. Right angle: exactly 90° (like the corner of a book). Acute angle: less than 90° (sharp and pointy). Obtuse angle: more than 90° but less than 180° (wide and open). Straight angle: exactly 180° (a straight line). A full circle is 360°.'},
+      {heading:'Lines of Symmetry', body:'A line of symmetry divides a shape into two identical halves that are mirror images. A square has 4 lines of symmetry. A rectangle has 2. An equilateral triangle has 3. An isosceles triangle has 1. A scalene triangle has 0. Fold the shape in half — if both sides match perfectly, you found a line of symmetry!'}
+    ],
+    tips: ['Draw shapes on grid paper to help you see if sides are equal and angles are right.','Remember: All squares ARE rectangles (they have 4 right angles), but not all rectangles are squares.','The sum of angles in a triangle is ALWAYS 180°. If you know two angles, subtract from 180° to find the third!']
+  },
+  'g4-data': {
+    title: 'Data & Graphs — Pictures That Tell Stories 📊',
+    sections: [
+      {heading:'What is Data?', body:'Data is information you collect — like your classmates\' favorite colors, how many books you read each month, or the types of pets people have. Once you collect data, you need a way to organize it so people can understand it at a glance. That\'s where graphs come in!'},
+      {heading:'Bar Graphs', body:'A bar graph uses bars (rectangles) to show data. The taller the bar, the more there is of that category! Bars can go up (vertical) or sideways (horizontal). Every bar graph needs: a title, labeled axes (the X-axis across the bottom and Y-axis up the side), and bars that don\'t touch each other. Use a ruler to make bars the right height!'},
+      {heading:'Pictographs', body:'A pictograph uses pictures or symbols instead of bars. Each picture represents a certain number of items — this is called the KEY. For example, one 🍎 might represent 5 apples. Pictographs are fun to look at and easy to understand, but they can be less precise than bar graphs when the numbers don\'t divide evenly.'},
+      {heading:'Line Plots', body:'A line plot shows data along a number line. You put an X (or dot) above each value for each time it appears. Line plots are great for showing how data is spread out and for finding the most common value (the mode). They work well with smaller sets of numbers.'},
+      {heading:'Reading Graphs', body:'When you read a graph, always: (1) Read the title to know what it\'s about. (2) Check the labels to understand what\'s being measured. (3) Look at the scale — how much each unit represents. (4) Compare the categories. Ask yourself: Which has the most? Which has the least? What\'s the difference between them?'}
+    ],
+    tips: ['Always give your graph a clear title so people know what they\'re looking at.','Make sure your bars or pictures are evenly spaced and the scale is consistent.','When collecting data, use tally marks (|||| with the fifth mark crossing through) to count quickly and accurately.']
+  },
+  'g4-probability': {
+    title: 'Probability — What Are the Chances? 🎲',
+    sections: [
+      {heading:'What is Probability?', body:'Probability is the chance that something will happen. We use special words to describe how likely an event is: CERTAIN (it will definitely happen, like the sun rising tomorrow), LIKELY (it will probably happen, like rain on a cloudy day), UNLIKELY (it probably won\'t happen, like finding a four-leaf clover), and IMPOSSIBLE (it can never happen, like a fish riding a bicycle).'},
+      {heading:'Equally Likely Events', body:'Some events have the same chance of happening. When you flip a fair coin, heads and tails are EQUALLY LIKELY — each has a 1 out of 2 chance. When you roll a fair die, each number from 1 to 6 is equally likely — each has a 1 out of 6 chance. "Fair" means nothing is rigged or biased!'},
+      {heading:'How to Measure Probability', body:'We can write probability as a fraction: (favourable outcomes) ÷ (total possible outcomes). If you pick one marble from a bag with 3 red and 7 blue marbles (10 total), the probability of picking red is 3/10 and the probability of picking blue is 7/10. Since 7/10 is bigger than 3/10, picking blue is MORE LIKELY.'},
+      {heading:'Probability Scale', body:'Think of probability like a number line from 0 to 1. Impossible = 0. Certain = 1. Equally likely = 1/2 (0.5). The closer to 0, the less likely. The closer to 1, the more likely. Likely events are > 1/2. Unlikely events are < 1/2.'},
+      {heading:'Probability in Everyday Life', body:'Probability helps us make decisions every day! Weather forecasts use probability ("70% chance of rain"). Games use probability (what are my chances of rolling a 6?). Even sports use probability (likelihood of scoring from a certain position). Understanding probability helps you make smarter choices!'}
+    ],
+    tips: ['Count the favourable outcomes (what you WANT to happen) and divide by the total possible outcomes.','A "fair" game or experiment means every outcome has an equal chance — no cheating!','If you do an experiment many times, the results should get closer to the predicted probability. Try flipping a coin 50 times and see how close you get to 25 heads!']
+  },
+  'g5-multdiv': {
+    title: 'Multi-Digit Multiplication & Division — Power Up! 🚀',
+    sections: [
+      {heading:'Moving Beyond Basic Facts', body:'In Grade 5, we multiply 3-digit numbers by 2-digit numbers and divide 3-digit numbers by 1-digit numbers. The key is understanding place value. For 234 × 12, break it into 234 × 10 + 234 × 2 = 2,340 + 468 = 2,808. This is called the distributive property — it\'s like giving each digit its own mini-problem!'},
+      {heading:'The Standard Algorithm for Multiplication', body:'Line up numbers by their rightmost digits. Multiply by the ones digit first, writing the result. Then multiply by the tens digit, but start writing one place to the left (because you\'re really multiplying by a multiple of 10). Finally, add the two results. Always check your work with estimation: 234 × 12 is about 200 × 10 = 2,000, so 2,808 makes sense!'},
+      {heading:'Long Division Step by Step', body:'Remember DMSB: Divide, Multiply, Subtract, Bring down. For 936 ÷ 4: Divide 9 by 4 = 2 (write 2 above). Multiply 2×4=8. Subtract 9−8=1. Bring down 3 to make 13. Repeat: 13÷4=3, 3×4=12, 13−12=1, bring down 6 to make 16. Finally 16÷4=4. Answer: 234. Take it one digit at a time!'},
+      {heading:'Divisibility Rules', body:'A number is divisible by 2 if it ends in 0,2,4,6,8. Divisible by 3 if the sum of its digits is divisible by 3. Divisible by 5 if it ends in 0 or 5. Divisible by 10 if it ends in 0. These shortcuts save you time! Is 147 divisible by 3? 1+4+7=12, and 12÷3=4, so YES!'},
+      {heading:'Estimation and Reasonableness', body:'Always estimate before calculating! Round numbers to the nearest ten or hundred, then multiply or divide. If 678 ÷ 8... 678 rounds to 680, and 680÷8=85. So your exact answer should be close to 85. If you get 84.75, that\'s reasonable. If you get 8,475, something went wrong!'}
+    ],
+    tips: ['Use graph paper to keep your columns lined up — messy alignment is the #1 cause of errors!','Check division by multiplying back: if 936 ÷ 4 = 234, then 234 × 4 should equal 936.','Break big problems into smaller ones using the distributive property. It\'s like eating an elephant — one bite at a time!']
+  },
+  'g5-fractionops': {
+    title: 'Fraction Operations — Adding, Subtracting & Beyond! 🍕',
+    sections: [
+      {heading:'Adding & Subtracting Fractions', body:'The golden rule: you can ONLY add or subtract fractions when the denominators (bottom numbers) are the SAME! If they\'re the same, just add or subtract the numerators and keep the denominator. 3/8 + 4/8 = 7/8. If denominators are different, you must find a common denominator first by finding the LCM (least common multiple).'},
+      {heading:'Improper Fractions & Mixed Numbers', body:'An improper fraction has a numerator BIGGER than the denominator — it\'s more than 1 whole! 7/4 is improper. You can convert it to a mixed number: 7÷4=1 remainder 3, so 7/4 = 1 3/4. Going the other way: multiply the whole number by the denominator and add the numerator. 2 3/5 = (2×5+3)/5 = 13/5.'},
+      {heading:'Finding Common Denominators', body:'To add 1/3 + 1/4, find the LCM of 3 and 4 = 12. Convert each fraction: 1/3 = 4/12 (multiply top and bottom by 4). 1/4 = 3/12 (multiply top and bottom by 3). Now add: 4/12 + 3/12 = 7/12. Always simplify your answer if possible!'},
+      {heading:'Comparing Fractions', body:'Which is bigger: 3/5 or 5/8? Cross-multiply! 3×8=24 and 5×5=25. Since 25>24, 5/8 > 3/5. Or convert to decimals: 3/5=0.6, 5/8=0.625. In Grade 5, use benchmarks too: is the fraction less than 1/2, exactly 1/2, or more than 1/2?'},
+      {heading:'Fractions in Word Problems', body:'When a problem says \'of,\' think MULTIPLY! \'What is 2/3 of 24?\' means (2/3)×24 = 48/3 = 16. For \'how many 1/4 cups in 3 cups?\' that\'s division: 3 ÷ (1/4) = 3 × 4 = 12. Fractions are everywhere — from recipes to measuring to sharing!'}
+    ],
+    tips: ['Always find a common denominator before adding or subtracting — never add denominators!','Draw pictures (pie charts, fraction bars) when you\'re stuck — seeing the problem makes it click.','Simplify your final answer! If you get 6/8, reduce to 3/4. Always check if numerator and denominator share a factor.']
+  },
+  'g5-decimalops': {
+    title: 'Decimal Operations — Precision with Tenths & Hundredths! 💰',
+    sections: [
+      {heading:'Place Value Beyond the Decimal', body:'In Grade 5, we work with decimals to the thousandths place (three digits after the decimal). Each place is 10 times smaller than the one before: tenths (0.1), hundredths (0.01), thousandths (0.001). The number 3.456 means 3 ones + 4 tenths + 5 hundredths + 6 thousandths. The decimal point NEVER moves — it\'s the anchor!'},
+      {heading:'Adding & Subtracting Decimals', body:'The most important rule: LINE UP THE DECIMAL POINTS! Write numbers so the decimal points are directly above each other. Fill empty spaces with zeros. Then add or subtract as usual, and bring the decimal point straight down. 3.45 + 2.7 → write as 3.45 + 2.70 = 6.15. Always estimate first: ~3.5 + 2.7 ≈ 6.2, so 6.15 is reasonable.'},
+      {heading:'Multiplying Decimals', body:'Multiply as if there were NO decimal points. Then count the total decimal places in both numbers. Put the decimal point in your answer with that many places. 0.6 × 0.8: 6×8=48 → two decimal places total → 0.48. Think about it: 0.6 × 0.8 means \'six-tenths of eight-tenths\' — the answer should be smaller than both!'},
+      {heading:'Dividing Decimals', body:'If the divisor has a decimal, move the decimal point in BOTH numbers to the right until the divisor is a whole number. 4.5 ÷ 0.75 → move decimal 2 places: 450 ÷ 75 = 6. You can check: 6 × 0.75 = 4.5. The decimal in the quotient goes directly above the decimal in the dividend.'},
+      {heading:'Money Math', body:'Money is the most practical way to practice decimals! $1 = 1.00, a quarter = $0.25, a dime = $0.10, a nickel = $0.05, a penny = $0.01. Adding prices, calculating change, comparing costs — these are all decimal operations. If you buy a $3.75 juice and a $2.50 sandwich, your total is $3.75 + $2.50 = $6.25.'}
+    ],
+    tips: ['ALWAYS line up decimal points when adding or subtracting — it\'s the #1 rule that prevents mistakes.','Add trailing zeros to make all numbers have the same number of decimal places. 3.4 + 2.75 → 3.40 + 2.75 = 6.15.','Check your answer by estimating: round each number and do the operation mentally to make sure your answer is in the right ballpark.']
+  },
+  'g5-ratio': {
+    title: 'Ratios & Rates — Comparing Quantities! ⚖️',
+    sections: [
+      {heading:'What is a Ratio?', body:'A ratio compares two quantities. It can be written three ways: 3 to 5, 3:5, or as the fraction 3/5. There are two types: part-to-part (comparing red marbles to blue marbles, like 3:5) and part-to-whole (comparing red marbles to ALL marbles, like 3:8). Ratios are like a recipe — they tell you the relationship between amounts.'},
+      {heading:'Equivalent Ratios', body:'Just like equivalent fractions, you can multiply or divide both parts of a ratio by the same number to get an equivalent ratio. 2:3 = 4:6 = 6:9 = 20:30. To check if two ratios are equivalent, cross-multiply: is 2:3 equal to 10:15? 2×15=30 and 3×10=30, so YES!'},
+      {heading:'Ratios, Fractions, Decimals & Percentages', body:'These are all different ways to express the same relationship! A ratio of 3:5 (part-to-part) means the fraction is 3/8 (part-to-whole). As a decimal: 3÷8=0.375. As a percentage: 0.375×100=37.5%. In Grade 5, you\'ll learn to switch between all four forms — they\'re all connected!'},
+      {heading:'Rates — Ratios with Different Units', body:'A rate is a special ratio that compares quantities with different units. Speed: 60 km per hour (60 km/h). Price: $3 for 5 apples = $0.60 per apple. Pay: $15 per hour. The word \'per\' means \'for each one.\' To find a unit rate, divide — if you drive 240 km in 3 hours, your rate is 240÷3 = 80 km/h.'},
+      {heading:'Solving Ratio Problems', body:'If the ratio of boys to girls is 3:4 and there are 21 boys, how many girls? Set up equivalent ratios: 3/4 = 21/x. Cross-multiply: 3x = 84, so x = 28 girls. Or use a ratio table: boys: 3,6,9,12,15,18,21... girls: 4,8,12,16,20,24,28. When boys hit 21, girls = 28!'}
+    ],
+    tips: ['Always identify whether a ratio is part-to-part or part-to-whole before solving — they follow different rules!','Draw a ratio table to solve problems step by step — it helps you see the pattern.','Remember: \'per\' means divide! Kilometres per hour = kilometres ÷ hours. Dollars per apple = dollars ÷ apples.']
+  },
+  'g5-equations': {
+    title: 'Expressions & Equations — Solving for the Unknown! ❓',
+    sections: [
+      {heading:'What is an Equation?', body:'An equation is like a balance scale — both sides must be EQUAL. The equal sign (=) means \'the same as.\' If x + 3 = 10, the left side (x+3) must equal the right side (10). Your job is to find the value of x that makes this true. Whatever you do to one side, you MUST do to the other to keep the scale balanced!'},
+      {heading:'Order of Operations (BEDMAS)', body:'BEDMAS tells you the order to solve expressions: Brackets first, then Exponents, then Division and Multiplication (left to right), then Addition and Subtraction (left to right). So 3 + 4 × 2 = 3 + 8 = 11, NOT 7 × 2 = 14. Multiplication comes before addition! Brackets change everything: (3+4) × 2 = 7 × 2 = 14.'},
+      {heading:'Solving One-Step Equations', body:'To find x in x + 8 = 15, do the OPPOSITE operation to both sides. Subtract 8 from both sides: x + 8 − 8 = 15 − 8, so x = 7. For 3x = 27, divide both sides by 3: x = 9. For x ÷ 4 = 6, multiply both sides by 4: x = 24. Inverse operations are your superpower!'},
+      {heading:'Variables and Algebraic Expressions', body:'A variable is a letter that stands for an unknown number. \'3 more than a number\' is written as n + 3. \'Twice a number\' is 2n. \'5 less than triple a number\' is 3n − 5. The number in front is called the COEFFICIENT. In 2n, the coefficient is 2 — it means 2 × n.'},
+      {heading:'Solving Two-Step Equations', body:'For 2x + 3 = 11, work backwards through BEDMAS. First, undo the addition: 2x + 3 − 3 = 11 − 3 → 2x = 8. Then undo the multiplication: 2x ÷ 2 = 8 ÷ 2 → x = 4. Always check: put x=4 back in → 2(4)+3 = 8+3 = 11. Works! Always verify your answer.'}
+    ],
+    tips: ['Whatever you do to one side of the equation, do EXACTLY the same to the other side. The balance scale doesn\'t lie!','Use BEDMAS for expressions, but solve equations in reverse (SAMDEB) — undo addition/subtraction first, then multiplication/division.','Always plug your answer back into the original equation to check. If both sides aren\'t equal, you made a mistake somewhere.']
+  },
+  'g5-geometry3d': {
+    title: '3D Geometry — Shapes That Pop Off the Page! 📦',
+    sections: [
+      {heading:'Faces, Edges, and Vertices', body:'Every 3D shape has three key parts: FACES (the flat surfaces, like the sides of a box), EDGES (the lines where two faces meet), and VERTICES (the corners where edges meet). A cube has 6 faces, 12 edges, and 8 vertices. Count them on a die! Different shapes have different counts — that\'s how we identify them.'},
+      {heading:'Prisms and Pyramids', body:'A PRISM has two identical, parallel bases connected by rectangular faces. Named by its base shape: triangular prism, rectangular prism, pentagonal prism. A PYRAMID has one base and triangular faces that meet at a point (the apex). A square pyramid has a square base and 4 triangular faces. Prisms have the same cross-section all the way through; pyramids taper to a point.'},
+      {heading:'Nets — Unfolding 3D Shapes', body:'A net is like \'unfolding\' a 3D shape into a flat 2D pattern. Imagine cutting along the edges of a cereal box and laying it flat — that\'s a net! Different nets can make the same shape. A cube has 11 different nets. Can you visualize which faces will touch when you fold a net? Practice makes perfect!'},
+      {heading:'Symmetry in 3D', body:'3D shapes can have reflection symmetry (a plane that splits the shape into mirror halves) and rotation symmetry (how many times the shape looks the same during a full spin). A cube has 9 planes of symmetry and rotation symmetry of order 4 (through face centers). Look for symmetry in buildings, crystals, and everyday objects!'},
+      {heading:'Volume — Filling Up 3D Space', body:'Volume measures how much space a 3D shape takes up — how many unit cubes would fit inside. For a rectangular prism, Volume = length × width × height. A 4×3×2 box has volume = 24 cubic units. Volume is measured in cubic units (cm³, m³). Surface area is the total area of all faces — for the same box, SA = 2(4×3 + 4×2 + 3×2) = 2(12+8+6) = 52 sq units.'}
+    ],
+    tips: ['Build 3D shapes with clay or blocks to really understand faces, edges, and vertices — touching helps you remember!','When counting edges, go around the shape systematically: top face, vertical edges, bottom face.','Draw nets on paper, cut them out, and fold them. Seeing a flat shape become 3D is the best way to understand nets!']
+  },
+  'g5-areavolume': {
+    title: 'Area & Volume — Measuring Flat Space and 3D Space! 📐',
+    sections: [
+      {heading:'Area of Rectangles & Squares', body:'Area = length × width. It tells you how many unit squares cover a flat shape. If a soccer field is 100 m by 50 m, its area is 100×50 = 5,000 m². Area is always in SQUARE units (cm², m², km²). For a square, since all sides are equal, Area = side × side = side².'},
+      {heading:'Area of Triangles & Parallelograms', body:'Triangle area = (base × height) ÷ 2. Why? Because a triangle is HALF of a rectangle with the same base and height! If base=8 cm and height=5 cm, area = (8×5)÷2 = 20 cm². Parallelogram area = base × height. The height is the perpendicular distance between the parallel sides — NOT the slant side!'},
+      {heading:'Perimeter vs. Area', body:'Perimeter is the distance AROUND a shape (add all sides). Area is the space INSIDE. A 6×4 rectangle has perimeter = 6+4+6+4 = 20 units and area = 6×4 = 24 square units. Different shapes with the same area can have different perimeters! A 6×4 rectangle (area 24) has perimeter 20, but a 12×2 rectangle (also area 24) has perimeter 28.'},
+      {heading:'Volume of Rectangular Prisms', body:'Volume = length × width × height. Think of stacking layers of unit cubes. If the base layer has 4×3=12 cubes and you stack 2 layers high, that\'s 12×2=24 cubic units. Volume is ALWAYS in cubic units (cm³, m³). A fish tank 30 cm × 20 cm × 40 cm holds 30×20×40 = 24,000 cm³ of water!'},
+      {heading:'Unit Conversions for Area', body:'Since area is 2D, conversion factors get SQUARED! 1 m = 100 cm, so 1 m² = 100×100 = 10,000 cm². 1 km = 1,000 m, so 1 km² = 1,000,000 m². For volume: 1 m = 100 cm, so 1 m³ = 100×100×100 = 1,000,000 cm³. That\'s why a small box in cm³ has a tiny number in m³ — the units scale dramatically!'}
+    ],
+    tips: ['Remember: Perimeter = fence around the yard. Area = grass covering the yard. Volume = water filling a pool.','The height of a triangle or parallelogram is always PERPENDICULAR to the base — it\'s the shortest distance, not the slant.','When converting area units, square the conversion factor. When converting volume units, cube it. Don\'t just multiply by 100!']
+  },
+  'g5-statistics': {
+    title: 'Statistics — Making Sense of Data! 📊',
+    sections: [
+      {heading:'Mean, Median, Mode & Range', body:'MEAN (average): add all numbers and divide by how many. MEDIAN: the middle number when sorted. MODE: the number that appears most often. RANGE: largest minus smallest. For {3,7,5,9,5}: mean=(3+7+5+9+5)÷5=5.8, median=5, mode=5, range=9−3=6. Each measure tells a different story about the data!'},
+      {heading:'Frequency and Categorical Data', body:'Frequency = how OFTEN something appears. In a class survey of 20 students about favourite seasons: Summer=8, Winter=3, Spring=5, Fall=4. The frequency of Summer is 8. Categorical data is grouped into categories (colours, seasons, types of pets). The mode is the category with the highest frequency — Summer is the mode here!'},
+      {heading:'Types of Graphs', body:'BAR GRAPHS: Compare categories using rectangular bars. DOUBLE BAR GRAPHS: Compare TWO sets of data side by side (boys vs girls preferences). PICTOGRAPHS: Use pictures/symbols with a key. STEM-AND-LEAF PLOTS: Organize numbers by splitting digits (e.g., 25 becomes stem 2, leaf 5). Choose the right graph for your data!'},
+      {heading:'Creating and Reading Graphs', body:'Every graph needs: a TITLE (what is this about?), LABELLED AXES (what do the numbers/bars represent?), and a CONSISTENT SCALE (equal spacing). When reading a graph: find the tallest bar (most), shortest bar (least), and compare differences. \'How many more people chose X than Y?\' = subtract!'},
+      {heading:'Collecting Good Data', body:'Good surveys use clear questions. \'What is your favourite sport?\' is better than \'Do you like sports?\' because open-ended questions get more useful data. Always collect enough responses — 5 responses isn\'t enough to draw conclusions! And remember: just because most people in your class like pizza doesn\'t mean most people in the WORLD like pizza.'}
+    ],
+    tips: ['Sort your numbers before finding the median — if they\'re not in order, you might pick the wrong middle value!','A data set can have NO mode (if all values appear once) or MULTIPLE modes (if several values tie for most frequent).','Graphs should tell a story at a glance. If someone needs 5 minutes to understand your graph, simplify it!']
+  },
+  'g6-integers': {
+    title: 'Integers — Numbers Below Zero! ❄️',
+    sections: [
+      {heading:'What are Integers?', body:'Integers are whole numbers that can be positive, negative, or zero. Think of a thermometer: above zero is positive, below zero is negative. On a number line, positive numbers are to the right of zero, and negative numbers are to the left. −5 is LESS than −2 because it\'s further left on the number line!'},
+      {heading:'Adding and Subtracting Integers', body:'When adding a positive number, move RIGHT on the number line. When adding a negative number, move LEFT. So −3 + 5 = 2, and −3 + (−2) = −5. For subtraction, remember: subtracting is the same as adding the opposite! 5 − (−3) = 5 + 3 = 8. Two negatives make a positive!'},
+      {heading:'Multiplying and Dividing Integers', body:'The rules are simple: positive × positive = positive. positive × negative = negative. negative × negative = POSITIVE! So (−4) × (−3) = 12, but (−4) × 3 = −12. Same rules for division. Think of it as: same signs = positive answer, different signs = negative answer.'},
+      {heading:'Real-Life Integer Problems', body:'Temperatures: Monday was −8°C, then rose 15°C — what\'s the new temperature? −8 + 15 = 7°C! Bank accounts: if you have −$20 (you owe $20) and deposit $50, your balance is −20 + 50 = $30. Elevators: going from floor −2 to floor 5 means going up 7 floors!'},
+      {heading:'Comparing and Ordering Integers', body:'On the number line, numbers get bigger as you move right. So −1 > −100, and −5 < 0 < 3. The absolute value |x| is the distance from zero — it\'s always positive! |−7| = 7. When comparing negative numbers, the one with the smaller absolute value is actually LARGER: −3 > −8 because |−3| < |−8|.'}
+    ],
+    tips: ['Use a number line when adding/subtracting integers — physically moving left and right makes it click.','Remember: two negatives make a positive! −(−5) = +5, and (−3)×(−4) = +12.','For word problems, identify what "zero" means first (sea level, ground floor, freezing point). Then everything else follows.']
+  },
+  'g6-percent': {
+    title: 'Percentages — Out of 100 Every Time! 💯',
+    sections: [
+      {heading:'What is Percent?', body:'"Percent" means "per hundred" or "out of 100." 50% means 50 out of 100, which is the same as 1/2 or 0.5. 25% means 25 out of 100, or 1/4. Percentages, fractions, and decimals are all different ways of expressing the same relationship. The % symbol is just shorthand for "/100"!'},
+      {heading:'Finding a Percent of a Number', body:'To find X% of a number, multiply the number by X/100. What is 20% of 80? 80 × 20/100 = 80 × 0.2 = 16. Mental math shortcuts: 50% = half, 25% = quarter, 10% = move decimal one place left. So 10% of 340 = 34, and 20% of 340 = 68 (just double the 10% answer!)'},
+      {heading:'Converting Between Forms', body:'Fraction to percent: divide numerator by denominator and multiply by 100. 3/4 = 0.75 = 75%. Decimal to percent: multiply by 100 (move decimal 2 places right). 0.45 = 45%. Percent to decimal: divide by 100 (move decimal 2 places left). 82% = 0.82. Percent to fraction: put over 100 and simplify. 60% = 60/100 = 3/5.'},
+      {heading:'Percent Increase and Decrease', body:'A $50 shirt with 20% off: first find 20% of 50 = 10, then subtract: 50 − 10 = $40. Or use one step: 50 × 0.80 = $40 (because 100% − 20% = 80%). For increase: a population of 200 growing by 15% = 200 × 1.15 = 230. The key: (100% ± change%) converts to a decimal multiplier.'},
+      {heading:'Solving Percent Problems', body:'Three types: (1) Find the part: "What is 30% of 150?" → 150 × 0.30 = 45. (2) Find the percent: "18 is what % of 60?" → 18/60 × 100 = 30%. (3) Find the whole: "15 is 25% of what?" → 15 ÷ 0.25 = 60. Memorize the triangle: Part = Percent × Whole, Percent = Part ÷ Whole, Whole = Part ÷ Percent.'}
+    ],
+    tips: ['Always convert percent to a decimal before calculating: 7% = 0.07, NOT 0.7!','For quick estimates, use benchmark percents: 50% is half, 25% is quarter, 10% is move-the-decimal, 1% is divide by 100.','When a price goes up 20% then down 20%, you DON\'T end up at the original price! Try it with $100 → $120 → $96.']
+  },
+  'g6-fracdiv': {
+    title: 'Fraction Division — Flipping & Multiplying! 🔄',
+    sections: [
+      {heading:'What Does Fraction Division Mean?', body:'Dividing by a fraction answers the question: "How many of this fraction fit into that number?" For example, 3 ÷ (1/2) = 6 means "How many halves are in 3 wholes?" Since each whole has 2 halves, 3 × 2 = 6 halves. Division by a fraction always gives a LARGER answer — because you\'re counting smaller pieces!'},
+      {heading:'The Keep-Change-Flip Rule', body:'To divide by a fraction: KEEP the first number, CHANGE ÷ to ×, and FLIP the second fraction (use its reciprocal). So 3/4 ÷ 2/5 → 3/4 × 5/2 = 15/8 = 1 7/8. The reciprocal of 2/5 is 5/2. This works because dividing by a number is the same as multiplying by its reciprocal!'},
+      {heading:'Dividing Whole Numbers by Fractions', body:'A whole number is just a fraction with denominator 1! So 4 = 4/1. Then 4 ÷ 2/3 = 4/1 × 3/2 = 12/2 = 6. Visualize: if you have 4 pizzas and each person eats 2/3 of a pizza, how many people can you serve? 4 ÷ (2/3) = 6 people!'},
+      {heading:'Dividing Mixed Numbers', body:'First, convert ALL mixed numbers to improper fractions. 2 1/2 ÷ 1 1/4 = 5/2 ÷ 5/4 = 5/2 × 4/5 = 20/10 = 2. Don\'t try to divide the whole parts and fraction parts separately — always convert to improper fractions first!'},
+      {heading:'Real-World Fraction Division', body:'A 5-metre ribbon is cut into pieces that are each 2/3 metre long. How many pieces? 5 ÷ (2/3) = 5 × 3/2 = 15/2 = 7 1/2 pieces. You get 7 full pieces and half of an eighth piece. Recipe: if a batch needs 3/4 cup and you have 3 cups of flour, how many batches? 3 ÷ (3/4) = 4 batches!'}
+    ],
+    tips: ['Always use Keep-Change-Flip: Keep the first, Change ÷ to ×, Flip the second. Don\'t skip any step!','Convert mixed numbers to improper fractions BEFORE using Keep-Change-Flip.','The answer to fraction division should be LARGER than the starting number (unless dividing by a fraction > 1). Check your answer makes sense!']
+  },
+  'g6-equations': {
+    title: 'Two-Step Equations — Unlocking the Unknown! 🔓',
+    sections: [
+      {heading:'What Makes an Equation "Two-Step"?', body:'A two-step equation has TWO operations applied to the variable. For example, 3x + 5 = 20 has multiplication (3x) and addition (+5). To solve, you need two steps to isolate x. Think of it like unwrapping a present: first take off the outer wrapping (addition/subtraction), then the inner wrapping (multiplication/division).'},
+      {heading:'Solving: Undo Addition First', body:'For 2x + 3 = 11: Step 1 — subtract 3 from both sides: 2x = 8. Step 2 — divide both sides by 2: x = 4. Always UNDO addition/subtraction BEFORE undoing multiplication/division. This is the reverse of BEDMAS — we\'re working backwards to "unwrap" x!'},
+      {heading:'Solving with Subtraction', body:'For 5x − 7 = 18: Step 1 — add 7 to both sides: 5x = 25. Step 2 — divide both sides by 5: x = 5. If the equation has subtraction, ADD to both sides. If it has addition, SUBTRACT. Always do the INVERSE (opposite) operation.'},
+      {heading:'Equations with Division', body:'For x/4 + 6 = 10: Step 1 — subtract 6: x/4 = 4. Step 2 — multiply by 4: x = 16. For (x − 3)/2 = 5: Step 1 — multiply by 2: x − 3 = 10. Step 2 — add 3: x = 13. The fraction bar is like a division sign — undo it with multiplication!'},
+      {heading:'Checking Your Answer', body:'ALWAYS plug your answer back into the original equation! For 3x + 5 = 20, if x = 5: 3(5) + 5 = 15 + 5 = 20 ✓. If the sides don\'t match, you made a mistake. Checking catches errors and builds confidence. Make it a habit for every single equation you solve!'}
+    ],
+    tips: ['Work backwards through BEDMAS: undo addition/subtraction FIRST, then undo multiplication/division.','Whatever you do to one side, do EXACTLY the same to the other. The equation is a balance scale!','Always check your answer by plugging it back in. It only takes 5 seconds and catches 90% of mistakes.']
+  },
+  'g6-proportion': {
+    title: 'Proportional Reasoning — Same Relationship, Different Size! 📈',
+    sections: [
+      {heading:'What is a Proportion?', body:'A proportion says that two ratios are EQUAL. If 2/3 = 8/12, that\'s a proportion. You can check by cross-multiplying: 2×12 = 24 and 3×8 = 24, so YES! Proportions help us scale things up or down while keeping the same relationship. Recipes, maps, and scale models all use proportions!'},
+      {heading:'Solving with Cross-Multiplication', body:'If 3/5 = x/20, cross-multiply: 3×20 = 5×x, so 60 = 5x, and x = 12. Cross-multiplication works because you\'re multiplying both sides by both denominators, which is perfectly legal as long as you do it to BOTH sides!'},
+      {heading:'Unit Rates', body:'A unit rate tells you "how much for ONE." If 5 apples cost $3.75, the unit rate is $3.75 ÷ 5 = $0.75 per apple. Once you know the unit rate, you can find the cost of ANY number of apples. Unit rates make proportional reasoning easy: find the per-one amount, then scale up or down.'},
+      {heading:'Scale Drawings and Maps', body:'A map scale of 1 cm = 50 km means every centimetre on the map represents 50 kilometres in real life. If two cities are 7 cm apart on the map, the real distance is 7 × 50 = 350 km. The proportion is 1/50 = 7/x, so x = 350. Scale works the same way whether you\'re shrinking or enlarging.'},
+      {heading:'Proportional vs. Non-Proportional', body:'A relationship is proportional if it goes through (0,0) and has a constant ratio. Doubling the input doubles the output. For example: cost = $3 × number_of_items is proportional. But cost = $3 × items + $5 shipping is NOT proportional — there\'s a fixed $5 that doesn\'t scale. The graph of a proportional relationship is always a straight line through the origin.'}
+    ],
+    tips: ['Set up proportions with matching units: both numerators should be the same thing, both denominators the same thing.','Cross-multiply: a/b = c/d means a×d = b×c. This is your main tool for solving proportions.','Find the unit rate first — it often makes the rest of the problem much simpler.']
+  },
+  'g6-circle': {
+    title: 'Circle Geometry — Perfectly Round! ⭕',
+    sections: [
+      {heading:'Parts of a Circle', body:'RADIUS (r): distance from centre to edge. DIAMETER (d): distance across through the centre = 2×radius. CIRCUMFERENCE (C): distance around the circle. The diameter is always exactly twice the radius. If you know one, you automatically know the other!'},
+      {heading:'Pi (π) — The Magic Number', body:'Pi (π) is the ratio of a circle\'s circumference to its diameter — about 3.14. Every circle, no matter how big or small, has this same ratio! π = C ÷ d, so C = π × d = 2 × π × r. In Grade 6, we usually use π ≈ 3.14 for calculations. Pi goes on forever without repeating: 3.1415926535...'},
+      {heading:'Calculating Circumference', body:'C = π × d = 2 × π × r. If radius = 7 cm: C = 2 × 3.14 × 7 = 43.96 cm. If diameter = 10 m: C = 3.14 × 10 = 31.4 m. Think of circumference as the "perimeter" of a circle — it\'s the distance you\'d walk if you went around the edge once.'},
+      {heading:'Calculating Area', body:'A = π × r² (pi times radius squared). If radius = 5 cm: A = 3.14 × 5² = 3.14 × 25 = 78.5 cm². The area is how much flat space the circle covers. Notice we use the RADIUS, not the diameter, for area. If you\'re given the diameter, divide by 2 first!'},
+      {heading:'Circles in Real Life', body:'A bicycle wheel with radius 35 cm has circumference = 2 × 3.14 × 35 ≈ 220 cm — so it travels about 2.2 metres per rotation. A pizza with diameter 30 cm has area = 3.14 × 15² ≈ 706.5 cm². A running track is two straight sections plus two half-circles. Circles are everywhere!'}
+    ],
+    tips: ['Memorize: C = πd = 2πr and A = πr². Write them on your hand if you need to!','Don\'t confuse radius and diameter! If you\'re given diameter for an area problem, divide by 2 first to get radius.','Use π ≈ 3.14 for Grade 6 problems unless told otherwise. Keep answers to 1 decimal place for neatness.']
+  },
+  'g6-volume3d': {
+    title: '3D Volume — Filling Up Shapes! 🧊',
+    sections: [
+      {heading:'Volume of Rectangular Prisms', body:'Volume = length × width × height. A box 5 cm × 4 cm × 3 cm has volume = 5 × 4 × 3 = 60 cm³. Think of it as layers: the base layer has 5×4 = 20 cubes, and with 3 layers high, that\'s 20 × 3 = 60 cubes. Volume tells you how many unit cubes would fill the shape completely.'},
+      {heading:'Volume of Cubes', body:'A cube is a special prism where length = width = height. So Volume = side³ (side cubed). A cube with side 6 cm has volume = 6³ = 6 × 6 × 6 = 216 cm³. The cube root (³√) does the reverse: if volume is 125, the side is ³√125 = 5 cm, because 5³ = 125.'},
+      {heading:'Volume of Triangular Prisms', body:'Volume = (area of triangle base) × height. First find the triangle area: (base × height_of_triangle) ÷ 2. Then multiply by the prism\'s length. A triangular prism with triangle base 6 cm, triangle height 4 cm, and prism length 10 cm: Area = (6×4)÷2 = 12 cm², then Volume = 12 × 10 = 120 cm³.'},
+      {heading:'Volume of Cylinders', body:'A cylinder is like a circular prism. Volume = π × r² × height. Think of it as the area of the circular base (πr²) stacked up height times. A can with radius 3 cm and height 10 cm: V = 3.14 × 3² × 10 = 3.14 × 9 × 10 = 282.6 cm³. Cylinders are everywhere — cans, pipes, batteries!'},
+      {heading:'Volume in Real Life', body:'How much water fits in a fish tank? A 60 cm × 30 cm × 40 cm tank holds 60×30×40 = 72,000 cm³ = 72 litres (since 1 L = 1,000 cm³). How much concrete for a sidewalk? A 5 m × 1 m × 0.1 m slab needs 0.5 m³. Volume calculations help with packing, building, cooking, and more!'}
+    ],
+    tips: ['Volume is always in CUBIC units (cm³, m³, in³). Don\'t forget the little 3!','For prisms: Volume = base area × height. Find the area of whatever shape the base is, then multiply by height.','1 m³ = 1,000,000 cm³ (a million!). Unit conversions for volume are huge because you\'re cubing the conversion factor.']
+  },
+  'g6-probadv': {
+    title: 'Probability — Advanced — Predicting Outcomes! 🎲',
+    sections: [
+      {heading:'Theoretical Probability', body:'Theoretical probability = (favourable outcomes) ÷ (total possible outcomes). Rolling a die: P(rolling an even number) = 3/6 = 1/2 = 50%. This is what SHOULD happen in theory. The key word is "theoretical" — it assumes every outcome is equally likely and nothing is biased.'},
+      {heading:'Experimental Probability', body:'Experimental probability comes from ACTUALLY doing the experiment. Flip a coin 50 times and count: 23 heads, 27 tails. Experimental P(heads) = 23/50 = 46%. This may not match the theoretical 50%! As you do more trials, experimental probability usually gets CLOSER to theoretical probability — this is called the Law of Large Numbers.'},
+      {heading:'Sample Spaces and Tree Diagrams', body:'A sample space is a list of ALL possible outcomes. For flipping 2 coins: HH, HT, TH, TT. You can use a TREE DIAGRAM to find the sample space. Each branch shows a possible path. For 2 coins: first coin (H or T), then from each branch, second coin (H or T) = 4 outcomes total.'},
+      {heading:'Compound Probability', body:'For independent events (one doesn\'t affect the other), multiply the probabilities. P(rolling a 6 AND flipping heads) = P(6) × P(heads) = 1/6 × 1/2 = 1/12. For a bag with 3 red and 7 blue marbles, P(red, then red WITHOUT replacement) = 3/10 × 2/9 = 6/90 = 1/15.'},
+      {heading:'Expected Value', body:'Expected value = probability × value. If you win $10 with probability 1/4, your expected value is $10 × 1/4 = $2.50 per game. Over many games, you\'d average $2.50 per game. Expected value helps decide if a game is fair — if it costs $3 to play but expected winnings are $2.50, you\'ll lose money in the long run!'}
+    ],
+    tips: ['Theoretical = what SHOULD happen. Experimental = what ACTUALLY happened. They get closer with more trials!','For compound events, multiply probabilities only if the events are INDEPENDENT (one doesn\'t affect the other).','Draw tree diagrams or lists of outcomes when you\'re stuck. Seeing all possibilities makes the problem much clearer.']
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// CACHED DOM REFERENCES (populated after DOM ready)
+// ═══════════════════════════════════════════════════════
+let _screenEls, _navBtns, _tabBtns, _lenBtns;
+function cacheDOM() {
+  _screenEls = document.querySelectorAll('.screen');
+  _navBtns = document.querySelectorAll('.nav-btn');
+  _tabBtns = document.querySelectorAll('.tab-btn');
+  _lenBtns = document.querySelectorAll('.len-btn');
+}
+
+// ═══════════════════════════════════════════════════════
+// TOPIC ID VALIDATION
+// ═══════════════════════════════════════════════════════
+function validateTopics() {
+  TOPICS.forEach(t => {
+    if (!QB[t.id]) console.warn('Missing question bank for topic:', t.id);
+    if (t.grade < 4 || t.grade > 6) console.warn('Unexpected grade for topic:', t.id, t.grade);
+  });
+  const qbKeys = Object.keys(QB);
+  const topicIds = TOPICS.map(t => t.id);
+  qbKeys.forEach(k => {
+    if (!topicIds.includes(k)) console.warn('Orphan question bank key:', k);
+  });
+}
+
+function defaultProfile() {
+  return {
+    grade: 4,
+    correctCounts: {},   // { topicId: { 1: count, 2: count, 3: count } }
+    vault: [],
+    seenQuestions: {},   // { questionId: dateString }
+    dailyRounds: {},     // { topicId: { date: 'YYYY-MM-DD', count: n } }
+    tooEasyFlags: {},    // { topicId: { tier, date } } -> suggest upgrade
+    sessions: [],        // [{ date, topic, tier, score, total }]
+    lastStreakDate: null,
+    streak: 0,
+    weekStart: null,
+    weekSessions: 0,
+    weekCorrect: 0,
+    weekTotal: 0,
+    monthStart: null,
+    monthCorrect: 0,
+  };
+}
+
+function defaultBattle() {
+  return {
+    jennWall: WALL_BRICKS,
+    jessWall: WALL_BRICKS,
+    currentWeekStart: null,
+    slotsUsedThisWeek: { jenn:false, jess:false },
+    slotInProgress: null,   // { challenger, setup fields }
+    lastWinner: null,
+    lastPrize: null,
+    campaignNum: 1,
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) {
+      const parsed = JSON.parse(raw);
+      // Schema migration
+      if (!parsed._version || parsed._version < SCHEMA_VERSION) {
+        migrateState(parsed, parsed._version || 0);
+        parsed._version = SCHEMA_VERSION;
+      }
+      if(!parsed.battle) parsed.battle = defaultBattle();
+      return parsed;
+    }
+  } catch(e) { console.warn('Load failed', e); }
+  const fresh = {
+    jenn: defaultProfile(),
+    jess: defaultProfile(),
+    battle: defaultBattle(),
+    currentProfile: 'jenn',
+    _version: SCHEMA_VERSION
+  };
+  return fresh;
+}
+
+function migrateState(data, fromVersion) {
+  // Future migration logic goes here
+  console.log('State migrated from v' + fromVersion + ' to v' + SCHEMA_VERSION);
+}
+
+function saveState() {
+  try {
+    state._version = SCHEMA_VERSION;
+    state._updatedAt = Date.now();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    scheduleFirebaseSave();
+  }
+  catch(e) { console.warn('Save failed', e); }
+}
+
+function resetAllData() {
+  if(!confirm('Reset ALL progress for both girls? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  if (firebaseOnline) db.ref('progress').remove();
+  state = loadState();
+  renderMinibelts();
+  alert('Reset complete!');
+}
+
+// ═══════════════════════════════════════════════════════
+// DATE UTILS (bug-proof)
+// ═══════════════════════════════════════════════════════
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function getWeekStart() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  const mon = new Date(d.getFullYear(), d.getMonth(), diff);
+  return mon.toISOString().slice(0,10);
+}
+
+function getMonthStart() {
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+
+function daysBetween(dateStr1, dateStr2) {
+  const d1 = new Date(dateStr1), d2 = new Date(dateStr2);
+  return Math.floor((d2 - d1) / (1000*60*60*24));
+}
+
+// ═══════════════════════════════════════════════════════
+// WEEKLY/MONTHLY RESET (bug fix: only fire if date changed)
+// ═══════════════════════════════════════════════════════
+function checkResets() {
+  PROFILES.forEach(name => {
+    const p = state[name];
+    const wk = getWeekStart();
+    const mo = getMonthStart();
+    if(p.weekStart !== wk) {
+      p.weekStart = wk;
+      p.weekSessions = 0;
+      p.weekCorrect = 0;
+      p.weekTotal = 0;
+    }
+    if(p.monthStart !== mo) {
+      p.monthStart = mo;
+      p.monthCorrect = 0;
+    }
+  });
+
+  // Battle weekly slots reset
+  const wk = getWeekStart();
+  if(state.battle.currentWeekStart !== wk) {
+    state.battle.currentWeekStart = wk;
+    state.battle.slotsUsedThisWeek = { jenn:false, jess:false };
+  }
+  saveState();
+}
+
+// ═══════════════════════════════════════════════════════
+// PROFILE HELPERS
+// ═══════════════════════════════════════════════════════
+function getProfile() { return state[state.currentProfile]; }
+
+function getCorrectCount(profile, topicId, tier) {
+  if(!profile.correctCounts[topicId]) profile.correctCounts[topicId] = { 1:0, 2:0, 3:0 };
+  return profile.correctCounts[topicId][tier] || 0;
+}
+
+function getBelt(profile, topicId) {
+  const t1 = getCorrectCount(profile, topicId, 1);
+  const t2 = getCorrectCount(profile, topicId, 2);
+  const t3 = getCorrectCount(profile, topicId, 3);
+  if(t3 >= TIER2_TO_T3) return 'elite';
+  if(t2 >= TIER2_TO_T3) return 'kangaroo';
+  if(t1 >= TIER1_TO_T2) return 'gold';
+  if(t1 >= 40) return 'silver';
+  if(t1 >= 15) return 'bronze';
+  return 'unranked';
+}
+
+function isTierUnlocked(profile, topicId, tier) {
+  if(tier === 1) return true;
+  if(tier === 2) return getCorrectCount(profile, topicId, 1) >= TIER1_TO_T2;
+  if(tier === 3) return getCorrectCount(profile, topicId, 2) >= TIER2_TO_T3;
+  return false;
+}
+
+function getRoundsToday(profile, topicId) {
+  const today = todayStr();
+  const entry = profile.dailyRounds[topicId];
+  if(!entry || entry.date !== today) return 0;
+  return entry.count;
+}
+
+function incrementRounds(profile, topicId) {
+  const today = todayStr();
+  const entry = profile.dailyRounds[topicId];
+  if(!entry || entry.date !== today) {
+    profile.dailyRounds[topicId] = { date: today, count: 1 };
+  } else {
+    entry.count = Math.min(DAILY_ROUND_CAP, entry.count + 1);
+  }
+}
+
+function markSeenQuestions(profile, questions) {
+  const today = todayStr();
+  questions.forEach(q => { profile.seenQuestions[q.id] = today; });
+}
+
+function filterUnseenQuestions(profile, pool) {
+  const today = todayStr();
+  return pool.filter(q => {
+    const seenDate = profile.seenQuestions[q.id];
+    if(!seenDate) return true;
+    return daysBetween(seenDate, today) >= NO_REPEAT_DAYS;
+  });
+}
+
+// Fisher-Yates shuffle (deterministic sample without replacement)
+function sample(arr, n) {
+  const a = [...arr];
+  for(let i=a.length-1; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a.slice(0, n);
+}
+
+function getSessionQuestions(profile, topicId, tier, count) {
+  const bank = QB[topicId]?.[tier] || [];
+  if(bank.length === 0) return [];
+  const unseen = filterUnseenQuestions(profile, bank);
+  // If insufficient unseen, relax — allow reused (rare since pools are small in test)
+  let pool = unseen.length >= count ? unseen : [...unseen, ...bank.filter(q => !unseen.includes(q))];
+  return sample(pool, Math.min(count, pool.length));
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════
+function showScreen(id) {
+  _screenEls.forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const nav = document.getElementById('bottom-nav');
+  nav.style.display = (id === 'screen-profile') ? 'none' : 'flex';
+
+  _navBtns.forEach(b => b.classList.remove('active'));
+  const map = { 'screen-home':'home', 'screen-battle':'battle', 'screen-parent':'parent', 'screen-profile':'switch' };
+  const activeNav = document.querySelector(`.nav-btn[data-nav="${map[id]}"]`);
+  if(activeNav) activeNav.classList.add('active');
+
+  if(id === 'screen-home') renderHome();
+  if(id === 'screen-parent') renderParent();
+  if(id === 'screen-battle') renderBattle();
+}
+
+function selectProfile(name) {
+  state.currentProfile = name;
+  // Bug fix: reset filter state on profile switch
+  currentTab = 'all';
+  selectedLen = 10;
+  checkResets();
+  saveState();
+  renderMinibelts();
+  showScreen('screen-home');
+}
+
+function renderMinibelts() {
+  PROFILES.forEach(p => {
+    const el = document.getElementById(p+'-mini-belts');
+    if(!el) return;
+    el.innerHTML = '';
+    TOPICS.filter(t => t.grade === 4).slice(0,4).forEach(t => {
+      const b = getBelt(state[p], t.id);
+      const pip = document.createElement('div');
+      pip.className = 'mini-belt';
+      pip.style.background = BELT_COLORS[b];
+      el.appendChild(pip);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// HOME RENDER
+// ═══════════════════════════════════════════════════════
+function renderHome() {
+  checkResets();
+  const p = getProfile();
+  const name = state.currentProfile === 'jenn' ? 'Jenn' : 'Jess';
+  const avatar = state.currentProfile === 'jenn' ? '🐥' : '🦊';
+  document.getElementById('home-greeting').textContent = `Hey ${name}! ${avatar}`;
+  document.getElementById('stat-sessions').textContent = p.weekSessions || 0;
+  const beltCount = TOPICS.filter(t => getBelt(p, t.id) !== 'unranked').length;
+  document.getElementById('stat-belts').textContent = beltCount;
+  document.getElementById('stat-streak').textContent = '🔥 ' + (p.streak || 0);
+
+  document.getElementById('monthly-jenn').textContent = state.jenn.monthCorrect || 0;
+  document.getElementById('monthly-jess').textContent = state.jess.monthCorrect || 0;
+
+  document.getElementById('battle-walls-mini').textContent = `🐥 ${state.battle.jennWall} · 🦊 ${state.battle.jessWall}`;
+  const slotAvail = !state.battle.slotsUsedThisWeek[state.currentProfile];
+  document.getElementById('battle-sub').textContent = slotAvail ? 'Your turn to challenge this week!' : 'Slot used — defender this week';
+
+  renderContent();
+}
+
+function setTab(tab) {
+  currentTab = tab;
+  _tabBtns.forEach(b => {
+    const isActive = b.dataset.tab === tab;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-selected', isActive);
+  });
+  renderContent();
+}
+
+function renderContent() {
+  const area = document.getElementById('content-area');
+  area.innerHTML = '';
+  if(currentTab === 'vault') {
+    renderVaultList(area);
+    return;
+  }
+  const p = getProfile();
+  const title = document.createElement('div');
+  title.className = 'section-title';
+  title.innerHTML = '🎖️ Belt Board';
+  area.appendChild(title);
+
+  const grid = document.createElement('div');
+  grid.className = 'topic-grid';
+  const filtered = currentTab === 'all' ? TOPICS : TOPICS.filter(t => t.grade === parseInt(currentTab,10));
+
+  filtered.forEach(t => {
+    const t1Count = getCorrectCount(p, t.id, 1);
+    const t2Count = getCorrectCount(p, t.id, 2);
+    const belt = getBelt(p, t.id);
+    const rounds = getRoundsToday(p, t.id);
+    const exhausted = rounds >= DAILY_ROUND_CAP;
+    const pct = Math.min(100, Math.round((t1Count / TIER1_TO_T2) * 100));
+
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (exhausted ? ' exhausted' : '');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `${t.icon} ${t.name} — Grade ${t.grade}, belt ${belt}, ${rounds} of ${DAILY_ROUND_CAP} rounds today`);
+    card.style.borderColor = belt !== 'unranked' ? BELT_COLORS[belt] : 'transparent';
+    card.innerHTML = `
+      <div class="tc-grade" style="color:${t.color}">Grade ${t.grade}</div>
+      <div class="tc-name">${t.icon} ${t.name}</div>
+      <div class="tc-belt ${belt !== 'unranked' ? 'belt-'+belt : 'belt-unranked'}">${BELT_EMOJIS[belt]}</div>
+      <div class="tc-progress"><div class="tc-bar" style="width:${pct}%;background:${t.color}"></div></div>
+      <div class="tc-meta"><span>${t1Count}/${TIER1_TO_T2} T1</span><span>${rounds}/${DAILY_ROUND_CAP} today</span></div>
+    `;
+    card.onclick = () => {
+      if(exhausted) { alert(`🌙 You've done 2 rounds of ${t.name} today!\n\nCome back tomorrow for more.`); return; }
+      openTopic(t);
+    };
+    card.onkeydown = (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if(exhausted) { alert(`🌙 You've done 2 rounds of ${t.name} today!\n\nCome back tomorrow for more.`); return; }
+        openTopic(t);
+      }
+    };
+    grid.appendChild(card);
+  });
+  area.appendChild(grid);
+
+  // Vault button
+  const vb = document.createElement('div');
+  vb.className = 'vault-btn';
+  vb.setAttribute('role', 'button');
+  vb.setAttribute('tabindex', '0');
+  vb.setAttribute('aria-label', `Mistake Vault — ${vaultCount} questions to review`);
+  vb.style.marginTop = '16px';
+  const vaultCount = (p.vault || []).length;
+  vb.innerHTML = `
+    <div class="vault-icon">🔐</div>
+    <div style="flex:1;">
+      <div class="vault-info-title">Mistake Vault</div>
+      <div class="vault-info-sub">${vaultCount === 0 ? 'No mistakes — nice!' : vaultCount + ' question' + (vaultCount>1?'s':'') + ' to revisit'}</div>
+    </div>
+    <div class="vault-count">${vaultCount}</div>
+  `;
+  vb.onclick = () => setTab('vault');
+  vb.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTab('vault'); } };
+  area.appendChild(vb);
+}
+
+// ═══════════════════════════════════════════════════════
+// VAULT (hybrid: flashcard preview + retry)
+// ═══════════════════════════════════════════════════════
+function renderVaultList(area) {
+  const p = getProfile();
+  const title = document.createElement('div');
+  title.className = 'section-title';
+  title.innerHTML = '🔐 Mistake Vault';
+  area.appendChild(title);
+
+  if(!p.vault || p.vault.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'vault-empty';
+    empty.innerHTML = `<div class="vault-empty-emoji">✨</div><div class="vault-empty-text">No mistakes in your vault!<br>Keep training.</div>`;
+    area.appendChild(empty);
+    return;
+  }
+
+  const info = document.createElement('div');
+  info.style.cssText = 'font-size:12px; color:var(--muted); font-weight:700; margin-bottom:12px;';
+  info.textContent = 'Conquer these to remove them from the vault.';
+  area.appendChild(info);
+
+  p.vault.forEach((item, idx) => {
+    const topic = TOPICS.find(t => t.id === item.topicId);
+    const card = document.createElement('div');
+    card.className = 'vault-item';
+    card.innerHTML = `
+      <div class="vault-q-topic">${topic ? topic.icon + ' ' + topic.name : item.topicId} · Tier ${item.tier}</div>
+      <div class="vault-q-text">${item.question}</div>
+      <div class="vault-q-actions">
+        <button class="vault-btn-flip" onclick="vaultFlip(${idx})" aria-label="Show answer for question about ${topic ? topic.name : item.topicId}">👀 Show Answer</button>
+        <button class="vault-btn-retry" onclick="vaultRetry(${idx})" aria-label="Retry question about ${topic ? topic.name : item.topicId}">🎯 Try Again</button>
+      </div>
+      <div id="vault-flip-${idx}"></div>
+    `;
+    area.appendChild(card);
+  });
+}
+
+function vaultFlip(idx) {
+  const p = getProfile();
+  const item = p.vault[idx];
+  const slot = document.getElementById('vault-flip-'+idx);
+  if(slot.innerHTML) { slot.innerHTML = ''; return; }
+  slot.innerHTML = `<div class="vault-answer">Answer: ${item.answerText}</div>`;
+}
+
+function vaultRetry(idx) {
+  const p = getProfile();
+  const item = p.vault[idx];
+  const topic = TOPICS.find(t => t.id === item.topicId);
+  if(!topic) { alert('Topic not found'); return; }
+  // Start single-question vault session
+  state.topic = topic;
+  state.tier = item.tier;
+  state.sessionLen = 1;
+  state.questions = [{ id:item.qid, q:item.question, ans:item.answer, choices:item.choices, type:item.qtype }];
+  state.qIndex = 0;
+  state.score = 0;
+  state.wrongCount = 0;
+  state.vaultAdded = 0;
+  state.vaultRetryIdx = idx;
+  state.timerStart = Date.now();
+  clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - state.timerStart) / 1000);
+    const m = Math.floor(elapsed/60), s = elapsed%60;
+    document.getElementById('q-timer').textContent = `⏱ ${m}:${s.toString().padStart(2,'0')}`;
+  }, 1000);
+  showScreen('screen-question');
+  renderQuestion();
+}
+
+// ═══════════════════════════════════════════════════════
+// TOPIC DETAIL
+// ═══════════════════════════════════════════════════════
+function openTopic(t) {
+  state.topic = t;
+  document.getElementById('th-icon').textContent = t.icon;
+  document.getElementById('th-name').textContent = t.name;
+  document.getElementById('th-grade').textContent = 'Grade ' + t.grade;
+  renderBeltDisplay();
+  renderTierSelect();
+  renderLecture(t.id);
+  showScreen('screen-topic');
+}
+
+function renderBeltDisplay() {
+  const p = getProfile();
+  const belt = getBelt(p, state.topic.id);
+  const idx = BELT_LEVELS.indexOf(belt);
+  const display = document.getElementById('belt-display');
+  display.innerHTML = '';
+  BELT_LEVELS.filter(b=>b!=='unranked').forEach((b,i) => {
+    const pip = document.createElement('div');
+    pip.className = 'belt-pip belt-'+b + (i > idx-1 ? ' inactive' : '');
+    pip.textContent = BELT_EMOJIS[b];
+    display.appendChild(pip);
+  });
+  const t1 = getCorrectCount(p, state.topic.id, 1);
+  const t2 = getCorrectCount(p, state.topic.id, 2);
+  const t3 = getCorrectCount(p, state.topic.id, 3);
+  document.getElementById('counter-info').innerHTML =
+    `T1: <b>${t1}</b>/${TIER1_TO_T2} · T2: <b>${t2}</b>/${TIER2_TO_T3} · T3: <b>${t3}</b>`;
+}
+
+function renderTierSelect() {
+  const p = getProfile();
+  const grid = document.getElementById('tier-select-grid');
+  const t1c = getCorrectCount(p, state.topic.id, 1);
+  const t2c = getCorrectCount(p, state.topic.id, 2);
+  const t3c = getCorrectCount(p, state.topic.id, 3);
+  const tiers = [
+    { num:1, name:'Tier 1 — Alberta Core', desc:'Curriculum-aligned', icon:'📗', progress:`${t1c}/${TIER1_TO_T2}`, unlock:true },
+    { num:2, name:'Tier 2 — Kangaroo', desc:'Lateral & multi-step', icon:'🦘', progress:`${t2c}/${TIER2_TO_T3}`, unlock:isTierUnlocked(p, state.topic.id, 2) },
+    { num:3, name:'Tier 3 — Elite', desc:'Private school challenge', icon:'⭐', progress:`${t3c} correct`, unlock:isTierUnlocked(p, state.topic.id, 3) },
+  ];
+  grid.innerHTML = '';
+  tiers.forEach(t => {
+    const btn = document.createElement('div');
+    btn.className = 'tier-btn' + (t.unlock ? '' : ' locked');
+    if(t.unlock) {
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('tabindex', '0');
+      btn.setAttribute('aria-label', `${t.name} — ${t.progress}`);
+    }
+    const lockTxt = t.num === 2 ? `Complete ${TIER1_TO_T2- t1c} more T1` : `Complete ${TIER2_TO_T3 - t2c} more T2`;
+    btn.innerHTML = `
+      <div class="tier-icon tier-${t.num}-icon">${t.icon}</div>
+      <div class="tier-info">
+        <div class="tier-name">${t.name}</div>
+        <div class="tier-desc">${t.desc}</div>
+        <div class="tier-progress">${t.unlock ? t.progress + ' correct' : '🔒 ' + lockTxt}</div>
+      </div>
+    `;
+    if(t.unlock) {
+      btn.onclick = () => startSession(t.num);
+      btn.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startSession(t.num); } };
+    }
+    grid.appendChild(btn);
+  });
+}
+
+function selectLen(n, btn) {
+  selectedLen = n;
+  _lenBtns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// ═══════════════════════════════════════════════════════
+// LECTURE VIEWER
+// ═══════════════════════════════════════════════════════
+function renderLecture(topicId) {
+  const body = document.getElementById('lecture-body');
+  const toggle = document.getElementById('lecture-toggle');
+  const section = document.getElementById('lecture-section');
+  const lecture = LECTURES[topicId];
+
+  if (!lecture) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+  toggle.disabled = false;
+
+  // Reset to collapsed when opening a new topic
+  body.classList.remove('open');
+  toggle.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+
+  // Reset parent help message
+  const helpMsg = document.getElementById('parent-help-msg');
+  const helpBtn = document.getElementById('parent-help-btn');
+  helpMsg.classList.remove('show');
+  helpMsg.innerHTML = '';
+  helpBtn.setAttribute('aria-expanded', 'false');
+
+  toggle.innerHTML = `📖 ${lecture.title} <span class="toggle-arrow">▼</span>`;
+
+  let html = '';
+  lecture.sections.forEach(sec => {
+    html += `<div class="lecture-card">
+      <h4>${sec.heading}</h4>
+      <p>${sec.body}</p>
+    </div>`;
+  });
+
+  if (lecture.tips && lecture.tips.length) {
+    html += `<div class="lecture-tips">
+      <h4>💡 Quick Tips</h4>
+      <ul>${lecture.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+function toggleLecture() {
+  const body = document.getElementById('lecture-body');
+  const toggle = document.getElementById('lecture-toggle');
+  const isOpen = body.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+}
+
+function toggleParentHelp() {
+  const msg = document.getElementById('parent-help-msg');
+  const btn = document.getElementById('parent-help-btn');
+  const isOpen = msg.classList.toggle('show');
+  btn.setAttribute('aria-expanded', isOpen);
+  if (isOpen) {
+    const topic = state.topic;
+    const grade = topic ? topic.grade : '';
+    const name = topic ? topic.name : '';
+    msg.innerHTML = `
+      <strong>👋 Hey parent!</strong><br><br>
+      Your child is learning about <strong>${name}</strong> (Grade ${grade}).<br><br>
+      📖 Read through the lesson above together — it explains the key concepts in kid-friendly language.<br><br>
+      💡 Try working through the Quick Tips as a team.<br><br>
+      🎯 Then let your child try the practice questions. If they get stuck, talk through the problem step by step rather than giving the answer.<br><br>
+      <em>Learning math together builds confidence that lasts a lifetime!</em>
+    `;
+  } else {
+    msg.innerHTML = '';
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SESSION
+// ═══════════════════════════════════════════════════════
+function startSession(tier) {
+  const p = getProfile();
+  const rounds = getRoundsToday(p, state.topic.id);
+  if(rounds >= DAILY_ROUND_CAP) {
+    alert(`🌙 You've done ${DAILY_ROUND_CAP} rounds of ${state.topic.name} today!\n\nCome back tomorrow.`);
+    return;
+  }
+
+  const questions = getSessionQuestions(p, state.topic.id, tier, selectedLen);
+  if(questions.length === 0) {
+    alert('No questions available for this tier yet! Sample bank is limited for the test build.');
+    return;
+  }
+
+  state.tier = tier;
+  state.sessionLen = questions.length;
+  state.questions = questions;
+  state.qIndex = 0;
+  state.score = 0;
+  state.wrongCount = 0;
+  state.vaultAdded = 0;
+  state.vaultRetryIdx = null;
+  state.timerStart = Date.now();
+  state.tooEasyCount = 0;
+  clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - state.timerStart) / 1000);
+    const m = Math.floor(elapsed/60), s = elapsed%60;
+    document.getElementById('q-timer').textContent = `⏱ ${m}:${s.toString().padStart(2,'0')}`;
+  }, 1000);
+
+  // Mark questions seen for no-repeat
+  markSeenQuestions(p, questions);
+  saveState();
+
+  showScreen('screen-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = state.questions[state.qIndex];
+  const total = state.questions.length;
+  document.getElementById('q-counter').textContent = `${state.qIndex+1} / ${total}`;
+  const progBar = document.getElementById('q-progress-bar');
+  progBar.style.width = `${(state.qIndex/total)*100}%`;
+  progBar.setAttribute('aria-valuenow', state.qIndex);
+  progBar.setAttribute('aria-valuemax', total);
+
+  const tierNames = ['','Tier 1 — Core','Tier 2 — Kangaroo','Tier 3 — Elite'];
+  const tierBg = ['','#EAF3DE','#E6F1FB','#F3E5FF'];
+  const tierTxt = ['','#3B6D11','#185FA5','#6C3483'];
+  const tag = document.getElementById('q-tier-tag');
+  tag.textContent = tierNames[state.tier];
+  tag.style.background = tierBg[state.tier];
+  tag.style.color = tierTxt[state.tier];
+
+  document.getElementById('multi-hint-slot').innerHTML = '';
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('feedback-area').innerHTML = '';
+  state.answered = false;
+  state.lastChosen = undefined;
+  state.lastCorrect = undefined;
+  explainInFlight = false;
+
+  const area = document.getElementById('choices-area');
+  if(q.type === 'mcq') {
+    const letters = ['A','B','C','D'];
+    area.innerHTML = `<div class="choices-grid">${q.choices.map((c,i)=>`
+      <button class="choice-btn" onclick="submitMCQ(${i})">
+        <div class="choice-letter">${letters[i]}</div>${c}
+      </button>`).join('')}</div>`;
+  } else {
+    area.innerHTML = `<div class="free-entry">
+      <input class="free-input" type="text" id="free-input" placeholder="Type your answer…" autocomplete="off" onkeydown="if(event.key==='Enter')submitFree()">
+      <button class="submit-btn" id="submit-btn" onclick="submitFree()">Check →</button>
+    </div>`;
+    setTimeout(()=>{ const el=document.getElementById('free-input'); if(el) el.focus(); }, 100);
+  }
+}
+
+function submitMCQ(chosen) {
+  if(state.answered) return;
+  state.answered = true;
+  const q = state.questions[state.qIndex];
+  const correct = chosen === q.ans;
+  state.lastChosen = chosen;
+  state.lastCorrect = correct;
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach((btn,i) => {
+    btn.disabled = true;
+    if(i === q.ans) btn.classList.add('correct');
+    else if(i === chosen && !correct) btn.classList.add('wrong');
+  });
+  handleResult(correct, q, chosen);
+}
+
+function submitFree() {
+  if(state.answered) return;
+  const input = document.getElementById('free-input');
+  const submitBtn = document.getElementById('submit-btn');
+  const val = input ? input.value.trim() : '';
+  if(!val) return;
+  submitBtn.disabled = true;
+  const q = state.questions[state.qIndex];
+  const normalize = s => s.toString().toLowerCase().replace(/\s+/g,'').replace(/^[+]/,'');
+  const correct = normalize(val) === normalize(q.ans);
+  state.lastChosen = val;
+  state.lastCorrect = correct;
+  input.disabled = true;
+  input.style.borderColor = correct ? 'var(--success)' : 'var(--danger)';
+  input.style.background = correct ? '#EAFAF1' : '#FDEDEC';
+  if(!correct) {
+    const hint = document.createElement('div');
+    hint.style.cssText = 'font-size:13px;color:var(--success);font-weight:800;margin-top:6px;';
+    hint.textContent = '✓ Answer: ' + q.ans;
+    input.parentNode.appendChild(hint);
+    const tip = document.createElement('div');
+    tip.style.cssText = 'font-size:11px;color:var(--muted);font-weight:600;margin-top:3px;';
+    const ansStr = String(q.ans);
+    if(ansStr.includes('/')) tip.textContent = '💡 Tip: type fractions like 1/2 or 3/4';
+    else if(ansStr.includes(' ')) tip.textContent = '💡 Tip: use spaces for mixed numbers like 2 1/3';
+    else if(ansStr.includes('.')) tip.textContent = '💡 Tip: include the decimal point, like 1.35';
+    else tip.textContent = '💡 Tip: type just the number — no extra spaces or symbols';
+    input.parentNode.appendChild(tip);
+  }
+  state.answered = true;
+  handleResult(correct, q, val);
+}
+
+function handleResult(correct, q, chosen) {
+  const p = getProfile();
+  const feedbackArea = document.getElementById('feedback-area');
+
+  if(correct) {
+    state.score++;
+    // Bug fix: clamp correct count per topic-tier
+    if(!p.correctCounts[state.topic.id]) p.correctCounts[state.topic.id] = { 1:0, 2:0, 3:0 };
+    const maxT1 = TIER1_TO_T2 * 2;
+    const maxT2 = TIER2_TO_T3 * 2;
+    if(state.tier === 1) p.correctCounts[state.topic.id][1] = Math.min(maxT1, p.correctCounts[state.topic.id][1] + 1);
+    if(state.tier === 2) p.correctCounts[state.topic.id][2] = Math.min(maxT2, p.correctCounts[state.topic.id][2] + 1);
+    if(state.tier === 3) p.correctCounts[state.topic.id][3] = p.correctCounts[state.topic.id][3] + 1;
+
+    // Monthly & weekly tally
+    p.monthCorrect = (p.monthCorrect || 0) + 1;
+
+    // If this was a vault retry, remove from vault
+    if(state.vaultRetryIdx != null) {
+      p.vault.splice(state.vaultRetryIdx, 1);
+      state.vaultRetryIdx = null;
+    }
+  } else {
+    state.wrongCount++;
+    // Add to vault with full details for retry (bug fix: store everything needed)
+    p.vault = p.vault || [];
+    const alreadyInVault = p.vault.some(v => v.qid === q.id);
+    if(!alreadyInVault) {
+      p.vault.push({
+        qid: q.id,
+        topicId: state.topic.id,
+        topicName: state.topic.name,
+        question: q.q,
+        choices: q.choices,
+        answer: q.ans,
+        answerText: q.type === 'mcq' && q.choices ? q.choices[q.ans] : q.ans,
+        qtype: q.type,
+        tier: state.tier,
+        addedDate: todayStr(),
+      });
+      state.vaultAdded++;
+    }
+  }
+  saveState();
+
+  const nextBtnHtml = state.qIndex < state.questions.length-1
+    ? `<button class="next-btn" onclick="nextQuestion()">Next →</button>`
+    : `<button class="next-btn" onclick="endSession()">Finish 🎯</button>`;
+
+  if(correct) {
+    feedbackArea.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="success-tag">✅ Correct!</div>
+        <button class="explain-btn" id="explain-btn" onclick="loadExplanation(this, 'correct')">🧠 Why?</button>
+        <button class="easy-btn" id="easy-btn" onclick="markTooEasy(this)">😴 Too Easy</button>
+        ${nextBtnHtml}
+      </div>
+      <div id="explain-content"></div>
+    `;
+  } else {
+    feedbackArea.innerHTML = `
+      <div class="feedback-row">
+        <button class="explain-btn" id="explain-btn" onclick="loadExplanation(this, 'wrong')">🧠 Explain</button>
+        ${nextBtnHtml}
+      </div>
+      <div class="vault-tag">🔐 Saved to Vault — you can retry it later</div>
+      <div id="explain-content"></div>
+    `;
+  }
+}
+
+function markTooEasy(btn) {
+  const p = getProfile();
+  if(!p.tooEasyFlags[state.topic.id]) p.tooEasyFlags[state.topic.id] = { tier: state.tier, count: 0, date: todayStr() };
+  p.tooEasyFlags[state.topic.id].count++;
+  p.tooEasyFlags[state.topic.id].date = todayStr();
+  state.tooEasyCount = (state.tooEasyCount || 0) + 1;
+  btn.classList.add('active');
+  btn.textContent = '😴 Flagged';
+  btn.disabled = true;
+  saveState();
+}
+
+async function loadExplanation(btn, mode) {
+  if(explainInFlight) return;
+  explainInFlight = true;
+  btn.disabled = true;
+  btn.innerHTML = 'Loading...';
+  const q = state.questions[state.qIndex];
+  const explainDiv = document.getElementById('explain-content');
+  const answerText = q.type === 'mcq' && q.choices ? q.choices[q.ans] : q.ans;
+
+  // Determine what the user answered
+  const chosen = state.lastChosen;
+  const chosenText = q.type === 'mcq' && q.choices && chosen !== undefined
+    ? q.choices[chosen]
+    : (typeof chosen === 'string' ? chosen : null);
+
+  const isCorrect = mode === 'correct';
+
+  explainDiv.innerHTML = `<div class="explain-box"><div class="explain-loading">🧠 Thinking... <div class="dot-pulse"><span></span><span></span><span></span></div></div></div>`;
+
+  try {
+    const grade = getProfile().grade;
+    let prompt;
+    if (isCorrect) {
+      // Correct answer: reinforce understanding
+      prompt = `You are a friendly math tutor for a Grade ${grade} student in Alberta, Canada. The student correctly answered "${answerText}". Reinforce why this answer is right — explain the key concept or reasoning behind it. Keep it encouraging, step-by-step, 3-4 short sentences max. Question: "${q.q}"`;
+    } else {
+      // Wrong answer: distractor-specific feedback
+      if (chosenText && chosenText !== answerText) {
+        prompt = `You are a friendly math tutor for a Grade ${grade} student in Alberta, Canada. The student answered "${chosenText}" but the correct answer is "${answerText}". Explain why "${chosenText}" is wrong (what mistake did they likely make?) and then show the right way to get "${answerText}". Be encouraging, step-by-step, 3-5 short sentences max. Question: "${q.q}"`;
+      } else {
+        prompt = `You are a friendly math tutor for a Grade ${grade} student in Alberta, Canada. The student got this wrong. Explain why the correct answer is "${answerText}" — walk through the reasoning step by step. Keep it encouraging, 3-5 short sentences max. Question: "${q.q}"`;
+      }
+    }
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:350,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    if(!response.ok) throw new Error('API failed');
+    const data = await response.json();
+    const text = data.content?.map(c=>c.text||'').join('') || buildFallbackExplanation(q, chosenText, answerText, isCorrect);
+    explainDiv.innerHTML = `<div class="explain-box">🧠 <strong>${isCorrect ? 'You got it!' : "Here's why:"}</strong><br><br>${text}</div>`;
+  } catch(e) {
+    explainDiv.innerHTML = buildFallbackExplanationHTML(q, chosenText, answerText, isCorrect);
+  }
+  btn.style.display = 'none';
+  explainInFlight = false;
+}
+
+function buildFallbackExplanation(q, chosenText, answerText, isCorrect) {
+  if (isCorrect) {
+    return `The correct answer is <strong>${answerText}</strong>. You used good reasoning to get this — remembering this approach will help you with similar problems!`;
+  }
+  if (chosenText && chosenText !== answerText) {
+    return `You picked <strong>${chosenText}</strong>, but the right answer is <strong>${answerText}</strong>.<br><br>Take a moment to compare them — where might the difference come from? Reviewing mistakes like this one is the fastest way to grow stronger at math!`;
+  }
+  return `The answer is <strong>${answerText}</strong>.<br><br>Try working through this step by step — even wrong answers teach us something new!`;
+}
+
+function buildFallbackExplanationHTML(q, chosenText, answerText, isCorrect) {
+  const text = buildFallbackExplanation(q, chosenText, answerText, isCorrect);
+  const title = isCorrect ? '✅ Great thinking!' : '💡 Almost!';
+  return `<div class="explain-box"><strong>${title}</strong><br><br>${text}</div>`;
+}
+
+function nextQuestion() {
+  state.qIndex++;
+  renderQuestion();
+}
+
+function endSession() {
+  // Bug fix: clear timer FIRST before any state changes
+  clearInterval(state.timerInterval);
+  state.timerInterval = null;
+
+  const p = getProfile();
+  const total = state.questions.length;
+
+  // Increment daily rounds cap
+  incrementRounds(p, state.topic.id);
+
+  // Streak logic (bug fix: only +1 per unique day)
+  const today = todayStr();
+  if(p.lastStreakDate !== today) {
+    if(p.lastStreakDate) {
+      const days = daysBetween(p.lastStreakDate, today);
+      p.streak = days === 1 ? (p.streak || 0) + 1 : 1;
+    } else {
+      p.streak = 1;
+    }
+    p.lastStreakDate = today;
+  }
+
+  // Weekly stats
+  p.weekSessions = (p.weekSessions||0) + 1;
+  p.weekCorrect = (p.weekCorrect||0) + state.score;
+  p.weekTotal = (p.weekTotal||0) + total;
+
+  // Session history
+  p.sessions.push({ date: today, topic: state.topic.id, tier: state.tier, score: state.score, total });
+  if(p.sessions.length > 100) p.sessions.shift();
+
+  saveState();
+
+  // Results display
+  const pct = Math.round((state.score/total)*100);
+  const emoji = pct>=90?'🎉':pct>=70?'💪':pct>=50?'📚':'🔁';
+  const title = pct>=90?'Outstanding!':pct>=70?'Great session!':pct>=50?'Good effort!':'Keep training!';
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-score').textContent = `${state.score}/${total}`;
+  document.getElementById('result-sub').textContent = `${pct}% accuracy · ${state.tooEasyCount||0} flagged as easy`;
+  document.getElementById('r-correct').textContent = state.score;
+  document.getElementById('r-wrong').textContent = state.wrongCount;
+  document.getElementById('r-vault').textContent = state.vaultAdded;
+
+  const belt = getBelt(p, state.topic.id);
+  const beltBox = document.getElementById('belt-earned-box');
+  if(belt !== 'unranked') {
+    beltBox.style.display = 'block';
+    document.getElementById('belt-earned-icon').textContent = BELT_EMOJIS[belt];
+    document.getElementById('belt-earned-txt').textContent = `${belt.charAt(0).toUpperCase()+belt.slice(1)} Belt — ${state.topic.name}`;
+  } else {
+    beltBox.style.display = 'none';
+  }
+
+  // Too-easy upgrade nudge
+  if(state.tooEasyCount >= 3 && state.tier < 3 && isTierUnlocked(p, state.topic.id, state.tier+1)) {
+    setTimeout(() => {
+      if(confirm(`🔥 You flagged ${state.tooEasyCount} questions as too easy!\n\nWant to try Tier ${state.tier+1} next time?`)) {
+        // Just acknowledging — they'll pick next time
+      }
+    }, 600);
+  }
+
+  // Confetti only on ≥80% AND first attempt (bug fix: threshold check)
+  if(pct >= 80) launchConfetti();
+  showScreen('screen-result');
+}
+
+function replaySession() {
+  // Use same topic + tier, fresh random questions
+  const p = getProfile();
+  const rounds = getRoundsToday(p, state.topic.id);
+  if(rounds >= DAILY_ROUND_CAP) {
+    alert('🌙 Daily cap reached for this topic. Try another topic!');
+    showScreen('screen-home');
+    return;
+  }
+  startSession(state.tier);
+}
+
+// ═══════════════════════════════════════════════════════
+// PARENT
+// ═══════════════════════════════════════════════════════
+function renderParent() {
+  checkResets();
+  const today = new Date();
+  const wk = getWeekStart();
+  document.getElementById('parent-week-label').textContent = 'Week of ' + new Date(wk).toLocaleDateString('en-CA',{month:'short',day:'numeric'});
+
+  PROFILES.forEach(name => {
+    const p = state[name];
+    document.getElementById(`p-${name}-sessions`).textContent = p.weekSessions||0;
+    const acc = p.weekTotal ? Math.round((p.weekCorrect/p.weekTotal)*100)+'%' : '—';
+    document.getElementById(`p-${name}-acc`).textContent = acc;
+    document.getElementById(`p-${name}-vault`).textContent = (p.vault||[]).length;
+    const topBelt = TOPICS.reduce((best,t) => {
+      const b = getBelt(p,t.id);
+      return BELT_LEVELS.indexOf(b) > BELT_LEVELS.indexOf(best) ? b : best;
+    }, 'unranked');
+    document.getElementById(`p-${name}-belt`).textContent = topBelt === 'unranked' ? '—' : BELT_EMOJIS[topBelt]+' '+topBelt;
+  });
+
+  const board = document.getElementById('parent-belt-board');
+  board.innerHTML = '';
+  [4,5,6].forEach(g => {
+    const gh = document.createElement('div');
+    gh.style.cssText = 'font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin:12px 0 6px;';
+    gh.textContent = 'Grade '+g;
+    board.appendChild(gh);
+    TOPICS.filter(t => t.grade === g).forEach(t => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:6px;background:var(--card);border-radius:var(--radius-sm);padding:8px 12px;box-shadow:var(--shadow);';
+      const jb = getBelt(state.jenn, t.id);
+      const jsb = getBelt(state.jess, t.id);
+      row.innerHTML = `
+        <span style="font-size:14px;">${t.icon}</span>
+        <span style="font-size:12px;font-weight:800;flex:1;">${t.name}</span>
+        <span style="font-size:11px;font-weight:700;color:var(--jenn-dark);background:var(--jenn-light);padding:2px 8px;border-radius:99px;">🐥 ${BELT_EMOJIS[jb]}</span>
+        <span style="font-size:11px;font-weight:700;color:var(--jess-dark);background:var(--jess-light);padding:2px 8px;border-radius:99px;">🦊 ${BELT_EMOJIS[jsb]}</span>
+      `;
+      board.appendChild(row);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// WALL BATTLE
+// ═══════════════════════════════════════════════════════
+function renderWall(containerId, bricks, owner) {
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = '';
+  const total = WALL_BRICKS;
+  const rows = Math.ceil(total / WALL_COLS);
+  let drawn = 0;
+  for(let r=0; r<rows; r++) {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'brick-row-b';
+    for(let c=0; c<WALL_COLS; c++) {
+      if(drawn >= total) break;
+      const b = document.createElement('div');
+      b.className = 'brick-cell ' + (drawn < bricks ? 'intact-'+owner : 'destroyed');
+      rowDiv.appendChild(b);
+      drawn++;
+    }
+    wrap.appendChild(rowDiv);
+  }
+}
+
+function renderBattle() {
+  checkResets();
+  renderWall('wall-jenn', state.battle.jennWall, 'jenn');
+  renderWall('wall-jess', state.battle.jessWall, 'jess');
+  document.getElementById('wall-jenn-count').textContent = state.battle.jennWall + ' bricks';
+  document.getElementById('wall-jess-count').textContent = state.battle.jessWall + ' bricks';
+
+  const content = document.getElementById('battle-content');
+  const statusText = document.getElementById('battle-status-text');
+
+  // Check campaign winner
+  if(state.battle.jennWall === 0 || state.battle.jessWall === 0) {
+    const winner = state.battle.jennWall === 0 ? 'jess' : 'jenn';
+    const winnerEmoji = winner === 'jenn' ? '🐥' : '🦊';
+    const winnerName = winner === 'jenn' ? 'Jenn' : 'Jess';
+    statusText.textContent = `🏆 Campaign ${state.battle.campaignNum} winner: ${winnerEmoji} ${winnerName}!`;
+    content.innerHTML = `
+      <div class="slot-info">
+        <div class="slot-title">🏆 Campaign Complete!</div>
+        <div class="slot-detail"><b>${winnerEmoji} ${winnerName}</b> wins Campaign ${state.battle.campaignNum}!</div>
+        <div class="slot-detail">Prize: <b>${state.battle.lastPrize || 'To be decided'}</b></div>
+        <button class="slot-action" onclick="resetCampaign()">🔄 Start New Campaign</button>
+      </div>
+    `;
+    return;
+  }
+
+  statusText.textContent = `Campaign ${state.battle.campaignNum} · Week of ${getWeekStart()}`;
+  const mySlotUsed = state.battle.slotsUsedThisWeek[state.currentProfile];
+  const otherProfile = state.currentProfile === 'jenn' ? 'jess' : 'jenn';
+  const otherUsed = state.battle.slotsUsedThisWeek[otherProfile];
+  const myEmoji = state.currentProfile === 'jenn' ? '🐥' : '🦊';
+  const otherEmoji = otherProfile === 'jenn' ? '🐥' : '🦊';
+
+  if(state.battle.slotInProgress) {
+    renderBattleSetup(content);
+    return;
+  }
+
+  content.innerHTML = `
+    <div class="slot-info">
+      <div class="slot-title">⚔️ Your Challenger Slot</div>
+      <div class="slot-detail">${myEmoji} ${state.currentProfile === 'jenn' ? 'Jenn' : 'Jess'}: ${mySlotUsed ? '✅ Used this week' : '🟢 Available'}</div>
+      <button class="slot-action" onclick="startBattleSetup()" ${mySlotUsed ? 'disabled' : ''}>${mySlotUsed ? 'Come back next week' : '🎯 Challenge!'}</button>
+    </div>
+    <div class="slot-info">
+      <div class="slot-title">🛡️ Opponent Status</div>
+      <div class="slot-detail">${otherEmoji} ${otherProfile === 'jenn' ? 'Jenn' : 'Jess'}: ${otherUsed ? '✅ Used challenge' : '⏳ Awaiting turn'}</div>
+    </div>
+  `;
+}
+
+function resetCampaign() {
+  if(!confirm('Start a new wall battle campaign? Both walls reset to 30 bricks.')) return;
+  state.battle.jennWall = WALL_BRICKS;
+  state.battle.jessWall = WALL_BRICKS;
+  state.battle.campaignNum++;
+  state.battle.lastWinner = null;
+  state.battle.lastPrize = null;
+  saveState();
+  renderBattle();
+}
+
+let battleSetup = {};
+function startBattleSetup() {
+  battleSetup = { challenger: state.currentProfile, step: 1 };
+  state.battle.slotInProgress = { ...battleSetup };
+  saveState();
+  renderBattleSetup(document.getElementById('battle-content'));
+}
+
+function renderBattleSetup(container) {
+  const challenger = battleSetup.challenger || state.battle.slotInProgress?.challenger;
+  const defender = challenger === 'jenn' ? 'jess' : 'jenn';
+  const chEmoji = challenger === 'jenn' ? '🐥' : '🦊';
+  const dfEmoji = defender === 'jenn' ? '🐥' : '🦊';
+
+  container.innerHTML = `
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">1</span>Challenger ${chEmoji} picks topic</div>
+      <select id="bt-topic" class="custom-prize-input" onchange="battleSetup.topic=this.value">
+        <option value="">Choose topic...</option>
+        ${TOPICS.filter(t => t.grade === 4).map(t => `<option value="${t.id}">${t.icon} ${t.name}</option>`).join('')}
+      </select>
+    </div>
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">2</span>Defender ${dfEmoji} picks difficulty</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="setBattleField('tier',1,this)">Tier 1 — Core</button>
+        <button class="opt-btn" onclick="setBattleField('tier',2,this)">Tier 2 — Kangaroo</button>
+      </div>
+    </div>
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">3</span>Defender picks time/question</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="setBattleField('timeLimit',15,this)">15 sec</button>
+        <button class="opt-btn" onclick="setBattleField('timeLimit',30,this)">30 sec</button>
+        <button class="opt-btn" onclick="setBattleField('timeLimit',45,this)">45 sec</button>
+        <button class="opt-btn" onclick="setBattleField('timeLimit',60,this)">60 sec</button>
+      </div>
+    </div>
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">4</span>Number of questions</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="setBattleField('qCount',5,this)">5</button>
+        <button class="opt-btn" onclick="setBattleField('qCount',10,this)">10</button>
+      </div>
+    </div>
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">5</span>Pick the prize</div>
+      <div class="prize-grid-sel">
+        <button class="opt-btn" onclick="setBattleField('prize','🍦 Winner picks dessert',this)">🍦 Dessert pick</button>
+        <button class="opt-btn" onclick="setBattleField('prize','📺 Winner picks movie',this)">📺 Movie pick</button>
+        <button class="opt-btn" onclick="setBattleField('prize','🛋️ Winner gets couch',this)">🛋️ Couch spot</button>
+        <button class="opt-btn" onclick="setBattleField('prize','🎮 Winner picks game',this)">🎮 Game pick</button>
+        <button class="opt-btn" onclick="setBattleField('prize','🛏️ Loser makes beds',this)">🛏️ Make beds</button>
+        <button class="opt-btn" onclick="setBattleField('prize','🚶 Winner skips chore',this)">🚶 Skip chore</button>
+      </div>
+      <input class="custom-prize-input" type="text" placeholder="Or type custom prize..." oninput="battleSetup.prize=this.value">
+    </div>
+    <div class="setup-step">
+      <div class="step-title"><span class="step-num">6</span>Play mode</div>
+      <div class="opt-grid">
+        <button class="opt-btn selected" onclick="setBattleField('mode','same',this)">📱 Same device</button>
+        <button class="opt-btn" onclick="setBattleField('mode','async',this)">🔀 Separate turns</button>
+      </div>
+    </div>
+    <button class="slot-action" onclick="launchBattle()">⚔️ Launch Battle!</button>
+    <button class="slot-action" style="background:var(--muted);margin-top:6px;" onclick="cancelBattleSetup()">Cancel</button>
+  `;
+  battleSetup.mode = battleSetup.mode || 'same';
+}
+
+function setBattleField(field, val, btn) {
+  battleSetup[field] = val;
+  if(btn) {
+    btn.parentNode.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+}
+
+function cancelBattleSetup() {
+  state.battle.slotInProgress = null;
+  battleSetup = {};
+  saveState();
+  renderBattle();
+}
+
+function launchBattle() {
+  const s = battleSetup;
+  if(!s.topic || !s.tier || !s.timeLimit || !s.qCount || !s.prize) {
+    alert('Please fill in all battle settings!');
+    return;
+  }
+
+  const topic = TOPICS.find(t => t.id === s.topic);
+  const bank = QB[s.topic]?.[s.tier] || [];
+  const questions = sample(bank, Math.min(s.qCount, bank.length));
+  if(questions.length === 0) {
+    alert('No questions available for this topic/tier yet!');
+    return;
+  }
+
+  const challenger = s.challenger;
+  const defender = challenger === 'jenn' ? 'jess' : 'jenn';
+
+  // Play as same-device pass-and-play: challenger goes first
+  state.battleActive = {
+    topic, tier: s.tier, timeLimit: s.timeLimit, questions, prize: s.prize, mode: s.mode,
+    challenger, defender,
+    currentPlayer: challenger,
+    challengerScore: 0,
+    defenderScore: 0,
+    qIdx: 0,
+    phase: 'challenger',
+  };
+  playBattleQuestion();
+}
+
+function playBattleQuestion() {
+  const b = state.battleActive;
+  const q = b.questions[b.qIdx];
+  const total = b.questions.length;
+  const playerEmoji = b.currentPlayer === 'jenn' ? '🐥' : '🦊';
+  const playerName = b.currentPlayer === 'jenn' ? 'Jenn' : 'Jess';
+
+  showScreen('screen-question');
+  // Hide normal header, show battle overlay
+  document.getElementById('q-counter').textContent = `${b.qIdx+1} / ${total}`;
+  document.getElementById('q-progress-bar').style.width = `${(b.qIdx/total)*100}%`;
+  document.getElementById('q-tier-tag').textContent = `⚔️ ${playerEmoji} ${playerName}'s turn · Tier ${b.tier}`;
+  document.getElementById('q-tier-tag').style.background = b.currentPlayer === 'jenn' ? '#FFF8E1' : '#FFF3E0';
+  document.getElementById('q-tier-tag').style.color = b.currentPlayer === 'jenn' ? '#F57F17' : '#E65100';
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('feedback-area').innerHTML = '';
+
+  // Timer countdown
+  let remaining = b.timeLimit;
+  document.getElementById('q-timer').textContent = `⏱ ${remaining}s`;
+  clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    remaining--;
+    if(remaining <= 0) {
+      clearInterval(state.timerInterval);
+      battleTimeout();
+      return;
+    }
+    document.getElementById('q-timer').textContent = `⏱ ${remaining}s`;
+    document.getElementById('q-timer').style.color = remaining <= 5 ? 'var(--danger)' : 'var(--purple)';
+  }, 1000);
+
+  const area = document.getElementById('choices-area');
+  if(q.type === 'mcq') {
+    const letters = ['A','B','C','D'];
+    area.innerHTML = `<div class="choices-grid">${q.choices.map((c,i)=>`
+      <button class="choice-btn" onclick="submitBattleMCQ(${i})">
+        <div class="choice-letter">${letters[i]}</div>${c}
+      </button>`).join('')}</div>`;
+  } else {
+    area.innerHTML = `<div class="free-entry">
+      <input class="free-input" type="text" id="free-input" placeholder="Your answer..." autocomplete="off" onkeydown="if(event.key==='Enter')submitBattleFree()">
+      <button class="submit-btn" onclick="submitBattleFree()">⚔️</button>
+    </div>`;
+    setTimeout(()=>{ const el=document.getElementById('free-input'); if(el) el.focus(); }, 100);
+  }
+}
+
+function submitBattleMCQ(chosen) {
+  clearInterval(state.timerInterval);
+  const b = state.battleActive;
+  const q = b.questions[b.qIdx];
+  const correct = chosen === q.ans;
+  scoreBattle(correct);
+}
+
+function submitBattleFree() {
+  clearInterval(state.timerInterval);
+  const b = state.battleActive;
+  const q = b.questions[b.qIdx];
+  const input = document.getElementById('free-input');
+  if(!input) return;
+  const val = input.value.trim();
+  const normalize = s => s.toString().toLowerCase().replace(/\s+/g,'').replace(/^[+]/,'');
+  const correct = normalize(val) === normalize(q.ans);
+  scoreBattle(correct);
+}
+
+function battleTimeout() {
+  scoreBattle(false, true);
+}
+
+function scoreBattle(correct, timeout) {
+  const b = state.battleActive;
+  if(correct) {
+    if(b.currentPlayer === b.challenger) b.challengerScore++;
+    else b.defenderScore++;
+  }
+  b.qIdx++;
+
+  const playerEmoji = b.currentPlayer === 'jenn' ? '🐥' : '🦊';
+  const feedback = document.getElementById('feedback-area');
+  feedback.innerHTML = `
+    <div style="padding:14px; background:${correct?'#EAFAF1':'#FDEDEC'}; border-radius:10px; display:flex; align-items:center; gap:10px;">
+      <span style="font-size:20px;">${correct?'✅':timeout?'⏰':'❌'}</span>
+      <span style="font-size:14px; font-weight:800; color:${correct?'#1E8449':'#C0392B'};">${correct?'Correct!':timeout?'Time up!':'Wrong!'}</span>
+      <button class="next-btn" style="margin-left:auto;" onclick="nextBattleQuestion()">Next →</button>
+    </div>
+  `;
+}
+
+function nextBattleQuestion() {
+  const b = state.battleActive;
+  if(b.qIdx < b.questions.length) {
+    playBattleQuestion();
+  } else {
+    // Switch player or end
+    if(b.phase === 'challenger') {
+      b.phase = 'defender';
+      b.currentPlayer = b.defender;
+      b.qIdx = 0;
+      const defEmoji = b.defender === 'jenn' ? '🐥' : '🦊';
+      const defName = b.defender === 'jenn' ? 'Jenn' : 'Jess';
+      if(b.mode === 'same') {
+        alert(`${b.challenger === 'jenn' ? '🐥 Jenn' : '🦊 Jess'} done!\nPass the device to ${defEmoji} ${defName}.`);
+      }
+      playBattleQuestion();
+    } else {
+      endBattle();
+    }
+  }
+}
+
+function endBattle() {
+  const b = state.battleActive;
+  clearInterval(state.timerInterval);
+
+  // Cannon damage: correct answers = bricks from opponent
+  const challengerDmg = b.challengerScore;
+  const defenderDmg = b.defenderScore;
+
+  // Bug fix: clamp to zero
+  if(b.challenger === 'jenn') {
+    state.battle.jessWall = Math.max(0, state.battle.jessWall - challengerDmg);
+    state.battle.jennWall = Math.max(0, state.battle.jennWall - defenderDmg);
+  } else {
+    state.battle.jennWall = Math.max(0, state.battle.jennWall - challengerDmg);
+    state.battle.jessWall = Math.max(0, state.battle.jessWall - defenderDmg);
+  }
+
+  state.battle.slotsUsedThisWeek[b.challenger] = true;
+  state.battle.slotInProgress = null;
+  state.battle.lastPrize = b.prize;
+  battleSetup = {};
+  saveState();
+
+  const chEmoji = b.challenger === 'jenn' ? '🐥' : '🦊';
+  const dfEmoji = b.defender === 'jenn' ? '🐥' : '🦊';
+
+  alert(`⚔️ Battle Over!\n\n${chEmoji} Challenger: ${b.challengerScore}/${b.questions.length} → dealt ${challengerDmg} damage\n${dfEmoji} Defender: ${b.defenderScore}/${b.questions.length} → dealt ${defenderDmg} damage\n\nPrize if won: ${b.prize}`);
+
+  state.battleActive = null;
+  showScreen('screen-battle');
+}
+
+// ═══════════════════════════════════════════════════════
+// CONFETTI
+// ═══════════════════════════════════════════════════════
+function launchConfetti() {
+  const wrap = document.getElementById('confetti-wrap');
+  wrap.innerHTML = '';
+  const colors = ['#FFD93D','#FF8C42','#4ECDC4','#9B59B6','#27AE60','#E67E22'];
+  for(let i=0;i<60;i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `left:${Math.random()*100}%;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.5}s;transform:rotate(${Math.random()*360}deg);width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;`;
+    wrap.appendChild(p);
+  }
+  setTimeout(()=>{ wrap.innerHTML=''; }, 3500);
+}
+
+// ═══════════════════════════════════════════════════════
+// LOAD GRADE 4 QUESTIONS FROM EXTERNAL JSON
+// ═══════════════════════════════════════════════════════
+async function loadGrade4Questions() {
+  try {
+    const resp = await fetch('grade4.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    Object.assign(QB, data.questions);
+    console.log(`Grade 4 questions loaded: ${Object.keys(data.questions).length} topics`);
+  } catch(e) {
+    console.warn('Failed to load grade4.json — Grade 4 questions unavailable:', e.message);
+  }
+}
+
+async function loadGrade5Questions() {
+  try {
+    const resp = await fetch('grade5.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    Object.assign(QB, data.questions);
+    console.log(`Grade 5 questions loaded: ${Object.keys(data.questions).length} topics`);
+  } catch(e) {
+    console.warn('Failed to load grade5.json — using inline fallback questions:', e.message);
+  }
+}
+
+async function loadGrade6Questions() {
+  try {
+    const resp = await fetch('grade6.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    Object.assign(QB, data.questions);
+    console.log(`Grade 6 questions loaded: ${Object.keys(data.questions).length} topics`);
+  } catch(e) {
+    console.warn('Failed to load grade6.json — using inline fallback questions:', e.message);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+(async function init() {
+  cacheDOM();
+  validateTopics();
+  // Render immediately from localStorage
+  checkResets();
+  renderMinibelts();
+  // Load questions in background
+  loadGrade4Questions();
+  loadGrade5Questions();
+  loadGrade6Questions();
+  // Then try Firebase sync (non-blocking — updates UI when ready)
+  const loaded = await loadFromFirebase();
+  if (loaded) {
+    renderMinibelts();
+    // Re-render current screen if visible
+    const active = document.querySelector('.screen.active');
+    if (active) {
+      if (active.id === 'screen-home') renderHome();
+      else if (active.id === 'screen-parent') renderParent();
+      else if (active.id === 'screen-battle') renderBattle();
+    }
+    console.log('Synced from Firebase');
+  }
+})();
+</script>
+</body>
+</html>

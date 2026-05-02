@@ -1,0 +1,5879 @@
+{
+  "grade": 6,
+  "topics": [
+    {
+      "id": "g6-integers",
+      "name": "Integers",
+      "icon": "±",
+      "color": "#C0392B"
+    },
+    {
+      "id": "g6-percent",
+      "name": "Percent",
+      "icon": "%",
+      "color": "#D35400"
+    },
+    {
+      "id": "g6-fracdiv",
+      "name": "Fraction Division",
+      "icon": "½÷",
+      "color": "#E67E22"
+    },
+    {
+      "id": "g6-equations",
+      "name": "Two-step Equations",
+      "icon": "x=",
+      "color": "#1ABC9C"
+    },
+    {
+      "id": "g6-proportion",
+      "name": "Proportional Reasoning",
+      "icon": "∝",
+      "color": "#16A085"
+    },
+    {
+      "id": "g6-circle",
+      "name": "Circle Geometry",
+      "icon": "⭕",
+      "color": "#2980B9"
+    },
+    {
+      "id": "g6-volume3d",
+      "name": "3D Volume",
+      "icon": "📦",
+      "color": "#8E44AD"
+    },
+    {
+      "id": "g6-probadv",
+      "name": "Probability — Advanced",
+      "icon": "🎲",
+      "color": "#C0392B"
+    }
+  ],
+  "questions": {
+    "g6-integers": {
+      "1": [
+        {
+          "id": "g6in-1-01",
+          "q": "-14 + (3) = ?",
+          "type": "free",
+          "ans": "-11"
+        },
+        {
+          "id": "g6in-1-02",
+          "q": "-4 + (-8) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-1-03",
+          "q": "16 + (-4) = ?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6in-1-04",
+          "q": "9 + (9) = ?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6in-1-05",
+          "q": "-5 + (5) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-1-06",
+          "q": "2 + (-3) = ?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6in-1-07",
+          "q": "-5 + (-5) = ?",
+          "type": "free",
+          "ans": "-10"
+        },
+        {
+          "id": "g6in-1-08",
+          "q": "9 + (-8) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-1-09",
+          "q": "-18 + (9) = ?",
+          "type": "free",
+          "ans": "-9"
+        },
+        {
+          "id": "g6in-1-10",
+          "q": "-10 + (-8) = ?",
+          "type": "free",
+          "ans": "-18"
+        },
+        {
+          "id": "g6in-1-11",
+          "q": "-20 + (6) = ?",
+          "type": "free",
+          "ans": "-14"
+        },
+        {
+          "id": "g6in-1-12",
+          "q": "3 + (-10) = ?",
+          "type": "free",
+          "ans": "-7"
+        },
+        {
+          "id": "g6in-1-13",
+          "q": "7 + (-6) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-1-14",
+          "q": "1 + (9) = ?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6in-1-15",
+          "q": "19 + (-4) = ?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6in-1-16",
+          "q": "-9 + (3) = ?",
+          "type": "free",
+          "ans": "-6"
+        },
+        {
+          "id": "g6in-1-17",
+          "q": "0 + (-5) = ?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-1-18",
+          "q": "16 + (-5) = ?",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6in-1-19",
+          "q": "-18 + (-4) = ?",
+          "type": "free",
+          "ans": "-22"
+        },
+        {
+          "id": "g6in-1-20",
+          "q": "20 + (-2) = ?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6in-1-21",
+          "q": "-20 + (-6) = ?",
+          "type": "free",
+          "ans": "-26"
+        },
+        {
+          "id": "g6in-1-22",
+          "q": "11 + (-10) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-1-23",
+          "q": "11 + (-10) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-1-24",
+          "q": "-11 + (-2) = ?",
+          "type": "free",
+          "ans": "-13"
+        },
+        {
+          "id": "g6in-1-25",
+          "q": "1 + (7) = ?",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6in-1-26",
+          "q": "-2 + (-3) = ?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-1-27",
+          "q": "4 + (-8) = ?",
+          "type": "free",
+          "ans": "-4"
+        },
+        {
+          "id": "g6in-1-28",
+          "q": "-18 + (9) = ?",
+          "type": "free",
+          "ans": "-9"
+        },
+        {
+          "id": "g6in-1-29",
+          "q": "-14 + (10) = ?",
+          "type": "free",
+          "ans": "-4"
+        },
+        {
+          "id": "g6in-1-30",
+          "q": "-13 + (-6) = ?",
+          "type": "free",
+          "ans": "-19"
+        },
+        {
+          "id": "g6in-1-31",
+          "q": "3 − (-6) = ?",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6in-1-32",
+          "q": "2 − (-10) = ?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6in-1-33",
+          "q": "1 − (-6) = ?",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6in-1-34",
+          "q": "11 − (10) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-1-35",
+          "q": "6 − (7) = ?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6in-1-36",
+          "q": "7 − (0) = ?",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6in-1-37",
+          "q": "10 − (-9) = ?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6in-1-38",
+          "q": "6 − (-6) = ?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6in-1-39",
+          "q": "-2 − (4) = ?",
+          "type": "free",
+          "ans": "-6"
+        },
+        {
+          "id": "g6in-1-40",
+          "q": "-10 − (2) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-1-41",
+          "q": "-5 − (7) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-1-42",
+          "q": "13 − (-5) = ?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6in-1-43",
+          "q": "14 − (-6) = ?",
+          "type": "free",
+          "ans": "20"
+        },
+        {
+          "id": "g6in-1-44",
+          "q": "13 − (5) = ?",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6in-1-45",
+          "q": "4 − (-5) = ?",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6in-1-46",
+          "q": "14 − (-3) = ?",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6in-1-47",
+          "q": "7 − (3) = ?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6in-1-48",
+          "q": "1 − (6) = ?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-1-49",
+          "q": "15 − (7) = ?",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6in-1-50",
+          "q": "0 − (10) = ?",
+          "type": "free",
+          "ans": "-10"
+        },
+        {
+          "id": "g6in-1-51",
+          "q": "5 − (-9) = ?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6in-1-52",
+          "q": "-15 − (-4) = ?",
+          "type": "free",
+          "ans": "-11"
+        },
+        {
+          "id": "g6in-1-53",
+          "q": "1 − (6) = ?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-1-54",
+          "q": "12 − (-9) = ?",
+          "type": "free",
+          "ans": "21"
+        },
+        {
+          "id": "g6in-1-55",
+          "q": "7 − (7) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-1-56",
+          "q": "-4 − (-7) = ?",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6in-1-57",
+          "q": "10 − (-3) = ?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6in-1-58",
+          "q": "-7 − (7) = ?",
+          "type": "free",
+          "ans": "-14"
+        },
+        {
+          "id": "g6in-1-59",
+          "q": "-15 − (-3) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-1-60",
+          "q": "-12 − (1) = ?",
+          "type": "free",
+          "ans": "-13"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6in-2-01",
+          "q": "12 × (4) = ?",
+          "type": "free",
+          "ans": "48"
+        },
+        {
+          "id": "g6in-2-02",
+          "q": "-3 × (3) = ?",
+          "type": "free",
+          "ans": "-9"
+        },
+        {
+          "id": "g6in-2-03",
+          "q": "-4 × (-5) = ?",
+          "type": "free",
+          "ans": "20"
+        },
+        {
+          "id": "g6in-2-04",
+          "q": "-4 × (-1) = ?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6in-2-05",
+          "q": "4 × (-2) = ?",
+          "type": "free",
+          "ans": "-8"
+        },
+        {
+          "id": "g6in-2-06",
+          "q": "What is the sum of integers from -5 to 1?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-07",
+          "q": "5 × (2) = ?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6in-2-08",
+          "q": "-5 × (6) = ?",
+          "type": "free",
+          "ans": "-30"
+        },
+        {
+          "id": "g6in-2-09",
+          "q": "2 × (3) = ?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6in-2-10",
+          "q": "What is the sum of integers from -2 to 1?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-11",
+          "q": "-11 × (1) = ?",
+          "type": "free",
+          "ans": "-11"
+        },
+        {
+          "id": "g6in-2-12",
+          "q": "-1 × (-4) = ?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6in-2-13",
+          "q": "What is the sum of integers from -1 to 4?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-14",
+          "q": "4 × (6) = ?",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6in-2-15",
+          "q": "5 × (-1) = ?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-2-16",
+          "q": "-6 × (-6) = ?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6in-2-17",
+          "q": "-4 × (3) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-2-18",
+          "q": "-9 × (5) = ?",
+          "type": "free",
+          "ans": "-45"
+        },
+        {
+          "id": "g6in-2-19",
+          "q": "0 × (-6) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-20",
+          "q": "12 × (1) = ?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6in-2-21",
+          "q": "6 × (-2) = ?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-2-22",
+          "q": "3 × (3) = ?",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6in-2-23",
+          "q": "-11 × (-5) = ?",
+          "type": "free",
+          "ans": "55"
+        },
+        {
+          "id": "g6in-2-24",
+          "q": "5 × (-6) = ?",
+          "type": "free",
+          "ans": "-30"
+        },
+        {
+          "id": "g6in-2-25",
+          "q": "-7 × (-1) = ?",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6in-2-26",
+          "q": "1 × (1) = ?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-2-27",
+          "q": "-5 × (-6) = ?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6in-2-28",
+          "q": "2 × (-3) = ?",
+          "type": "free",
+          "ans": "-6"
+        },
+        {
+          "id": "g6in-2-29",
+          "q": "-2 × (1) = ?",
+          "type": "free",
+          "ans": "-2"
+        },
+        {
+          "id": "g6in-2-30",
+          "q": "12 × (-3) = ?",
+          "type": "free",
+          "ans": "-36"
+        },
+        {
+          "id": "g6in-2-31",
+          "q": "11 × (-5) = ?",
+          "type": "free",
+          "ans": "-55"
+        },
+        {
+          "id": "g6in-2-32",
+          "q": "8 × (-1) = ?",
+          "type": "free",
+          "ans": "-8"
+        },
+        {
+          "id": "g6in-2-33",
+          "q": "0 × (2) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-34",
+          "q": "0 × (-5) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-35",
+          "q": "0 × (-4) = ?",
+          "type": "free",
+          "ans": "0"
+        },
+        {
+          "id": "g6in-2-36",
+          "q": "-6 × (-4) = ?",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6in-2-37",
+          "q": "12 × (-2) = ?",
+          "type": "free",
+          "ans": "-24"
+        },
+        {
+          "id": "g6in-2-38",
+          "q": "-6 × (1) = ?",
+          "type": "free",
+          "ans": "-6"
+        },
+        {
+          "id": "g6in-2-39",
+          "q": "-9 × (-4) = ?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6in-2-40",
+          "q": "3 × (2) = ?",
+          "type": "free",
+          "ans": "6"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6in-3-01",
+          "q": "Monday: -11°C. Rose 14°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6in-3-02",
+          "q": "Monday: -2°C. Rose 3°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-3-03",
+          "q": "Monday: -18°C. Rose 13°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6in-3-04",
+          "q": "Monday: -11°C. Rose 3°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-8"
+        },
+        {
+          "id": "g6in-3-05",
+          "q": "Monday: -15°C. Rose 12°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-3"
+        },
+        {
+          "id": "g6in-3-06",
+          "q": "Monday: -3°C. Rose 17°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6in-3-07",
+          "q": "Monday: -3°C. Rose 9°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6in-3-08",
+          "q": "Monday: -11°C. Rose 4°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-7"
+        },
+        {
+          "id": "g6in-3-09",
+          "q": "Monday: -12°C. Rose 5°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-7"
+        },
+        {
+          "id": "g6in-3-10",
+          "q": "Monday: -5°C. Rose 9°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6in-3-11",
+          "q": "Monday: -15°C. Rose 18°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6in-3-12",
+          "q": "Monday: -18°C. Rose 6°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-12"
+        },
+        {
+          "id": "g6in-3-13",
+          "q": "Monday: -17°C. Rose 18°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "1"
+        },
+        {
+          "id": "g6in-3-14",
+          "q": "Monday: -2°C. Rose 8°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6in-3-15",
+          "q": "Monday: -18°C. Rose 11°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-7"
+        },
+        {
+          "id": "g6in-3-16",
+          "q": "Monday: -2°C. Rose 1°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6in-3-17",
+          "q": "Monday: -2°C. Rose 1°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6in-3-18",
+          "q": "Monday: -12°C. Rose 17°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6in-3-19",
+          "q": "Monday: -7°C. Rose 12°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6in-3-20",
+          "q": "Monday: -3°C. Rose 19°C by Friday. Friday temp?",
+          "type": "free",
+          "ans": "16"
+        }
+      ]
+    },
+    "g6-percent": {
+      "1": [
+        {
+          "id": "g6pc-1-01",
+          "q": "16% of 143?",
+          "type": "free",
+          "ans": "23"
+        },
+        {
+          "id": "g6pc-1-02",
+          "q": "83% of 154?",
+          "type": "free",
+          "ans": "128"
+        },
+        {
+          "id": "g6pc-1-03",
+          "q": "72% of 41?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6pc-1-04",
+          "q": "66% of 106?",
+          "type": "free",
+          "ans": "70"
+        },
+        {
+          "id": "g6pc-1-05",
+          "q": "64% of 188?",
+          "type": "free",
+          "ans": "120"
+        },
+        {
+          "id": "g6pc-1-06",
+          "q": "45% of 112?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6pc-1-07",
+          "q": "13% of 32?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6pc-1-08",
+          "q": "54% of 148?",
+          "type": "free",
+          "ans": "80"
+        },
+        {
+          "id": "g6pc-1-09",
+          "q": "12% of 27?",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6pc-1-10",
+          "q": "51% of 25?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6pc-1-11",
+          "q": "77% of 57?",
+          "type": "free",
+          "ans": "44"
+        },
+        {
+          "id": "g6pc-1-12",
+          "q": "89% of 62?",
+          "type": "free",
+          "ans": "55"
+        },
+        {
+          "id": "g6pc-1-13",
+          "q": "68% of 121?",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6pc-1-14",
+          "q": "16% of 65?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6pc-1-15",
+          "q": "19% of 187?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6pc-1-16",
+          "q": "61% of 92?",
+          "type": "free",
+          "ans": "56"
+        },
+        {
+          "id": "g6pc-1-17",
+          "q": "25% of 95?",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6pc-1-18",
+          "q": "26% of 164?",
+          "type": "free",
+          "ans": "43"
+        },
+        {
+          "id": "g6pc-1-19",
+          "q": "63% of 74?",
+          "type": "free",
+          "ans": "47"
+        },
+        {
+          "id": "g6pc-1-20",
+          "q": "9% of 164?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6pc-1-21",
+          "q": "92% of 79?",
+          "type": "free",
+          "ans": "73"
+        },
+        {
+          "id": "g6pc-1-22",
+          "q": "81% of 108?",
+          "type": "free",
+          "ans": "87"
+        },
+        {
+          "id": "g6pc-1-23",
+          "q": "92% of 78?",
+          "type": "free",
+          "ans": "72"
+        },
+        {
+          "id": "g6pc-1-24",
+          "q": "11% of 114?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6pc-1-25",
+          "q": "7% of 73?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6pc-1-26",
+          "q": "18% of 51?",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6pc-1-27",
+          "q": "21% of 123?",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6pc-1-28",
+          "q": "47% of 117?",
+          "type": "free",
+          "ans": "55"
+        },
+        {
+          "id": "g6pc-1-29",
+          "q": "94% of 110?",
+          "type": "free",
+          "ans": "103"
+        },
+        {
+          "id": "g6pc-1-30",
+          "q": "59% of 75?",
+          "type": "free",
+          "ans": "44"
+        },
+        {
+          "id": "g6pc-1-31",
+          "q": "90/21 as a percentage?",
+          "type": "free",
+          "ans": "429"
+        },
+        {
+          "id": "g6pc-1-32",
+          "q": "33/155 as a percentage?",
+          "type": "free",
+          "ans": "21"
+        },
+        {
+          "id": "g6pc-1-33",
+          "q": "28/185 as a percentage?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6pc-1-34",
+          "q": "74/97 as a percentage?",
+          "type": "free",
+          "ans": "76"
+        },
+        {
+          "id": "g6pc-1-35",
+          "q": "73/85 as a percentage?",
+          "type": "free",
+          "ans": "86"
+        },
+        {
+          "id": "g6pc-1-36",
+          "q": "93/120 as a percentage?",
+          "type": "free",
+          "ans": "78"
+        },
+        {
+          "id": "g6pc-1-37",
+          "q": "16/162 as a percentage?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6pc-1-38",
+          "q": "73/129 as a percentage?",
+          "type": "free",
+          "ans": "57"
+        },
+        {
+          "id": "g6pc-1-39",
+          "q": "84/168 as a percentage?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6pc-1-40",
+          "q": "88/194 as a percentage?",
+          "type": "free",
+          "ans": "45"
+        },
+        {
+          "id": "g6pc-1-41",
+          "q": "63/131 as a percentage?",
+          "type": "free",
+          "ans": "48"
+        },
+        {
+          "id": "g6pc-1-42",
+          "q": "29/98 as a percentage?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6pc-1-43",
+          "q": "6/89 as a percentage?",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6pc-1-44",
+          "q": "47/142 as a percentage?",
+          "type": "free",
+          "ans": "33"
+        },
+        {
+          "id": "g6pc-1-45",
+          "q": "32/93 as a percentage?",
+          "type": "free",
+          "ans": "34"
+        },
+        {
+          "id": "g6pc-1-46",
+          "q": "22/117 as a percentage?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6pc-1-47",
+          "q": "89/170 as a percentage?",
+          "type": "free",
+          "ans": "52"
+        },
+        {
+          "id": "g6pc-1-48",
+          "q": "22/167 as a percentage?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6pc-1-49",
+          "q": "43/107 as a percentage?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6pc-1-50",
+          "q": "59/119 as a percentage?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6pc-1-51",
+          "q": "20/116 as a percentage?",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6pc-1-52",
+          "q": "40/165 as a percentage?",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6pc-1-53",
+          "q": "51/194 as a percentage?",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6pc-1-54",
+          "q": "94/88 as a percentage?",
+          "type": "free",
+          "ans": "107"
+        },
+        {
+          "id": "g6pc-1-55",
+          "q": "73/80 as a percentage?",
+          "type": "free",
+          "ans": "91"
+        },
+        {
+          "id": "g6pc-1-56",
+          "q": "38/82 as a percentage?",
+          "type": "free",
+          "ans": "46"
+        },
+        {
+          "id": "g6pc-1-57",
+          "q": "26/199 as a percentage?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6pc-1-58",
+          "q": "84/197 as a percentage?",
+          "type": "free",
+          "ans": "43"
+        },
+        {
+          "id": "g6pc-1-59",
+          "q": "23/50 as a percentage?",
+          "type": "free",
+          "ans": "46"
+        },
+        {
+          "id": "g6pc-1-60",
+          "q": "72/193 as a percentage?",
+          "type": "free",
+          "ans": "37"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6pc-2-01",
+          "q": "Price: $170. 15% off. Sale price?",
+          "type": "free",
+          "ans": "144"
+        },
+        {
+          "id": "g6pc-2-02",
+          "q": "Price: $192. 40% off. Sale price?",
+          "type": "free",
+          "ans": "115"
+        },
+        {
+          "id": "g6pc-2-03",
+          "q": "Price: $81. 11% off. Sale price?",
+          "type": "free",
+          "ans": "72"
+        },
+        {
+          "id": "g6pc-2-04",
+          "q": "Price: $100. 30% off. Sale price?",
+          "type": "free",
+          "ans": "70"
+        },
+        {
+          "id": "g6pc-2-05",
+          "q": "Price: $67. 28% off. Sale price?",
+          "type": "free",
+          "ans": "48"
+        },
+        {
+          "id": "g6pc-2-06",
+          "q": "Price: $74. 47% off. Sale price?",
+          "type": "free",
+          "ans": "39"
+        },
+        {
+          "id": "g6pc-2-07",
+          "q": "Price: $154. 41% off. Sale price?",
+          "type": "free",
+          "ans": "91"
+        },
+        {
+          "id": "g6pc-2-08",
+          "q": "Price: $180. 41% off. Sale price?",
+          "type": "free",
+          "ans": "106"
+        },
+        {
+          "id": "g6pc-2-09",
+          "q": "Price: $72. 28% off. Sale price?",
+          "type": "free",
+          "ans": "52"
+        },
+        {
+          "id": "g6pc-2-10",
+          "q": "Price: $73. 16% off. Sale price?",
+          "type": "free",
+          "ans": "61"
+        },
+        {
+          "id": "g6pc-2-11",
+          "q": "Price: $187. 10% off. Sale price?",
+          "type": "free",
+          "ans": "168"
+        },
+        {
+          "id": "g6pc-2-12",
+          "q": "Price: $104. 45% off. Sale price?",
+          "type": "free",
+          "ans": "57"
+        },
+        {
+          "id": "g6pc-2-13",
+          "q": "Price: $81. 12% off. Sale price?",
+          "type": "free",
+          "ans": "71"
+        },
+        {
+          "id": "g6pc-2-14",
+          "q": "Price: $194. 24% off. Sale price?",
+          "type": "free",
+          "ans": "147"
+        },
+        {
+          "id": "g6pc-2-15",
+          "q": "Price: $149. 45% off. Sale price?",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6pc-2-16",
+          "q": "Price: $99. 35% off. Sale price?",
+          "type": "free",
+          "ans": "64"
+        },
+        {
+          "id": "g6pc-2-17",
+          "q": "Price: $152. 22% off. Sale price?",
+          "type": "free",
+          "ans": "119"
+        },
+        {
+          "id": "g6pc-2-18",
+          "q": "Price: $120. 10% off. Sale price?",
+          "type": "free",
+          "ans": "108"
+        },
+        {
+          "id": "g6pc-2-19",
+          "q": "Price: $53. 37% off. Sale price?",
+          "type": "free",
+          "ans": "33"
+        },
+        {
+          "id": "g6pc-2-20",
+          "q": "Price: $58. 12% off. Sale price?",
+          "type": "free",
+          "ans": "51"
+        },
+        {
+          "id": "g6pc-2-21",
+          "q": "Price: $107. 34% off. Sale price?",
+          "type": "free",
+          "ans": "71"
+        },
+        {
+          "id": "g6pc-2-22",
+          "q": "Price: $101. 45% off. Sale price?",
+          "type": "free",
+          "ans": "56"
+        },
+        {
+          "id": "g6pc-2-23",
+          "q": "Price: $105. 26% off. Sale price?",
+          "type": "free",
+          "ans": "78"
+        },
+        {
+          "id": "g6pc-2-24",
+          "q": "Price: $135. 38% off. Sale price?",
+          "type": "free",
+          "ans": "84"
+        },
+        {
+          "id": "g6pc-2-25",
+          "q": "Price: $61. 19% off. Sale price?",
+          "type": "free",
+          "ans": "49"
+        },
+        {
+          "id": "g6pc-2-26",
+          "q": "Price: $168. 33% off. Sale price?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6pc-2-27",
+          "q": "Price: $194. 32% off. Sale price?",
+          "type": "free",
+          "ans": "132"
+        },
+        {
+          "id": "g6pc-2-28",
+          "q": "Price: $159. 32% off. Sale price?",
+          "type": "free",
+          "ans": "108"
+        },
+        {
+          "id": "g6pc-2-29",
+          "q": "Price: $137. 18% off. Sale price?",
+          "type": "free",
+          "ans": "112"
+        },
+        {
+          "id": "g6pc-2-30",
+          "q": "Price: $80. 21% off. Sale price?",
+          "type": "free",
+          "ans": "63"
+        },
+        {
+          "id": "g6pc-2-31",
+          "q": "Price: $133. 48% off. Sale price?",
+          "type": "free",
+          "ans": "69"
+        },
+        {
+          "id": "g6pc-2-32",
+          "q": "Price: $117. 12% off. Sale price?",
+          "type": "free",
+          "ans": "103"
+        },
+        {
+          "id": "g6pc-2-33",
+          "q": "Price: $70. 25% off. Sale price?",
+          "type": "free",
+          "ans": "52"
+        },
+        {
+          "id": "g6pc-2-34",
+          "q": "Price: $86. 24% off. Sale price?",
+          "type": "free",
+          "ans": "65"
+        },
+        {
+          "id": "g6pc-2-35",
+          "q": "Price: $139. 27% off. Sale price?",
+          "type": "free",
+          "ans": "101"
+        },
+        {
+          "id": "g6pc-2-36",
+          "q": "Price: $116. 10% off. Sale price?",
+          "type": "free",
+          "ans": "104"
+        },
+        {
+          "id": "g6pc-2-37",
+          "q": "Price: $111. 11% off. Sale price?",
+          "type": "free",
+          "ans": "99"
+        },
+        {
+          "id": "g6pc-2-38",
+          "q": "Price: $108. 31% off. Sale price?",
+          "type": "free",
+          "ans": "75"
+        },
+        {
+          "id": "g6pc-2-39",
+          "q": "Price: $126. 18% off. Sale price?",
+          "type": "free",
+          "ans": "103"
+        },
+        {
+          "id": "g6pc-2-40",
+          "q": "Price: $131. 35% off. Sale price?",
+          "type": "free",
+          "ans": "85"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6pc-3-01",
+          "q": "Price up 10%, then down 10%. Net change from $493?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6pc-3-02",
+          "q": "Price up 19%, then down 19%. Net change from $348?",
+          "type": "free",
+          "ans": "-13"
+        },
+        {
+          "id": "g6pc-3-03",
+          "q": "Price up 12%, then down 12%. Net change from $299?",
+          "type": "free",
+          "ans": "-4"
+        },
+        {
+          "id": "g6pc-3-04",
+          "q": "Price up 22%, then down 22%. Net change from $229?",
+          "type": "free",
+          "ans": "-11"
+        },
+        {
+          "id": "g6pc-3-05",
+          "q": "Price up 20%, then down 20%. Net change from $387?",
+          "type": "free",
+          "ans": "-15"
+        },
+        {
+          "id": "g6pc-3-06",
+          "q": "Price up 5%, then down 5%. Net change from $328?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6pc-3-07",
+          "q": "Price up 27%, then down 27%. Net change from $240?",
+          "type": "free",
+          "ans": "-17"
+        },
+        {
+          "id": "g6pc-3-08",
+          "q": "Price up 26%, then down 26%. Net change from $338?",
+          "type": "free",
+          "ans": "-23"
+        },
+        {
+          "id": "g6pc-3-09",
+          "q": "Price up 7%, then down 7%. Net change from $461?",
+          "type": "free",
+          "ans": "-2"
+        },
+        {
+          "id": "g6pc-3-10",
+          "q": "Price up 10%, then down 10%. Net change from $456?",
+          "type": "free",
+          "ans": "-5"
+        },
+        {
+          "id": "g6pc-3-11",
+          "q": "Price up 22%, then down 22%. Net change from $487?",
+          "type": "free",
+          "ans": "-24"
+        },
+        {
+          "id": "g6pc-3-12",
+          "q": "Price up 17%, then down 17%. Net change from $267?",
+          "type": "free",
+          "ans": "-8"
+        },
+        {
+          "id": "g6pc-3-13",
+          "q": "Price up 9%, then down 9%. Net change from $361?",
+          "type": "free",
+          "ans": "-3"
+        },
+        {
+          "id": "g6pc-3-14",
+          "q": "Price up 5%, then down 5%. Net change from $358?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6pc-3-15",
+          "q": "Price up 5%, then down 5%. Net change from $378?",
+          "type": "free",
+          "ans": "-1"
+        },
+        {
+          "id": "g6pc-3-16",
+          "q": "Price up 28%, then down 28%. Net change from $321?",
+          "type": "free",
+          "ans": "-25"
+        },
+        {
+          "id": "g6pc-3-17",
+          "q": "Price up 20%, then down 20%. Net change from $411?",
+          "type": "free",
+          "ans": "-16"
+        },
+        {
+          "id": "g6pc-3-18",
+          "q": "Price up 22%, then down 22%. Net change from $433?",
+          "type": "free",
+          "ans": "-21"
+        },
+        {
+          "id": "g6pc-3-19",
+          "q": "Price up 17%, then down 17%. Net change from $130?",
+          "type": "free",
+          "ans": "-4"
+        },
+        {
+          "id": "g6pc-3-20",
+          "q": "Price up 23%, then down 23%. Net change from $210?",
+          "type": "free",
+          "ans": "-11"
+        }
+      ]
+    },
+    "g6-fracdiv": {
+      "1": [
+        {
+          "id": "g6fd-1-01",
+          "q": "5/3 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6fd-1-02",
+          "q": "6/2 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/4"
+        },
+        {
+          "id": "g6fd-1-03",
+          "q": "4/6 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "4/12"
+        },
+        {
+          "id": "g6fd-1-04",
+          "q": "2/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/10"
+        },
+        {
+          "id": "g6fd-1-05",
+          "q": "2/6 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/12"
+        },
+        {
+          "id": "g6fd-1-06",
+          "q": "7/8 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/16"
+        },
+        {
+          "id": "g6fd-1-07",
+          "q": "4/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "4/10"
+        },
+        {
+          "id": "g6fd-1-08",
+          "q": "7/8 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/16"
+        },
+        {
+          "id": "g6fd-1-09",
+          "q": "5/8 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "5/16"
+        },
+        {
+          "id": "g6fd-1-10",
+          "q": "5/7 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "5/14"
+        },
+        {
+          "id": "g6fd-1-11",
+          "q": "8/7 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/14"
+        },
+        {
+          "id": "g6fd-1-12",
+          "q": "3/6 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "3/12"
+        },
+        {
+          "id": "g6fd-1-13",
+          "q": "2/7 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/14"
+        },
+        {
+          "id": "g6fd-1-14",
+          "q": "6/4 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/8"
+        },
+        {
+          "id": "g6fd-1-15",
+          "q": "3/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "3/10"
+        },
+        {
+          "id": "g6fd-1-16",
+          "q": "6/8 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/16"
+        },
+        {
+          "id": "g6fd-1-17",
+          "q": "1/2 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6fd-1-18",
+          "q": "8/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/10"
+        },
+        {
+          "id": "g6fd-1-19",
+          "q": "7/2 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/4"
+        },
+        {
+          "id": "g6fd-1-20",
+          "q": "7/6 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/12"
+        },
+        {
+          "id": "g6fd-1-21",
+          "q": "8/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/10"
+        },
+        {
+          "id": "g6fd-1-22",
+          "q": "7/8 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/16"
+        },
+        {
+          "id": "g6fd-1-23",
+          "q": "2/5 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/10"
+        },
+        {
+          "id": "g6fd-1-24",
+          "q": "8/7 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/14"
+        },
+        {
+          "id": "g6fd-1-25",
+          "q": "3/3 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6fd-1-26",
+          "q": "3/4 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6fd-1-27",
+          "q": "6/2 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/4"
+        },
+        {
+          "id": "g6fd-1-28",
+          "q": "8/6 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/12"
+        },
+        {
+          "id": "g6fd-1-29",
+          "q": "7/3 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "7/6"
+        },
+        {
+          "id": "g6fd-1-30",
+          "q": "6/2 ÷ 2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/4"
+        },
+        {
+          "id": "g6fd-1-31",
+          "q": "3/5 ÷ 3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/15"
+        },
+        {
+          "id": "g6fd-1-32",
+          "q": "2/7 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/35"
+        },
+        {
+          "id": "g6fd-1-33",
+          "q": "1/6 ÷ 1 = ? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6fd-1-34",
+          "q": "2/8 ÷ 6 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/48"
+        },
+        {
+          "id": "g6fd-1-35",
+          "q": "1/5 ÷ 1 = ? (as a/b)",
+          "type": "free",
+          "ans": "1/5"
+        },
+        {
+          "id": "g6fd-1-36",
+          "q": "6/6 ÷ 2 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/12"
+        },
+        {
+          "id": "g6fd-1-37",
+          "q": "6/3 ÷ 2 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/6"
+        },
+        {
+          "id": "g6fd-1-38",
+          "q": "1/8 ÷ 4 = ? (as a/b)",
+          "type": "free",
+          "ans": "1/32"
+        },
+        {
+          "id": "g6fd-1-39",
+          "q": "3/5 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/25"
+        },
+        {
+          "id": "g6fd-1-40",
+          "q": "2/2 ÷ 6 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/12"
+        },
+        {
+          "id": "g6fd-1-41",
+          "q": "4/6 ÷ 4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/24"
+        },
+        {
+          "id": "g6fd-1-42",
+          "q": "5/8 ÷ 3 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/24"
+        },
+        {
+          "id": "g6fd-1-43",
+          "q": "1/7 ÷ 3 = ? (as a/b)",
+          "type": "free",
+          "ans": "1/21"
+        },
+        {
+          "id": "g6fd-1-44",
+          "q": "3/6 ÷ 6 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/36"
+        },
+        {
+          "id": "g6fd-1-45",
+          "q": "4/6 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/30"
+        },
+        {
+          "id": "g6fd-1-46",
+          "q": "2/8 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/40"
+        },
+        {
+          "id": "g6fd-1-47",
+          "q": "4/4 ÷ 2 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/8"
+        },
+        {
+          "id": "g6fd-1-48",
+          "q": "3/4 ÷ 1 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/4"
+        },
+        {
+          "id": "g6fd-1-49",
+          "q": "1/4 ÷ 1 = ? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6fd-1-50",
+          "q": "3/8 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/40"
+        },
+        {
+          "id": "g6fd-1-51",
+          "q": "3/3 ÷ 4 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/12"
+        },
+        {
+          "id": "g6fd-1-52",
+          "q": "4/5 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/25"
+        },
+        {
+          "id": "g6fd-1-53",
+          "q": "6/2 ÷ 3 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/6"
+        },
+        {
+          "id": "g6fd-1-54",
+          "q": "5/5 ÷ 6 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/30"
+        },
+        {
+          "id": "g6fd-1-55",
+          "q": "6/4 ÷ 6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/24"
+        },
+        {
+          "id": "g6fd-1-56",
+          "q": "3/3 ÷ 4 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/12"
+        },
+        {
+          "id": "g6fd-1-57",
+          "q": "5/2 ÷ 5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/10"
+        },
+        {
+          "id": "g6fd-1-58",
+          "q": "6/4 ÷ 2 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/8"
+        },
+        {
+          "id": "g6fd-1-59",
+          "q": "5/4 ÷ 4 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/16"
+        },
+        {
+          "id": "g6fd-1-60",
+          "q": "4/8 ÷ 1 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/8"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6fd-2-01",
+          "q": "½ ÷ 5/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/10"
+        },
+        {
+          "id": "g6fd-2-02",
+          "q": "½ ÷ 5/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/10"
+        },
+        {
+          "id": "g6fd-2-03",
+          "q": "½ ÷ 5/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/10"
+        },
+        {
+          "id": "g6fd-2-04",
+          "q": "½ ÷ 2/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/4"
+        },
+        {
+          "id": "g6fd-2-05",
+          "q": "½ ÷ 5/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/10"
+        },
+        {
+          "id": "g6fd-2-06",
+          "q": "½ ÷ 3/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6fd-2-07",
+          "q": "½ ÷ 5/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/10"
+        },
+        {
+          "id": "g6fd-2-08",
+          "q": "½ ÷ 4/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6fd-2-09",
+          "q": "½ ÷ 2/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/4"
+        },
+        {
+          "id": "g6fd-2-10",
+          "q": "½ ÷ 5/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/10"
+        },
+        {
+          "id": "g6fd-2-11",
+          "q": "½ ÷ 4/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6fd-2-12",
+          "q": "½ ÷ 2/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/4"
+        },
+        {
+          "id": "g6fd-2-13",
+          "q": "½ ÷ 5/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/10"
+        },
+        {
+          "id": "g6fd-2-14",
+          "q": "½ ÷ 5/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/10"
+        },
+        {
+          "id": "g6fd-2-15",
+          "q": "½ ÷ 3/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6fd-2-16",
+          "q": "½ ÷ 3/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6fd-2-17",
+          "q": "½ ÷ 2/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/4"
+        },
+        {
+          "id": "g6fd-2-18",
+          "q": "½ ÷ 3/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6fd-2-19",
+          "q": "½ ÷ 1/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/2"
+        },
+        {
+          "id": "g6fd-2-20",
+          "q": "½ ÷ 5/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/10"
+        },
+        {
+          "id": "g6fd-2-21",
+          "q": "½ ÷ 1/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/2"
+        },
+        {
+          "id": "g6fd-2-22",
+          "q": "½ ÷ 3/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6fd-2-23",
+          "q": "½ ÷ 4/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/8"
+        },
+        {
+          "id": "g6fd-2-24",
+          "q": "½ ÷ 3/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6fd-2-25",
+          "q": "½ ÷ 5/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/10"
+        },
+        {
+          "id": "g6fd-2-26",
+          "q": "½ ÷ 3/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6fd-2-27",
+          "q": "½ ÷ 3/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/6"
+        },
+        {
+          "id": "g6fd-2-28",
+          "q": "½ ÷ 3/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6fd-2-29",
+          "q": "½ ÷ 1/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/2"
+        },
+        {
+          "id": "g6fd-2-30",
+          "q": "½ ÷ 4/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/8"
+        },
+        {
+          "id": "g6fd-2-31",
+          "q": "½ ÷ 3/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6fd-2-32",
+          "q": "½ ÷ 5/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/10"
+        },
+        {
+          "id": "g6fd-2-33",
+          "q": "½ ÷ 1/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/2"
+        },
+        {
+          "id": "g6fd-2-34",
+          "q": "½ ÷ 1/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/2"
+        },
+        {
+          "id": "g6fd-2-35",
+          "q": "½ ÷ 1/6 = ? (as a/b)",
+          "type": "free",
+          "ans": "6/2"
+        },
+        {
+          "id": "g6fd-2-36",
+          "q": "½ ÷ 3/4 = ? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6fd-2-37",
+          "q": "½ ÷ 5/5 = ? (as a/b)",
+          "type": "free",
+          "ans": "5/10"
+        },
+        {
+          "id": "g6fd-2-38",
+          "q": "½ ÷ 4/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6fd-2-39",
+          "q": "½ ÷ 5/2 = ? (as a/b)",
+          "type": "free",
+          "ans": "2/10"
+        },
+        {
+          "id": "g6fd-2-40",
+          "q": "½ ÷ 5/3 = ? (as a/b)",
+          "type": "free",
+          "ans": "3/10"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6fd-3-01",
+          "q": "4/2 ÷ 5/3 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "12/10"
+        },
+        {
+          "id": "g6fd-3-02",
+          "q": "1/2 ÷ 3/5 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6fd-3-03",
+          "q": "3/3 ÷ 3/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "12/9"
+        },
+        {
+          "id": "g6fd-3-04",
+          "q": "1/6 ÷ 2/2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/12"
+        },
+        {
+          "id": "g6fd-3-05",
+          "q": "5/3 ÷ 4/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "20/12"
+        },
+        {
+          "id": "g6fd-3-06",
+          "q": "4/2 ÷ 2/3 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "12/4"
+        },
+        {
+          "id": "g6fd-3-07",
+          "q": "2/6 ÷ 1/3 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/6"
+        },
+        {
+          "id": "g6fd-3-08",
+          "q": "4/5 ÷ 2/5 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "20/10"
+        },
+        {
+          "id": "g6fd-3-09",
+          "q": "1/3 ÷ 1/5 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "5/3"
+        },
+        {
+          "id": "g6fd-3-10",
+          "q": "3/5 ÷ 5/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "12/25"
+        },
+        {
+          "id": "g6fd-3-11",
+          "q": "4/4 ÷ 5/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "16/20"
+        },
+        {
+          "id": "g6fd-3-12",
+          "q": "4/6 ÷ 3/2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/18"
+        },
+        {
+          "id": "g6fd-3-13",
+          "q": "1/5 ÷ 5/3 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "3/25"
+        },
+        {
+          "id": "g6fd-3-14",
+          "q": "1/2 ÷ 3/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6fd-3-15",
+          "q": "1/6 ÷ 4/2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "2/24"
+        },
+        {
+          "id": "g6fd-3-16",
+          "q": "2/5 ÷ 5/4 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/25"
+        },
+        {
+          "id": "g6fd-3-17",
+          "q": "5/4 ÷ 3/5 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "25/12"
+        },
+        {
+          "id": "g6fd-3-18",
+          "q": "1/2 ÷ 3/6 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "6/6"
+        },
+        {
+          "id": "g6fd-3-19",
+          "q": "4/3 ÷ 5/2 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "8/15"
+        },
+        {
+          "id": "g6fd-3-20",
+          "q": "3/5 ÷ 1/6 = ? (as a/b, simplify)",
+          "type": "free",
+          "ans": "18/5"
+        }
+      ]
+    },
+    "g6-equations": {
+      "1": [
+        {
+          "id": "g6eq-1-01",
+          "q": "If x + 16 = 21, what is x?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-1-02",
+          "q": "If x + 3 = 18, what is x?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-1-03",
+          "q": "If x + 11 = 16, what is x?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-1-04",
+          "q": "If x + 2 = 13, what is x?",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-1-05",
+          "q": "If x + 20 = 38, what is x?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6eq-1-06",
+          "q": "If x + 6 = 10, what is x?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-1-07",
+          "q": "If x + 1 = 20, what is x?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6eq-1-08",
+          "q": "If x + 4 = 16, what is x?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-1-09",
+          "q": "If x + 19 = 29, what is x?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6eq-1-10",
+          "q": "If x + 14 = 26, what is x?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-1-11",
+          "q": "If x + 7 = 19, what is x?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-1-12",
+          "q": "If x + 18 = 29, what is x?",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-1-13",
+          "q": "If x + 10 = 22, what is x?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-1-14",
+          "q": "If x + 4 = 18, what is x?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-1-15",
+          "q": "If x + 20 = 23, what is x?",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-1-16",
+          "q": "If x + 13 = 20, what is x?",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-1-17",
+          "q": "If x + 13 = 19, what is x?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-1-18",
+          "q": "If x + 4 = 23, what is x?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6eq-1-19",
+          "q": "If x + 16 = 33, what is x?",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6eq-1-20",
+          "q": "If x + 13 = 30, what is x?",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6eq-1-21",
+          "q": "If x + 20 = 35, what is x?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-1-22",
+          "q": "If x + 8 = 25, what is x?",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6eq-1-23",
+          "q": "If x + 11 = 21, what is x?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6eq-1-24",
+          "q": "If x + 9 = 17, what is x?",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-1-25",
+          "q": "If x + 7 = 13, what is x?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-1-26",
+          "q": "If x + 16 = 25, what is x?",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6eq-1-27",
+          "q": "If x + 1 = 3, what is x?",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-1-28",
+          "q": "If x + 4 = 19, what is x?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-1-29",
+          "q": "If x + 18 = 38, what is x?",
+          "type": "free",
+          "ans": "20"
+        },
+        {
+          "id": "g6eq-1-30",
+          "q": "If x + 16 = 18, what is x?",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-1-31",
+          "q": "Solve: 5x = 70",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-1-32",
+          "q": "Solve: 6x = 48",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-1-33",
+          "q": "Solve: 2x = 8",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-1-34",
+          "q": "Solve: 9x = 126",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-1-35",
+          "q": "Solve: 6x = 36",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-1-36",
+          "q": "Solve: 5x = 40",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-1-37",
+          "q": "Solve: 10x = 150",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-1-38",
+          "q": "Solve: 2x = 18",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6eq-1-39",
+          "q": "Solve: 7x = 42",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-1-40",
+          "q": "Solve: 5x = 70",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-1-41",
+          "q": "Solve: 7x = 35",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-1-42",
+          "q": "Solve: 8x = 16",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-1-43",
+          "q": "Solve: 5x = 70",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-1-44",
+          "q": "Solve: 6x = 54",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6eq-1-45",
+          "q": "Solve: 2x = 6",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-1-46",
+          "q": "Solve: 10x = 110",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-1-47",
+          "q": "Solve: 9x = 72",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-1-48",
+          "q": "Solve: 10x = 30",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-1-49",
+          "q": "Solve: 2x = 16",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-1-50",
+          "q": "Solve: 6x = 90",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-1-51",
+          "q": "Solve: 8x = 32",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-1-52",
+          "q": "Solve: 5x = 50",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6eq-1-53",
+          "q": "Solve: 6x = 18",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-1-54",
+          "q": "Solve: 10x = 70",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-1-55",
+          "q": "Solve: 8x = 16",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-1-56",
+          "q": "Solve: 10x = 50",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-1-57",
+          "q": "Solve: 9x = 117",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-1-58",
+          "q": "Solve: 8x = 24",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-1-59",
+          "q": "Solve: 3x = 36",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-1-60",
+          "q": "Solve: 8x = 80",
+          "type": "free",
+          "ans": "10"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6eq-2-01",
+          "q": "Solve: 3x + 2 = 38",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-2-02",
+          "q": "Solve: 3x + 4 = 22",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-03",
+          "q": "Solve: 3x + 3 = 39",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-2-04",
+          "q": "Solve: 4x + 2 = 46",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-2-05",
+          "q": "Solve: 4x + 6 = 38",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-2-06",
+          "q": "Solve: 5x + 8 = 28",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-2-07",
+          "q": "Solve: 3x + 6 = 21",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-2-08",
+          "q": "Solve: 4x + 8 = 60",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-2-09",
+          "q": "Solve: 5x + 1 = 46",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6eq-2-10",
+          "q": "Solve: 3x + 4 = 25",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-2-11",
+          "q": "Solve: 3x + 6 = 24",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-12",
+          "q": "Solve: 3x + 8 = 53",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-2-13",
+          "q": "Solve: 4x + 10 = 66",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-2-14",
+          "q": "Solve: 5x + 5 = 30",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-2-15",
+          "q": "Solve: 2x + 9 = 35",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-2-16",
+          "q": "Solve: 5x + 3 = 78",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6eq-2-17",
+          "q": "Solve: 4x + 9 = 61",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-2-18",
+          "q": "Solve: 4x + 8 = 28",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-2-19",
+          "q": "Solve: 3x + 1 = 19",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-20",
+          "q": "Solve: 3x + 8 = 26",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-21",
+          "q": "Solve: 2x + 9 = 23",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-2-22",
+          "q": "Solve: 5x + 3 = 38",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-2-23",
+          "q": "Solve: 4x + 3 = 51",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-2-24",
+          "q": "Solve: 2x + 3 = 19",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-2-25",
+          "q": "Solve: 3x + 9 = 39",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6eq-2-26",
+          "q": "Solve: 4x + 2 = 46",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-2-27",
+          "q": "Solve: 2x + 3 = 21",
+          "type": "free",
+          "ans": "9"
+        },
+        {
+          "id": "g6eq-2-28",
+          "q": "Solve: 5x + 7 = 37",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-29",
+          "q": "Solve: 4x + 4 = 12",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-2-30",
+          "q": "Solve: 2x + 7 = 23",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-2-31",
+          "q": "Solve: 5x + 4 = 34",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-2-32",
+          "q": "Solve: 3x + 1 = 34",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-2-33",
+          "q": "Solve: 5x + 2 = 62",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-2-34",
+          "q": "Solve: 2x + 1 = 27",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-2-35",
+          "q": "Solve: 5x + 9 = 44",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-2-36",
+          "q": "Solve: 5x + 4 = 19",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-2-37",
+          "q": "Solve: 3x + 6 = 36",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6eq-2-38",
+          "q": "Solve: 3x + 6 = 48",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6eq-2-39",
+          "q": "Solve: 2x + 2 = 6",
+          "type": "free",
+          "ans": "2"
+        },
+        {
+          "id": "g6eq-2-40",
+          "q": "Solve: 5x + 7 = 57",
+          "type": "free",
+          "ans": "10"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6eq-3-01",
+          "q": "Solve: 4(x − 12) = 24",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6eq-3-02",
+          "q": "Solve: 6(x − 8) = -18",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-3-03",
+          "q": "Solve: 4(x − 6) = 8",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-3-04",
+          "q": "Solve: 4(x − 12) = 20",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6eq-3-05",
+          "q": "Solve: 4(x − 12) = -32",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-3-06",
+          "q": "Solve: 2(x − 8) = 6",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-3-07",
+          "q": "Solve: 4(x − 11) = 8",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6eq-3-08",
+          "q": "Solve: 5(x − 8) = -5",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6eq-3-09",
+          "q": "Solve: 6(x − 8) = 48",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6eq-3-10",
+          "q": "Solve: 2(x − 12) = -16",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6eq-3-11",
+          "q": "Solve: 4(x − 10) = -8",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6eq-3-12",
+          "q": "Solve: 3(x − 7) = -6",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6eq-3-13",
+          "q": "Solve: 4(x − 14) = -44",
+          "type": "free",
+          "ans": "3"
+        },
+        {
+          "id": "g6eq-3-14",
+          "q": "Solve: 2(x − 11) = 0",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6eq-3-15",
+          "q": "Solve: 2(x − 3) = 18",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6eq-3-16",
+          "q": "Solve: 5(x − 15) = 10",
+          "type": "free",
+          "ans": "17"
+        },
+        {
+          "id": "g6eq-3-17",
+          "q": "Solve: 4(x − 8) = -8",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-3-18",
+          "q": "Solve: 2(x − 15) = -18",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6eq-3-19",
+          "q": "Solve: 6(x − 9) = 54",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6eq-3-20",
+          "q": "Solve: 3(x − 12) = 0",
+          "type": "free",
+          "ans": "12"
+        }
+      ]
+    },
+    "g6-proportion": {
+      "1": [
+        {
+          "id": "g6pp-1-01",
+          "q": "Write the ratio 1 to 10 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "1:10"
+        },
+        {
+          "id": "g6pp-1-02",
+          "q": "Write the ratio 10 to 5 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "10:5"
+        },
+        {
+          "id": "g6pp-1-03",
+          "q": "Write the ratio 7 to 1 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "7:1"
+        },
+        {
+          "id": "g6pp-1-04",
+          "q": "Write the ratio 9 to 4 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "9:4"
+        },
+        {
+          "id": "g6pp-1-05",
+          "q": "Write the ratio 9 to 5 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "9:5"
+        },
+        {
+          "id": "g6pp-1-06",
+          "q": "Write the ratio 5 to 4 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "5:4"
+        },
+        {
+          "id": "g6pp-1-07",
+          "q": "Write the ratio 6 to 9 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "6:9"
+        },
+        {
+          "id": "g6pp-1-08",
+          "q": "Write the ratio 6 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "6:8"
+        },
+        {
+          "id": "g6pp-1-09",
+          "q": "Write the ratio 2 to 6 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "2:6"
+        },
+        {
+          "id": "g6pp-1-10",
+          "q": "Write the ratio 10 to 7 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "10:7"
+        },
+        {
+          "id": "g6pp-1-11",
+          "q": "Write the ratio 3 to 5 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "3:5"
+        },
+        {
+          "id": "g6pp-1-12",
+          "q": "Write the ratio 6 to 7 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "6:7"
+        },
+        {
+          "id": "g6pp-1-13",
+          "q": "Write the ratio 9 to 10 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "9:10"
+        },
+        {
+          "id": "g6pp-1-14",
+          "q": "Write the ratio 5 to 7 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "5:7"
+        },
+        {
+          "id": "g6pp-1-15",
+          "q": "Write the ratio 2 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "2:8"
+        },
+        {
+          "id": "g6pp-1-16",
+          "q": "Write the ratio 10 to 2 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "10:2"
+        },
+        {
+          "id": "g6pp-1-17",
+          "q": "Write the ratio 3 to 2 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "3:2"
+        },
+        {
+          "id": "g6pp-1-18",
+          "q": "Write the ratio 10 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "10:8"
+        },
+        {
+          "id": "g6pp-1-19",
+          "q": "Write the ratio 7 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "7:8"
+        },
+        {
+          "id": "g6pp-1-20",
+          "q": "Write the ratio 1 to 2 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "1:2"
+        },
+        {
+          "id": "g6pp-1-21",
+          "q": "Write the ratio 1 to 9 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "1:9"
+        },
+        {
+          "id": "g6pp-1-22",
+          "q": "Write the ratio 4 to 9 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "4:9"
+        },
+        {
+          "id": "g6pp-1-23",
+          "q": "Write the ratio 2 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "2:8"
+        },
+        {
+          "id": "g6pp-1-24",
+          "q": "Write the ratio 6 to 10 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "6:10"
+        },
+        {
+          "id": "g6pp-1-25",
+          "q": "Write the ratio 9 to 7 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "9:7"
+        },
+        {
+          "id": "g6pp-1-26",
+          "q": "Write the ratio 1 to 8 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "1:8"
+        },
+        {
+          "id": "g6pp-1-27",
+          "q": "Write the ratio 7 to 9 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "7:9"
+        },
+        {
+          "id": "g6pp-1-28",
+          "q": "Write the ratio 4 to 5 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "4:5"
+        },
+        {
+          "id": "g6pp-1-29",
+          "q": "Write the ratio 4 to 2 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "4:2"
+        },
+        {
+          "id": "g6pp-1-30",
+          "q": "Write the ratio 2 to 7 in simplest form (as a:b).",
+          "type": "free",
+          "ans": "2:7"
+        },
+        {
+          "id": "g6pp-1-31",
+          "q": "Ratio 5:8, total 39. How many of the 5 part?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6pp-1-32",
+          "q": "Ratio 2:6, total 72. How many of the 2 part?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6pp-1-33",
+          "q": "Ratio 4:2, total 18. How many of the 4 part?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6pp-1-34",
+          "q": "Ratio 2:5, total 56. How many of the 2 part?",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-1-35",
+          "q": "Ratio 5:4, total 81. How many of the 5 part?",
+          "type": "free",
+          "ans": "45"
+        },
+        {
+          "id": "g6pp-1-36",
+          "q": "Ratio 2:2, total 12. How many of the 2 part?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6pp-1-37",
+          "q": "Ratio 7:1, total 24. How many of the 7 part?",
+          "type": "free",
+          "ans": "21"
+        },
+        {
+          "id": "g6pp-1-38",
+          "q": "Ratio 6:7, total 104. How many of the 6 part?",
+          "type": "free",
+          "ans": "48"
+        },
+        {
+          "id": "g6pp-1-39",
+          "q": "Ratio 8:5, total 78. How many of the 8 part?",
+          "type": "free",
+          "ans": "48"
+        },
+        {
+          "id": "g6pp-1-40",
+          "q": "Ratio 5:3, total 16. How many of the 5 part?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6pp-1-41",
+          "q": "Ratio 1:2, total 15. How many of the 1 part?",
+          "type": "free",
+          "ans": "5"
+        },
+        {
+          "id": "g6pp-1-42",
+          "q": "Ratio 3:5, total 32. How many of the 3 part?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6pp-1-43",
+          "q": "Ratio 4:3, total 56. How many of the 4 part?",
+          "type": "free",
+          "ans": "32"
+        },
+        {
+          "id": "g6pp-1-44",
+          "q": "Ratio 7:1, total 56. How many of the 7 part?",
+          "type": "free",
+          "ans": "49"
+        },
+        {
+          "id": "g6pp-1-45",
+          "q": "Ratio 4:5, total 54. How many of the 4 part?",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6pp-1-46",
+          "q": "Ratio 3:3, total 24. How many of the 3 part?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6pp-1-47",
+          "q": "Ratio 8:4, total 24. How many of the 8 part?",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-1-48",
+          "q": "Ratio 1:4, total 20. How many of the 1 part?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6pp-1-49",
+          "q": "Ratio 4:3, total 70. How many of the 4 part?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6pp-1-50",
+          "q": "Ratio 4:8, total 108. How many of the 4 part?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6pp-1-51",
+          "q": "Ratio 7:3, total 60. How many of the 7 part?",
+          "type": "free",
+          "ans": "42"
+        },
+        {
+          "id": "g6pp-1-52",
+          "q": "Ratio 8:2, total 80. How many of the 8 part?",
+          "type": "free",
+          "ans": "64"
+        },
+        {
+          "id": "g6pp-1-53",
+          "q": "Ratio 2:4, total 54. How many of the 2 part?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6pp-1-54",
+          "q": "Ratio 7:5, total 48. How many of the 7 part?",
+          "type": "free",
+          "ans": "28"
+        },
+        {
+          "id": "g6pp-1-55",
+          "q": "Ratio 5:1, total 60. How many of the 5 part?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6pp-1-56",
+          "q": "Ratio 1:3, total 24. How many of the 1 part?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6pp-1-57",
+          "q": "Ratio 2:5, total 63. How many of the 2 part?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6pp-1-58",
+          "q": "Ratio 4:7, total 88. How many of the 4 part?",
+          "type": "free",
+          "ans": "32"
+        },
+        {
+          "id": "g6pp-1-59",
+          "q": "Ratio 4:2, total 24. How many of the 4 part?",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-1-60",
+          "q": "Ratio 2:1, total 30. How many of the 2 part?",
+          "type": "free",
+          "ans": "20"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6pp-2-01",
+          "q": "7 items cost $77.00. Cost per item?",
+          "type": "free",
+          "ans": "11.00"
+        },
+        {
+          "id": "g6pp-2-02",
+          "q": "2 items cost $18.00. Cost per item?",
+          "type": "free",
+          "ans": "9.00"
+        },
+        {
+          "id": "g6pp-2-03",
+          "q": "8 items cost $104.00. Cost per item?",
+          "type": "free",
+          "ans": "13.00"
+        },
+        {
+          "id": "g6pp-2-04",
+          "q": "8 items cost $120.00. Cost per item?",
+          "type": "free",
+          "ans": "15.00"
+        },
+        {
+          "id": "g6pp-2-05",
+          "q": "4 items cost $36.00. Cost per item?",
+          "type": "free",
+          "ans": "9.00"
+        },
+        {
+          "id": "g6pp-2-06",
+          "q": "7 items cost $91.00. Cost per item?",
+          "type": "free",
+          "ans": "13.00"
+        },
+        {
+          "id": "g6pp-2-07",
+          "q": "3 items cost $39.00. Cost per item?",
+          "type": "free",
+          "ans": "13.00"
+        },
+        {
+          "id": "g6pp-2-08",
+          "q": "6 items cost $78.00. Cost per item?",
+          "type": "free",
+          "ans": "13.00"
+        },
+        {
+          "id": "g6pp-2-09",
+          "q": "2 items cost $10.00. Cost per item?",
+          "type": "free",
+          "ans": "5.00"
+        },
+        {
+          "id": "g6pp-2-10",
+          "q": "5 items cost $75.00. Cost per item?",
+          "type": "free",
+          "ans": "15.00"
+        },
+        {
+          "id": "g6pp-2-11",
+          "q": "4 items cost $28.00. Cost per item?",
+          "type": "free",
+          "ans": "7.00"
+        },
+        {
+          "id": "g6pp-2-12",
+          "q": "3 items cost $24.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-13",
+          "q": "7 items cost $21.00. Cost per item?",
+          "type": "free",
+          "ans": "3.00"
+        },
+        {
+          "id": "g6pp-2-14",
+          "q": "3 items cost $36.00. Cost per item?",
+          "type": "free",
+          "ans": "12.00"
+        },
+        {
+          "id": "g6pp-2-15",
+          "q": "6 items cost $48.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-16",
+          "q": "8 items cost $16.00. Cost per item?",
+          "type": "free",
+          "ans": "2.00"
+        },
+        {
+          "id": "g6pp-2-17",
+          "q": "6 items cost $42.00. Cost per item?",
+          "type": "free",
+          "ans": "7.00"
+        },
+        {
+          "id": "g6pp-2-18",
+          "q": "6 items cost $30.00. Cost per item?",
+          "type": "free",
+          "ans": "5.00"
+        },
+        {
+          "id": "g6pp-2-19",
+          "q": "5 items cost $50.00. Cost per item?",
+          "type": "free",
+          "ans": "10.00"
+        },
+        {
+          "id": "g6pp-2-20",
+          "q": "7 items cost $56.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-21",
+          "q": "5 items cost $15.00. Cost per item?",
+          "type": "free",
+          "ans": "3.00"
+        },
+        {
+          "id": "g6pp-2-22",
+          "q": "2 items cost $20.00. Cost per item?",
+          "type": "free",
+          "ans": "10.00"
+        },
+        {
+          "id": "g6pp-2-23",
+          "q": "5 items cost $35.00. Cost per item?",
+          "type": "free",
+          "ans": "7.00"
+        },
+        {
+          "id": "g6pp-2-24",
+          "q": "2 items cost $4.00. Cost per item?",
+          "type": "free",
+          "ans": "2.00"
+        },
+        {
+          "id": "g6pp-2-25",
+          "q": "5 items cost $55.00. Cost per item?",
+          "type": "free",
+          "ans": "11.00"
+        },
+        {
+          "id": "g6pp-2-26",
+          "q": "2 items cost $16.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-27",
+          "q": "2 items cost $4.00. Cost per item?",
+          "type": "free",
+          "ans": "2.00"
+        },
+        {
+          "id": "g6pp-2-28",
+          "q": "8 items cost $112.00. Cost per item?",
+          "type": "free",
+          "ans": "14.00"
+        },
+        {
+          "id": "g6pp-2-29",
+          "q": "4 items cost $32.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-30",
+          "q": "3 items cost $45.00. Cost per item?",
+          "type": "free",
+          "ans": "15.00"
+        },
+        {
+          "id": "g6pp-2-31",
+          "q": "8 items cost $120.00. Cost per item?",
+          "type": "free",
+          "ans": "15.00"
+        },
+        {
+          "id": "g6pp-2-32",
+          "q": "8 items cost $24.00. Cost per item?",
+          "type": "free",
+          "ans": "3.00"
+        },
+        {
+          "id": "g6pp-2-33",
+          "q": "5 items cost $75.00. Cost per item?",
+          "type": "free",
+          "ans": "15.00"
+        },
+        {
+          "id": "g6pp-2-34",
+          "q": "6 items cost $48.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-35",
+          "q": "7 items cost $77.00. Cost per item?",
+          "type": "free",
+          "ans": "11.00"
+        },
+        {
+          "id": "g6pp-2-36",
+          "q": "8 items cost $24.00. Cost per item?",
+          "type": "free",
+          "ans": "3.00"
+        },
+        {
+          "id": "g6pp-2-37",
+          "q": "6 items cost $60.00. Cost per item?",
+          "type": "free",
+          "ans": "10.00"
+        },
+        {
+          "id": "g6pp-2-38",
+          "q": "2 items cost $14.00. Cost per item?",
+          "type": "free",
+          "ans": "7.00"
+        },
+        {
+          "id": "g6pp-2-39",
+          "q": "2 items cost $16.00. Cost per item?",
+          "type": "free",
+          "ans": "8.00"
+        },
+        {
+          "id": "g6pp-2-40",
+          "q": "7 items cost $35.00. Cost per item?",
+          "type": "free",
+          "ans": "5.00"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6pp-3-01",
+          "q": "If 5:4 = 37:y, find y.",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6pp-3-02",
+          "q": "If 5:4 = 34:y, find y.",
+          "type": "free",
+          "ans": "27"
+        },
+        {
+          "id": "g6pp-3-03",
+          "q": "If 6:6 = 22:y, find y.",
+          "type": "free",
+          "ans": "22"
+        },
+        {
+          "id": "g6pp-3-04",
+          "q": "If 6:3 = 47:y, find y.",
+          "type": "free",
+          "ans": "24"
+        },
+        {
+          "id": "g6pp-3-05",
+          "q": "If 5:4 = 33:y, find y.",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6pp-3-06",
+          "q": "If 4:6 = 45:y, find y.",
+          "type": "free",
+          "ans": "68"
+        },
+        {
+          "id": "g6pp-3-07",
+          "q": "If 6:2 = 49:y, find y.",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-3-08",
+          "q": "If 2:2 = 16:y, find y.",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-3-09",
+          "q": "If 6:2 = 20:y, find y.",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6pp-3-10",
+          "q": "If 6:5 = 25:y, find y.",
+          "type": "free",
+          "ans": "21"
+        },
+        {
+          "id": "g6pp-3-11",
+          "q": "If 6:6 = 45:y, find y.",
+          "type": "free",
+          "ans": "45"
+        },
+        {
+          "id": "g6pp-3-12",
+          "q": "If 6:5 = 16:y, find y.",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6pp-3-13",
+          "q": "If 2:4 = 28:y, find y.",
+          "type": "free",
+          "ans": "56"
+        },
+        {
+          "id": "g6pp-3-14",
+          "q": "If 2:5 = 31:y, find y.",
+          "type": "free",
+          "ans": "78"
+        },
+        {
+          "id": "g6pp-3-15",
+          "q": "If 3:4 = 31:y, find y.",
+          "type": "free",
+          "ans": "41"
+        },
+        {
+          "id": "g6pp-3-16",
+          "q": "If 6:3 = 14:y, find y.",
+          "type": "free",
+          "ans": "7"
+        },
+        {
+          "id": "g6pp-3-17",
+          "q": "If 5:2 = 27:y, find y.",
+          "type": "free",
+          "ans": "11"
+        },
+        {
+          "id": "g6pp-3-18",
+          "q": "If 5:4 = 43:y, find y.",
+          "type": "free",
+          "ans": "34"
+        },
+        {
+          "id": "g6pp-3-19",
+          "q": "If 6:6 = 16:y, find y.",
+          "type": "free",
+          "ans": "16"
+        },
+        {
+          "id": "g6pp-3-20",
+          "q": "If 3:5 = 45:y, find y.",
+          "type": "free",
+          "ans": "75"
+        }
+      ]
+    },
+    "g6-circle": {
+      "1": [
+        {
+          "id": "g6ci-1-01",
+          "q": "Radius 15, diameter?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6ci-1-02",
+          "q": "Radius 13, diameter?",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6ci-1-03",
+          "q": "Radius 3, diameter?",
+          "type": "free",
+          "ans": "6"
+        },
+        {
+          "id": "g6ci-1-04",
+          "q": "Radius 18, diameter?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6ci-1-05",
+          "q": "Radius 4, diameter?",
+          "type": "free",
+          "ans": "8"
+        },
+        {
+          "id": "g6ci-1-06",
+          "q": "Radius 18, diameter?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6ci-1-07",
+          "q": "Radius 20, diameter?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6ci-1-08",
+          "q": "Radius 13, diameter?",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6ci-1-09",
+          "q": "Radius 20, diameter?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6ci-1-10",
+          "q": "Radius 11, diameter?",
+          "type": "free",
+          "ans": "22"
+        },
+        {
+          "id": "g6ci-1-11",
+          "q": "Radius 5, diameter?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6ci-1-12",
+          "q": "Radius 2, diameter?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6ci-1-13",
+          "q": "Radius 19, diameter?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-14",
+          "q": "Radius 19, diameter?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-15",
+          "q": "Radius 15, diameter?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6ci-1-16",
+          "q": "Radius 15, diameter?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6ci-1-17",
+          "q": "Radius 15, diameter?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6ci-1-18",
+          "q": "Radius 20, diameter?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6ci-1-19",
+          "q": "Radius 11, diameter?",
+          "type": "free",
+          "ans": "22"
+        },
+        {
+          "id": "g6ci-1-20",
+          "q": "Radius 19, diameter?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-21",
+          "q": "Radius 5, diameter?",
+          "type": "free",
+          "ans": "10"
+        },
+        {
+          "id": "g6ci-1-22",
+          "q": "Radius 18, diameter?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6ci-1-23",
+          "q": "Radius 17, diameter?",
+          "type": "free",
+          "ans": "34"
+        },
+        {
+          "id": "g6ci-1-24",
+          "q": "Radius 9, diameter?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6ci-1-25",
+          "q": "Radius 7, diameter?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6ci-1-26",
+          "q": "Radius 20, diameter?",
+          "type": "free",
+          "ans": "40"
+        },
+        {
+          "id": "g6ci-1-27",
+          "q": "Radius 2, diameter?",
+          "type": "free",
+          "ans": "4"
+        },
+        {
+          "id": "g6ci-1-28",
+          "q": "Radius 9, diameter?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6ci-1-29",
+          "q": "Radius 6, diameter?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6ci-1-30",
+          "q": "Radius 7, diameter?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6ci-1-31",
+          "q": "Circumference of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "44"
+        },
+        {
+          "id": "g6ci-1-32",
+          "q": "Circumference of circle radius 13 (use π=3.14)?",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6ci-1-33",
+          "q": "Circumference of circle radius 13 (use π=3.14)?",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6ci-1-34",
+          "q": "Circumference of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "57"
+        },
+        {
+          "id": "g6ci-1-35",
+          "q": "Circumference of circle radius 3 (use π=3.14)?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6ci-1-36",
+          "q": "Circumference of circle radius 13 (use π=3.14)?",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6ci-1-37",
+          "q": "Circumference of circle radius 15 (use π=3.14)?",
+          "type": "free",
+          "ans": "94"
+        },
+        {
+          "id": "g6ci-1-38",
+          "q": "Circumference of circle radius 4 (use π=3.14)?",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6ci-1-39",
+          "q": "Circumference of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-40",
+          "q": "Circumference of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "31"
+        },
+        {
+          "id": "g6ci-1-41",
+          "q": "Circumference of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "44"
+        },
+        {
+          "id": "g6ci-1-42",
+          "q": "Circumference of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6ci-1-43",
+          "q": "Circumference of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "63"
+        },
+        {
+          "id": "g6ci-1-44",
+          "q": "Circumference of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6ci-1-45",
+          "q": "Circumference of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "31"
+        },
+        {
+          "id": "g6ci-1-46",
+          "q": "Circumference of circle radius 15 (use π=3.14)?",
+          "type": "free",
+          "ans": "94"
+        },
+        {
+          "id": "g6ci-1-47",
+          "q": "Circumference of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-1-48",
+          "q": "Circumference of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "44"
+        },
+        {
+          "id": "g6ci-1-49",
+          "q": "Circumference of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "63"
+        },
+        {
+          "id": "g6ci-1-50",
+          "q": "Circumference of circle radius 11 (use π=3.14)?",
+          "type": "free",
+          "ans": "69"
+        },
+        {
+          "id": "g6ci-1-51",
+          "q": "Circumference of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-52",
+          "q": "Circumference of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6ci-1-53",
+          "q": "Circumference of circle radius 15 (use π=3.14)?",
+          "type": "free",
+          "ans": "94"
+        },
+        {
+          "id": "g6ci-1-54",
+          "q": "Circumference of circle radius 14 (use π=3.14)?",
+          "type": "free",
+          "ans": "88"
+        },
+        {
+          "id": "g6ci-1-55",
+          "q": "Circumference of circle radius 4 (use π=3.14)?",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6ci-1-56",
+          "q": "Circumference of circle radius 3 (use π=3.14)?",
+          "type": "free",
+          "ans": "19"
+        },
+        {
+          "id": "g6ci-1-57",
+          "q": "Circumference of circle radius 14 (use π=3.14)?",
+          "type": "free",
+          "ans": "88"
+        },
+        {
+          "id": "g6ci-1-58",
+          "q": "Circumference of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "57"
+        },
+        {
+          "id": "g6ci-1-59",
+          "q": "Circumference of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-1-60",
+          "q": "Circumference of circle radius 15 (use π=3.14)?",
+          "type": "free",
+          "ans": "94"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6ci-2-01",
+          "q": "Area of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-2-02",
+          "q": "Area of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6ci-2-03",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-2-04",
+          "q": "Area of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "201"
+        },
+        {
+          "id": "g6ci-2-05",
+          "q": "Area of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "314"
+        },
+        {
+          "id": "g6ci-2-06",
+          "q": "Area of circle radius 4 (use π=3.14)?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6ci-2-07",
+          "q": "Area of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "314"
+        },
+        {
+          "id": "g6ci-2-08",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-2-09",
+          "q": "Area of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "201"
+        },
+        {
+          "id": "g6ci-2-10",
+          "q": "Area of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "201"
+        },
+        {
+          "id": "g6ci-2-11",
+          "q": "Area of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6ci-2-12",
+          "q": "Area of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "314"
+        },
+        {
+          "id": "g6ci-2-13",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-14",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-15",
+          "q": "Area of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-2-16",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-17",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-18",
+          "q": "Area of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-2-19",
+          "q": "Area of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "154"
+        },
+        {
+          "id": "g6ci-2-20",
+          "q": "Area of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "154"
+        },
+        {
+          "id": "g6ci-2-21",
+          "q": "Area of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "314"
+        },
+        {
+          "id": "g6ci-2-22",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-2-23",
+          "q": "Area of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-2-24",
+          "q": "Area of circle radius 10 (use π=3.14)?",
+          "type": "free",
+          "ans": "314"
+        },
+        {
+          "id": "g6ci-2-25",
+          "q": "Area of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6ci-2-26",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-2-27",
+          "q": "Area of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6ci-2-28",
+          "q": "Area of circle radius 6 (use π=3.14)?",
+          "type": "free",
+          "ans": "113"
+        },
+        {
+          "id": "g6ci-2-29",
+          "q": "Area of circle radius 7 (use π=3.14)?",
+          "type": "free",
+          "ans": "154"
+        },
+        {
+          "id": "g6ci-2-30",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-31",
+          "q": "Area of circle radius 3 (use π=3.14)?",
+          "type": "free",
+          "ans": "28"
+        },
+        {
+          "id": "g6ci-2-32",
+          "q": "Area of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "201"
+        },
+        {
+          "id": "g6ci-2-33",
+          "q": "Area of circle radius 2 (use π=3.14)?",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-2-34",
+          "q": "Area of circle radius 3 (use π=3.14)?",
+          "type": "free",
+          "ans": "28"
+        },
+        {
+          "id": "g6ci-2-35",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-36",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-2-37",
+          "q": "Area of circle radius 4 (use π=3.14)?",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6ci-2-38",
+          "q": "Area of circle radius 8 (use π=3.14)?",
+          "type": "free",
+          "ans": "201"
+        },
+        {
+          "id": "g6ci-2-39",
+          "q": "Area of circle radius 9 (use π=3.14)?",
+          "type": "free",
+          "ans": "254"
+        },
+        {
+          "id": "g6ci-2-40",
+          "q": "Area of circle radius 5 (use π=3.14)?",
+          "type": "free",
+          "ans": "79"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6ci-3-01",
+          "q": "Diameter 8 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6ci-3-02",
+          "q": "Diameter 11 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "35"
+        },
+        {
+          "id": "g6ci-3-03",
+          "q": "Diameter 4 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "13"
+        },
+        {
+          "id": "g6ci-3-04",
+          "q": "Diameter 8 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6ci-3-05",
+          "q": "Diameter 11 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "35"
+        },
+        {
+          "id": "g6ci-3-06",
+          "q": "Diameter 27 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "85"
+        },
+        {
+          "id": "g6ci-3-07",
+          "q": "Diameter 16 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "50"
+        },
+        {
+          "id": "g6ci-3-08",
+          "q": "Diameter 28 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "88"
+        },
+        {
+          "id": "g6ci-3-09",
+          "q": "Diameter 30 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "94"
+        },
+        {
+          "id": "g6ci-3-10",
+          "q": "Diameter 17 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "53"
+        },
+        {
+          "id": "g6ci-3-11",
+          "q": "Diameter 11 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "35"
+        },
+        {
+          "id": "g6ci-3-12",
+          "q": "Diameter 9 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "28"
+        },
+        {
+          "id": "g6ci-3-13",
+          "q": "Diameter 8 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6ci-3-14",
+          "q": "Diameter 15 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "47"
+        },
+        {
+          "id": "g6ci-3-15",
+          "q": "Diameter 23 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "72"
+        },
+        {
+          "id": "g6ci-3-16",
+          "q": "Diameter 11 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "35"
+        },
+        {
+          "id": "g6ci-3-17",
+          "q": "Diameter 26 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "82"
+        },
+        {
+          "id": "g6ci-3-18",
+          "q": "Diameter 25 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "79"
+        },
+        {
+          "id": "g6ci-3-19",
+          "q": "Diameter 19 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "60"
+        },
+        {
+          "id": "g6ci-3-20",
+          "q": "Diameter 22 cm. Circumference? (use π=3.14)",
+          "type": "free",
+          "ans": "69"
+        }
+      ]
+    },
+    "g6-volume3d": {
+      "1": [
+        {
+          "id": "g6v3-1-01",
+          "q": "Area of rectangle 20×14 cm?",
+          "type": "free",
+          "ans": "280"
+        },
+        {
+          "id": "g6v3-1-02",
+          "q": "Area of rectangle 14×13 cm?",
+          "type": "free",
+          "ans": "182"
+        },
+        {
+          "id": "g6v3-1-03",
+          "q": "Area of rectangle 19×15 cm?",
+          "type": "free",
+          "ans": "285"
+        },
+        {
+          "id": "g6v3-1-04",
+          "q": "Area of rectangle 15×5 cm?",
+          "type": "free",
+          "ans": "75"
+        },
+        {
+          "id": "g6v3-1-05",
+          "q": "Area of rectangle 19×12 cm?",
+          "type": "free",
+          "ans": "228"
+        },
+        {
+          "id": "g6v3-1-06",
+          "q": "Area of rectangle 15×3 cm?",
+          "type": "free",
+          "ans": "45"
+        },
+        {
+          "id": "g6v3-1-07",
+          "q": "Area of rectangle 20×5 cm?",
+          "type": "free",
+          "ans": "100"
+        },
+        {
+          "id": "g6v3-1-08",
+          "q": "Area of rectangle 16×5 cm?",
+          "type": "free",
+          "ans": "80"
+        },
+        {
+          "id": "g6v3-1-09",
+          "q": "Area of rectangle 7×14 cm?",
+          "type": "free",
+          "ans": "98"
+        },
+        {
+          "id": "g6v3-1-10",
+          "q": "Area of rectangle 9×2 cm?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6v3-1-11",
+          "q": "Area of rectangle 16×12 cm?",
+          "type": "free",
+          "ans": "192"
+        },
+        {
+          "id": "g6v3-1-12",
+          "q": "Area of rectangle 15×12 cm?",
+          "type": "free",
+          "ans": "180"
+        },
+        {
+          "id": "g6v3-1-13",
+          "q": "Area of rectangle 17×10 cm?",
+          "type": "free",
+          "ans": "170"
+        },
+        {
+          "id": "g6v3-1-14",
+          "q": "Area of rectangle 13×8 cm?",
+          "type": "free",
+          "ans": "104"
+        },
+        {
+          "id": "g6v3-1-15",
+          "q": "Area of rectangle 5×14 cm?",
+          "type": "free",
+          "ans": "70"
+        },
+        {
+          "id": "g6v3-1-16",
+          "q": "Area of rectangle 7×9 cm?",
+          "type": "free",
+          "ans": "63"
+        },
+        {
+          "id": "g6v3-1-17",
+          "q": "Area of rectangle 19×10 cm?",
+          "type": "free",
+          "ans": "190"
+        },
+        {
+          "id": "g6v3-1-18",
+          "q": "Area of rectangle 17×3 cm?",
+          "type": "free",
+          "ans": "51"
+        },
+        {
+          "id": "g6v3-1-19",
+          "q": "Area of rectangle 5×12 cm?",
+          "type": "free",
+          "ans": "60"
+        },
+        {
+          "id": "g6v3-1-20",
+          "q": "Area of rectangle 16×7 cm?",
+          "type": "free",
+          "ans": "112"
+        },
+        {
+          "id": "g6v3-1-21",
+          "q": "Area of rectangle 20×11 cm?",
+          "type": "free",
+          "ans": "220"
+        },
+        {
+          "id": "g6v3-1-22",
+          "q": "Area of rectangle 13×14 cm?",
+          "type": "free",
+          "ans": "182"
+        },
+        {
+          "id": "g6v3-1-23",
+          "q": "Area of rectangle 12×3 cm?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6v3-1-24",
+          "q": "Area of rectangle 16×9 cm?",
+          "type": "free",
+          "ans": "144"
+        },
+        {
+          "id": "g6v3-1-25",
+          "q": "Area of rectangle 19×13 cm?",
+          "type": "free",
+          "ans": "247"
+        },
+        {
+          "id": "g6v3-1-26",
+          "q": "Area of rectangle 16×15 cm?",
+          "type": "free",
+          "ans": "240"
+        },
+        {
+          "id": "g6v3-1-27",
+          "q": "Area of rectangle 4×14 cm?",
+          "type": "free",
+          "ans": "56"
+        },
+        {
+          "id": "g6v3-1-28",
+          "q": "Area of rectangle 18×4 cm?",
+          "type": "free",
+          "ans": "72"
+        },
+        {
+          "id": "g6v3-1-29",
+          "q": "Area of rectangle 19×15 cm?",
+          "type": "free",
+          "ans": "285"
+        },
+        {
+          "id": "g6v3-1-30",
+          "q": "Area of rectangle 15×4 cm?",
+          "type": "free",
+          "ans": "60"
+        },
+        {
+          "id": "g6v3-1-31",
+          "q": "Area of triangle base 11, height 11?",
+          "type": "free",
+          "ans": "60"
+        },
+        {
+          "id": "g6v3-1-32",
+          "q": "Area of triangle base 11, height 5?",
+          "type": "free",
+          "ans": "27"
+        },
+        {
+          "id": "g6v3-1-33",
+          "q": "Area of triangle base 14, height 10?",
+          "type": "free",
+          "ans": "70"
+        },
+        {
+          "id": "g6v3-1-34",
+          "q": "Area of triangle base 10, height 6?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6v3-1-35",
+          "q": "Area of triangle base 4, height 9?",
+          "type": "free",
+          "ans": "18"
+        },
+        {
+          "id": "g6v3-1-36",
+          "q": "Area of triangle base 13, height 13?",
+          "type": "free",
+          "ans": "84"
+        },
+        {
+          "id": "g6v3-1-37",
+          "q": "Area of triangle base 12, height 7?",
+          "type": "free",
+          "ans": "42"
+        },
+        {
+          "id": "g6v3-1-38",
+          "q": "Area of triangle base 14, height 7?",
+          "type": "free",
+          "ans": "49"
+        },
+        {
+          "id": "g6v3-1-39",
+          "q": "Area of triangle base 10, height 6?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6v3-1-40",
+          "q": "Area of triangle base 10, height 5?",
+          "type": "free",
+          "ans": "25"
+        },
+        {
+          "id": "g6v3-1-41",
+          "q": "Area of triangle base 7, height 4?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6v3-1-42",
+          "q": "Area of triangle base 16, height 8?",
+          "type": "free",
+          "ans": "64"
+        },
+        {
+          "id": "g6v3-1-43",
+          "q": "Area of triangle base 17, height 11?",
+          "type": "free",
+          "ans": "93"
+        },
+        {
+          "id": "g6v3-1-44",
+          "q": "Area of triangle base 17, height 12?",
+          "type": "free",
+          "ans": "102"
+        },
+        {
+          "id": "g6v3-1-45",
+          "q": "Area of triangle base 4, height 6?",
+          "type": "free",
+          "ans": "12"
+        },
+        {
+          "id": "g6v3-1-46",
+          "q": "Area of triangle base 5, height 6?",
+          "type": "free",
+          "ans": "15"
+        },
+        {
+          "id": "g6v3-1-47",
+          "q": "Area of triangle base 18, height 4?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6v3-1-48",
+          "q": "Area of triangle base 4, height 15?",
+          "type": "free",
+          "ans": "30"
+        },
+        {
+          "id": "g6v3-1-49",
+          "q": "Area of triangle base 12, height 14?",
+          "type": "free",
+          "ans": "84"
+        },
+        {
+          "id": "g6v3-1-50",
+          "q": "Area of triangle base 7, height 12?",
+          "type": "free",
+          "ans": "42"
+        },
+        {
+          "id": "g6v3-1-51",
+          "q": "Area of triangle base 10, height 14?",
+          "type": "free",
+          "ans": "70"
+        },
+        {
+          "id": "g6v3-1-52",
+          "q": "Area of triangle base 18, height 8?",
+          "type": "free",
+          "ans": "72"
+        },
+        {
+          "id": "g6v3-1-53",
+          "q": "Area of triangle base 10, height 9?",
+          "type": "free",
+          "ans": "45"
+        },
+        {
+          "id": "g6v3-1-54",
+          "q": "Area of triangle base 18, height 7?",
+          "type": "free",
+          "ans": "63"
+        },
+        {
+          "id": "g6v3-1-55",
+          "q": "Area of triangle base 11, height 7?",
+          "type": "free",
+          "ans": "38"
+        },
+        {
+          "id": "g6v3-1-56",
+          "q": "Area of triangle base 12, height 6?",
+          "type": "free",
+          "ans": "36"
+        },
+        {
+          "id": "g6v3-1-57",
+          "q": "Area of triangle base 13, height 4?",
+          "type": "free",
+          "ans": "26"
+        },
+        {
+          "id": "g6v3-1-58",
+          "q": "Area of triangle base 7, height 10?",
+          "type": "free",
+          "ans": "35"
+        },
+        {
+          "id": "g6v3-1-59",
+          "q": "Area of triangle base 7, height 4?",
+          "type": "free",
+          "ans": "14"
+        },
+        {
+          "id": "g6v3-1-60",
+          "q": "Area of triangle base 18, height 9?",
+          "type": "free",
+          "ans": "81"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6v3-2-01",
+          "q": "Volume of prism 17×15×2 cm?",
+          "type": "free",
+          "ans": "510"
+        },
+        {
+          "id": "g6v3-2-02",
+          "q": "Volume of prism 10×3×10 cm?",
+          "type": "free",
+          "ans": "300"
+        },
+        {
+          "id": "g6v3-2-03",
+          "q": "Volume of prism 19×7×12 cm?",
+          "type": "free",
+          "ans": "1596"
+        },
+        {
+          "id": "g6v3-2-04",
+          "q": "Volume of prism 10×9×2 cm?",
+          "type": "free",
+          "ans": "180"
+        },
+        {
+          "id": "g6v3-2-05",
+          "q": "Volume of prism 14×9×2 cm?",
+          "type": "free",
+          "ans": "252"
+        },
+        {
+          "id": "g6v3-2-06",
+          "q": "Volume of prism 4×11×4 cm?",
+          "type": "free",
+          "ans": "176"
+        },
+        {
+          "id": "g6v3-2-07",
+          "q": "Volume of prism 6×9×6 cm?",
+          "type": "free",
+          "ans": "324"
+        },
+        {
+          "id": "g6v3-2-08",
+          "q": "Volume of prism 13×15×3 cm?",
+          "type": "free",
+          "ans": "585"
+        },
+        {
+          "id": "g6v3-2-09",
+          "q": "Volume of prism 16×8×12 cm?",
+          "type": "free",
+          "ans": "1536"
+        },
+        {
+          "id": "g6v3-2-10",
+          "q": "Volume of prism 16×6×5 cm?",
+          "type": "free",
+          "ans": "480"
+        },
+        {
+          "id": "g6v3-2-11",
+          "q": "Volume of prism 4×12×9 cm?",
+          "type": "free",
+          "ans": "432"
+        },
+        {
+          "id": "g6v3-2-12",
+          "q": "Volume of prism 12×9×12 cm?",
+          "type": "free",
+          "ans": "1296"
+        },
+        {
+          "id": "g6v3-2-13",
+          "q": "Volume of prism 8×7×2 cm?",
+          "type": "free",
+          "ans": "112"
+        },
+        {
+          "id": "g6v3-2-14",
+          "q": "Volume of prism 16×8×7 cm?",
+          "type": "free",
+          "ans": "896"
+        },
+        {
+          "id": "g6v3-2-15",
+          "q": "Volume of prism 11×15×10 cm?",
+          "type": "free",
+          "ans": "1650"
+        },
+        {
+          "id": "g6v3-2-16",
+          "q": "Volume of prism 17×9×2 cm?",
+          "type": "free",
+          "ans": "306"
+        },
+        {
+          "id": "g6v3-2-17",
+          "q": "Volume of prism 13×5×6 cm?",
+          "type": "free",
+          "ans": "390"
+        },
+        {
+          "id": "g6v3-2-18",
+          "q": "Volume of prism 8×9×5 cm?",
+          "type": "free",
+          "ans": "360"
+        },
+        {
+          "id": "g6v3-2-19",
+          "q": "Volume of prism 15×9×6 cm?",
+          "type": "free",
+          "ans": "810"
+        },
+        {
+          "id": "g6v3-2-20",
+          "q": "Volume of prism 19×13×3 cm?",
+          "type": "free",
+          "ans": "741"
+        },
+        {
+          "id": "g6v3-2-21",
+          "q": "Volume of prism 19×14×9 cm?",
+          "type": "free",
+          "ans": "2394"
+        },
+        {
+          "id": "g6v3-2-22",
+          "q": "Volume of prism 5×15×3 cm?",
+          "type": "free",
+          "ans": "225"
+        },
+        {
+          "id": "g6v3-2-23",
+          "q": "Volume of prism 9×9×4 cm?",
+          "type": "free",
+          "ans": "324"
+        },
+        {
+          "id": "g6v3-2-24",
+          "q": "Volume of prism 17×5×6 cm?",
+          "type": "free",
+          "ans": "510"
+        },
+        {
+          "id": "g6v3-2-25",
+          "q": "Volume of prism 14×11×8 cm?",
+          "type": "free",
+          "ans": "1232"
+        },
+        {
+          "id": "g6v3-2-26",
+          "q": "Volume of prism 17×11×8 cm?",
+          "type": "free",
+          "ans": "1496"
+        },
+        {
+          "id": "g6v3-2-27",
+          "q": "Volume of prism 6×8×6 cm?",
+          "type": "free",
+          "ans": "288"
+        },
+        {
+          "id": "g6v3-2-28",
+          "q": "Volume of prism 11×5×7 cm?",
+          "type": "free",
+          "ans": "385"
+        },
+        {
+          "id": "g6v3-2-29",
+          "q": "Volume of prism 5×12×9 cm?",
+          "type": "free",
+          "ans": "540"
+        },
+        {
+          "id": "g6v3-2-30",
+          "q": "Volume of prism 20×14×2 cm?",
+          "type": "free",
+          "ans": "560"
+        },
+        {
+          "id": "g6v3-2-31",
+          "q": "Volume of prism 10×7×8 cm?",
+          "type": "free",
+          "ans": "560"
+        },
+        {
+          "id": "g6v3-2-32",
+          "q": "Volume of prism 18×10×9 cm?",
+          "type": "free",
+          "ans": "1620"
+        },
+        {
+          "id": "g6v3-2-33",
+          "q": "Volume of prism 10×5×3 cm?",
+          "type": "free",
+          "ans": "150"
+        },
+        {
+          "id": "g6v3-2-34",
+          "q": "Volume of prism 17×15×12 cm?",
+          "type": "free",
+          "ans": "3060"
+        },
+        {
+          "id": "g6v3-2-35",
+          "q": "Volume of prism 12×11×9 cm?",
+          "type": "free",
+          "ans": "1188"
+        },
+        {
+          "id": "g6v3-2-36",
+          "q": "Volume of prism 17×10×5 cm?",
+          "type": "free",
+          "ans": "850"
+        },
+        {
+          "id": "g6v3-2-37",
+          "q": "Volume of prism 20×7×9 cm?",
+          "type": "free",
+          "ans": "1260"
+        },
+        {
+          "id": "g6v3-2-38",
+          "q": "Volume of prism 5×6×8 cm?",
+          "type": "free",
+          "ans": "240"
+        },
+        {
+          "id": "g6v3-2-39",
+          "q": "Volume of prism 7×11×3 cm?",
+          "type": "free",
+          "ans": "231"
+        },
+        {
+          "id": "g6v3-2-40",
+          "q": "Volume of prism 10×10×10 cm?",
+          "type": "free",
+          "ans": "1000"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6v3-3-01",
+          "q": "A tank 13×6×7 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "546000"
+        },
+        {
+          "id": "g6v3-3-02",
+          "q": "A tank 13×10×8 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "1040000"
+        },
+        {
+          "id": "g6v3-3-03",
+          "q": "A tank 7×3×11 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "231000"
+        },
+        {
+          "id": "g6v3-3-04",
+          "q": "A tank 7×10×12 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "840000"
+        },
+        {
+          "id": "g6v3-3-05",
+          "q": "A tank 9×7×6 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "378000"
+        },
+        {
+          "id": "g6v3-3-06",
+          "q": "A tank 10×3×4 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "120000"
+        },
+        {
+          "id": "g6v3-3-07",
+          "q": "A tank 12×7×6 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "504000"
+        },
+        {
+          "id": "g6v3-3-08",
+          "q": "A tank 9×9×7 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "567000"
+        },
+        {
+          "id": "g6v3-3-09",
+          "q": "A tank 6×9×7 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "378000"
+        },
+        {
+          "id": "g6v3-3-10",
+          "q": "A tank 11×8×6 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "528000"
+        },
+        {
+          "id": "g6v3-3-11",
+          "q": "A tank 15×5×8 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "600000"
+        },
+        {
+          "id": "g6v3-3-12",
+          "q": "A tank 15×7×6 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "630000"
+        },
+        {
+          "id": "g6v3-3-13",
+          "q": "A tank 9×4×8 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "288000"
+        },
+        {
+          "id": "g6v3-3-14",
+          "q": "A tank 15×4×7 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "420000"
+        },
+        {
+          "id": "g6v3-3-15",
+          "q": "A tank 11×10×9 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "990000"
+        },
+        {
+          "id": "g6v3-3-16",
+          "q": "A tank 15×10×10 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "1500000"
+        },
+        {
+          "id": "g6v3-3-17",
+          "q": "A tank 12×3×11 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "396000"
+        },
+        {
+          "id": "g6v3-3-18",
+          "q": "A tank 13×6×3 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "234000"
+        },
+        {
+          "id": "g6v3-3-19",
+          "q": "A tank 6×7×11 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "462000"
+        },
+        {
+          "id": "g6v3-3-20",
+          "q": "A tank 9×8×7 m. How many litres if 1 m³ = 1000 L?",
+          "type": "free",
+          "ans": "504000"
+        }
+      ]
+    },
+    "g6-probadv": {
+      "1": [
+        {
+          "id": "g6pa-1-01",
+          "q": "P(event) = 3/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "6/9"
+        },
+        {
+          "id": "g6pa-1-02",
+          "q": "P(event) = 5/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/9"
+        },
+        {
+          "id": "g6pa-1-03",
+          "q": "P(event) = 1/5. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/5"
+        },
+        {
+          "id": "g6pa-1-04",
+          "q": "P(event) = 3/5. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/5"
+        },
+        {
+          "id": "g6pa-1-05",
+          "q": "P(event) = 1/2. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/2"
+        },
+        {
+          "id": "g6pa-1-06",
+          "q": "P(event) = 2/7. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "5/7"
+        },
+        {
+          "id": "g6pa-1-07",
+          "q": "P(event) = 5/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/9"
+        },
+        {
+          "id": "g6pa-1-08",
+          "q": "P(event) = 1/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "8/9"
+        },
+        {
+          "id": "g6pa-1-09",
+          "q": "P(event) = 5/6. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-10",
+          "q": "P(event) = 2/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "7/9"
+        },
+        {
+          "id": "g6pa-1-11",
+          "q": "P(event) = 2/8. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "6/8"
+        },
+        {
+          "id": "g6pa-1-12",
+          "q": "P(event) = 2/4. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/4"
+        },
+        {
+          "id": "g6pa-1-13",
+          "q": "P(event) = 2/4. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/4"
+        },
+        {
+          "id": "g6pa-1-14",
+          "q": "P(event) = 5/7. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/7"
+        },
+        {
+          "id": "g6pa-1-15",
+          "q": "P(event) = 3/4. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-1-16",
+          "q": "P(event) = 5/8. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6pa-1-17",
+          "q": "P(event) = 3/10. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "7/10"
+        },
+        {
+          "id": "g6pa-1-18",
+          "q": "P(event) = 2/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "7/9"
+        },
+        {
+          "id": "g6pa-1-19",
+          "q": "P(event) = 4/6. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-20",
+          "q": "P(event) = 5/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/9"
+        },
+        {
+          "id": "g6pa-1-21",
+          "q": "P(event) = 4/8. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/8"
+        },
+        {
+          "id": "g6pa-1-22",
+          "q": "P(event) = 3/7. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/7"
+        },
+        {
+          "id": "g6pa-1-23",
+          "q": "P(event) = 5/7. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/7"
+        },
+        {
+          "id": "g6pa-1-24",
+          "q": "P(event) = 1/5. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "4/5"
+        },
+        {
+          "id": "g6pa-1-25",
+          "q": "P(event) = 5/7. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "2/7"
+        },
+        {
+          "id": "g6pa-1-26",
+          "q": "P(event) = 2/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "7/9"
+        },
+        {
+          "id": "g6pa-1-27",
+          "q": "P(event) = 3/4. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-1-28",
+          "q": "P(event) = 2/3. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/3"
+        },
+        {
+          "id": "g6pa-1-29",
+          "q": "P(event) = 4/9. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "5/9"
+        },
+        {
+          "id": "g6pa-1-30",
+          "q": "P(event) = 5/6. What is P(not event)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-31",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-32",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-33",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-34",
+          "q": "Fair die. P(rolling > 2)? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6pa-1-35",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-36",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-37",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-38",
+          "q": "Fair die. P(rolling > 2)? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6pa-1-39",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-40",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-41",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-42",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-43",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-44",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-45",
+          "q": "Fair die. P(rolling > 2)? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6pa-1-46",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-47",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-48",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-49",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-50",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-51",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-52",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-53",
+          "q": "Fair die. P(rolling > 2)? (as a/b)",
+          "type": "free",
+          "ans": "4/6"
+        },
+        {
+          "id": "g6pa-1-54",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-55",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-56",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-1-57",
+          "q": "Fair die. P(rolling > 5)? (as a/b)",
+          "type": "free",
+          "ans": "1/6"
+        },
+        {
+          "id": "g6pa-1-58",
+          "q": "Fair die. P(rolling > 1)? (as a/b)",
+          "type": "free",
+          "ans": "5/6"
+        },
+        {
+          "id": "g6pa-1-59",
+          "q": "Fair die. P(rolling > 3)? (as a/b)",
+          "type": "free",
+          "ans": "3/6"
+        },
+        {
+          "id": "g6pa-1-60",
+          "q": "Fair die. P(rolling > 4)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        }
+      ],
+      "2": [
+        {
+          "id": "g6pa-2-01",
+          "q": "Bag: 5 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "5/9"
+        },
+        {
+          "id": "g6pa-2-02",
+          "q": "Bag: 2 red, 2 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/4"
+        },
+        {
+          "id": "g6pa-2-03",
+          "q": "Bag: 7 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "7/11"
+        },
+        {
+          "id": "g6pa-2-04",
+          "q": "Bag: 4 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "4/12"
+        },
+        {
+          "id": "g6pa-2-05",
+          "q": "Bag: 3 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/7"
+        },
+        {
+          "id": "g6pa-2-06",
+          "q": "Bag: 6 red, 2 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/8"
+        },
+        {
+          "id": "g6pa-2-07",
+          "q": "Bag: 2 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/7"
+        },
+        {
+          "id": "g6pa-2-08",
+          "q": "Bag: 3 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/11"
+        },
+        {
+          "id": "g6pa-2-09",
+          "q": "Bag: 8 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/13"
+        },
+        {
+          "id": "g6pa-2-10",
+          "q": "Bag: 8 red, 2 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/10"
+        },
+        {
+          "id": "g6pa-2-11",
+          "q": "Bag: 6 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/11"
+        },
+        {
+          "id": "g6pa-2-12",
+          "q": "Bag: 2 red, 7 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/9"
+        },
+        {
+          "id": "g6pa-2-13",
+          "q": "Bag: 3 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        },
+        {
+          "id": "g6pa-2-14",
+          "q": "Bag: 7 red, 2 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "7/9"
+        },
+        {
+          "id": "g6pa-2-15",
+          "q": "Bag: 4 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "4/12"
+        },
+        {
+          "id": "g6pa-2-16",
+          "q": "Bag: 2 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/10"
+        },
+        {
+          "id": "g6pa-2-17",
+          "q": "Bag: 8 red, 7 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/15"
+        },
+        {
+          "id": "g6pa-2-18",
+          "q": "Bag: 6 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/14"
+        },
+        {
+          "id": "g6pa-2-19",
+          "q": "Bag: 8 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/16"
+        },
+        {
+          "id": "g6pa-2-20",
+          "q": "Bag: 2 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/7"
+        },
+        {
+          "id": "g6pa-2-21",
+          "q": "Bag: 5 red, 6 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "5/11"
+        },
+        {
+          "id": "g6pa-2-22",
+          "q": "Bag: 6 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/10"
+        },
+        {
+          "id": "g6pa-2-23",
+          "q": "Bag: 2 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/6"
+        },
+        {
+          "id": "g6pa-2-24",
+          "q": "Bag: 6 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/11"
+        },
+        {
+          "id": "g6pa-2-25",
+          "q": "Bag: 3 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/7"
+        },
+        {
+          "id": "g6pa-2-26",
+          "q": "Bag: 8 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/13"
+        },
+        {
+          "id": "g6pa-2-27",
+          "q": "Bag: 2 red, 3 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/5"
+        },
+        {
+          "id": "g6pa-2-28",
+          "q": "Bag: 7 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "7/11"
+        },
+        {
+          "id": "g6pa-2-29",
+          "q": "Bag: 4 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "4/8"
+        },
+        {
+          "id": "g6pa-2-30",
+          "q": "Bag: 7 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "7/15"
+        },
+        {
+          "id": "g6pa-2-31",
+          "q": "Bag: 3 red, 4 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/7"
+        },
+        {
+          "id": "g6pa-2-32",
+          "q": "Bag: 8 red, 2 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/10"
+        },
+        {
+          "id": "g6pa-2-33",
+          "q": "Bag: 2 red, 7 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/9"
+        },
+        {
+          "id": "g6pa-2-34",
+          "q": "Bag: 4 red, 6 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "4/10"
+        },
+        {
+          "id": "g6pa-2-35",
+          "q": "Bag: 8 red, 6 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "8/14"
+        },
+        {
+          "id": "g6pa-2-36",
+          "q": "Bag: 5 red, 8 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "5/13"
+        },
+        {
+          "id": "g6pa-2-37",
+          "q": "Bag: 6 red, 7 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "6/13"
+        },
+        {
+          "id": "g6pa-2-38",
+          "q": "Bag: 3 red, 6 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/9"
+        },
+        {
+          "id": "g6pa-2-39",
+          "q": "Bag: 2 red, 6 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "2/8"
+        },
+        {
+          "id": "g6pa-2-40",
+          "q": "Bag: 3 red, 5 blue marbles. P(red)? (as a/b)",
+          "type": "free",
+          "ans": "3/8"
+        }
+      ],
+      "3": [
+        {
+          "id": "g6pa-3-01",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-02",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-03",
+          "q": "3 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/8"
+        },
+        {
+          "id": "g6pa-3-04",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-05",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-06",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-07",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-08",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-09",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-10",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-11",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-12",
+          "q": "3 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/8"
+        },
+        {
+          "id": "g6pa-3-13",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-14",
+          "q": "3 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/8"
+        },
+        {
+          "id": "g6pa-3-15",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-16",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-17",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        },
+        {
+          "id": "g6pa-3-18",
+          "q": "3 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/8"
+        },
+        {
+          "id": "g6pa-3-19",
+          "q": "2 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/4"
+        },
+        {
+          "id": "g6pa-3-20",
+          "q": "4 coins flipped. P(all heads)? (as a/b)",
+          "type": "free",
+          "ans": "1/16"
+        }
+      ]
+    }
+  }
+}
