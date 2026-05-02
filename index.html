@@ -693,7 +693,20 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 let firebaseOnline = false;
-let firebaseSyncing = false;
+// True ONLY while we are merging a snapshot from the realtime listener into
+// local state. While true, saveState() must NOT schedule a Firebase write —
+// otherwise we echo remote data back, possibly stomping a newer write made on
+// another device in the meantime.
+let applyingRemote = false;
+// Has the initial snapshot from Firebase been received yet?
+// We must NOT write to Firebase before this — otherwise a freshly-opened
+// device with stale localStorage would overwrite the authoritative cloud copy.
+let initialSyncDone = false;
+// Server timestamp (ms since epoch, set by Firebase) of the most recent state
+// we have applied. Compared against new snapshots to decide whether to merge.
+let lastKnownServerTs = 0;
+// If a save is requested before initialSyncDone, defer it until after.
+let pendingSaveAfterSync = false;
 
 // Connection monitor
 db.ref('.info/connected').on('value', snap => {
@@ -705,12 +718,19 @@ db.ref('.info/connected').on('value', snap => {
 // Debounced Firebase save (avoids writes on every keystroke)
 let _saveTimeout = null;
 function scheduleFirebaseSave() {
+  if (applyingRemote) return;            // never echo remote writes
+  if (!initialSyncDone) {                // queue until first sync completes
+    pendingSaveAfterSync = true;
+    return;
+  }
   clearTimeout(_saveTimeout);
   _saveTimeout = setTimeout(saveToFirebase, 800);
 }
 
 function saveToFirebase() {
-  if (!firebaseOnline || firebaseSyncing) return;
+  if (!firebaseOnline) return;
+  if (applyingRemote) return;
+  if (!initialSyncDone) { pendingSaveAfterSync = true; return; }
   try {
     const data = {
       jenn: state.jenn,
@@ -720,56 +740,73 @@ function saveToFirebase() {
       _version: SCHEMA_VERSION,
       _updatedAt: firebase.database.ServerValue.TIMESTAMP
     };
-    db.ref('progress').set(data);
+    db.ref('progress').set(data).catch(e => console.warn('FB write failed', e));
   } catch(e) { console.warn('Firebase save failed', e); }
 }
 
-async function loadFromFirebase() {
-  try {
-    const snap = await db.ref('progress').once('value');
-    const data = snap.val();
-    if (data && data._version) {
-      // Merge Firebase data into state (preserve local keys if needed)
+// Single source of truth for sync: this listener handles BOTH the initial
+// load AND every subsequent remote change. There is no separate one-shot
+// read at startup — that previously raced with this listener.
+//
+// We never write to Firebase until this listener has fired at least once
+// (the initialSyncDone gate above). That's how we stop a freshly-opened
+// device with stale localStorage from clobbering newer cloud data.
+db.ref('progress').on('value', snap => {
+  const data = snap.val();
+  const remoteTs = (data && typeof data._updatedAt === 'number') ? data._updatedAt : 0;
+
+  // Decide whether remote should overwrite local.
+  //   - Cloud empty: keep local, mark sync done, push local up to seed cloud.
+  //   - remoteTs > lastKnownServerTs: apply (it's a real new write).
+  //   - remoteTs <= lastKnownServerTs: ignore (it's our own echo or older).
+  let shouldApply = false;
+  let shouldSeed = false;
+
+  if (!data || !data._version) {
+    shouldSeed = true;
+  } else if (remoteTs > lastKnownServerTs) {
+    shouldApply = true;
+  }
+
+  if (shouldApply) {
+    applyingRemote = true;
+    try {
       if (data.jenn) state.jenn = { ...defaultProfile(), ...data.jenn };
       if (data.jess) state.jess = { ...defaultProfile(), ...data.jess };
       if (data.battle) state.battle = { ...defaultBattle(), ...data.battle };
       if (data.currentProfile) state.currentProfile = data.currentProfile;
       state._version = SCHEMA_VERSION;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      console.log('Firebase loaded');
-      return true;
+      lastKnownServerTs = remoteTs;
+      // Persist locally WITHOUT going through saveState() — saveState would
+      // (correctly) schedule a Firebase write, which would echo this snapshot.
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+
+      // Re-render whatever's on screen so the user sees the update.
+      const activeScreen = document.querySelector('.screen.active');
+      if (activeScreen) {
+        const id = activeScreen.id;
+        if (id === 'screen-home') renderHome();
+        else if (id === 'screen-parent') renderParent();
+        else if (id === 'screen-battle') renderBattle();
+      }
+      if (typeof renderMinibelts === 'function') renderMinibelts();
+      console.log('Firebase sync: applied remote @', remoteTs);
+    } finally {
+      applyingRemote = false;
     }
-  } catch(e) { console.warn('Firebase load failed, using localStorage', e.message); }
-  return false;
-}
-
-// Real-time listener: when another device changes data, reload
-db.ref('progress').on('value', snap => {
-  if (firebaseSyncing) return; // don't react to our own writes
-  const data = snap.val();
-  if (!data || !data._version) return;
-  // Don't overwrite if our local state is newer (compare timestamps)
-  if (data._updatedAt && state._updatedAt && data._updatedAt <= state._updatedAt) return;
-  firebaseSyncing = true;
-  if (data.jenn) state.jenn = { ...defaultProfile(), ...data.jenn };
-  if (data.jess) state.jess = { ...defaultProfile(), ...data.jess };
-  if (data.battle) state.battle = { ...defaultBattle(), ...data.battle };
-  if (data.currentProfile) state.currentProfile = data.currentProfile;
-  state._updatedAt = data._updatedAt;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  // Re-render current screen
-  const activeScreen = document.querySelector('.screen.active');
-  if (activeScreen) {
-    const id = activeScreen.id;
-    if (id === 'screen-home') renderHome();
-    else if (id === 'screen-parent') renderParent();
-    else if (id === 'screen-battle') renderBattle();
   }
-  renderMinibelts();
-  firebaseSyncing = false;
-  console.log('Firebase sync: updated from remote');
-});
 
+  // Mark first-sync complete and flush any queued save.
+  if (!initialSyncDone) {
+    initialSyncDone = true;
+    console.log('Initial Firebase sync complete. Cloud has data:', !!data);
+    if (shouldSeed || pendingSaveAfterSync) {
+      pendingSaveAfterSync = false;
+      // Slight delay so any in-flight UI-triggered saves coalesce into one.
+      setTimeout(saveToFirebase, 100);
+    }
+  }
+});
 // ═══════════════════════════════════════════════════════
 // TOPIC DEFINITIONS (24 topics, 8 per grade)
 // ═══════════════════════════════════════════════════════
@@ -1207,7 +1244,10 @@ function migrateState(data, fromVersion) {
 function saveState() {
   try {
     state._version = SCHEMA_VERSION;
-    state._updatedAt = Date.now();
+    // NOTE: do NOT set state._updatedAt here. The authoritative timestamp is
+    // assigned by Firebase ServerValue.TIMESTAMP on write, then mirrored back
+    // into lastKnownServerTs by the realtime listener. Using a local clock
+    // here would cause cross-device clock skew to corrupt last-write-wins.
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     scheduleFirebaseSave();
   }
@@ -1217,7 +1257,12 @@ function saveState() {
 function resetAllData() {
   if(!confirm('Reset ALL progress for both girls? This cannot be undone.')) return;
   localStorage.removeItem(STORAGE_KEY);
-  if (firebaseOnline) db.ref('progress').remove();
+  // Reset our sync bookkeeping so the cloud-empty snapshot doesn't get
+  // mistaken for a "stale" remote and ignored on the next listener fire.
+  lastKnownServerTs = 0;
+  if (firebaseOnline) {
+    db.ref('progress').remove().catch(e => console.warn('Cloud reset failed', e));
+  }
   state = loadState();
   renderMinibelts();
   alert('Reset complete!');
@@ -2561,29 +2606,19 @@ async function loadGrade6Questions() {
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-(async function init() {
+(function init() {
   cacheDOM();
   validateTopics();
-  // Render immediately from localStorage
+  // Render immediately from localStorage so the UI is responsive even before
+  // the cloud snapshot arrives. The realtime listener (registered earlier in
+  // this script) will fire shortly with the authoritative cloud state and
+  // re-render automatically if remote is newer than what we last applied.
   checkResets();
   renderMinibelts();
-  // Load questions in background
+  // Load question banks (fire-and-forget — independent of sync).
   loadGrade4Questions();
   loadGrade5Questions();
   loadGrade6Questions();
-  // Then try Firebase sync (non-blocking — updates UI when ready)
-  const loaded = await loadFromFirebase();
-  if (loaded) {
-    renderMinibelts();
-    // Re-render current screen if visible
-    const active = document.querySelector('.screen.active');
-    if (active) {
-      if (active.id === 'screen-home') renderHome();
-      else if (active.id === 'screen-parent') renderParent();
-      else if (active.id === 'screen-battle') renderBattle();
-    }
-    console.log('Synced from Firebase');
-  }
 })();
 </script>
 </body>
