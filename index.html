@@ -224,6 +224,26 @@ body::before {
 .easy-btn.active { background:#F39C12; color:white; }
 .next-btn { padding:10px 20px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--purple),#6C3483); color:white; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; border:none; cursor:pointer; margin-left:auto; transition:all 0.2s; box-shadow:0 3px 12px rgba(155,89,182,0.3); }
 .next-btn:hover { transform:translateY(-1px); }
+.report-btn { padding:9px 14px; border-radius:var(--radius-sm); border:2px solid #E74C3C; background:white; color:#E74C3C; font-family:'Nunito',sans-serif; font-size:12.5px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.2s; }
+.report-btn:hover { background:#FDEDEC; }
+.report-btn.reported { background:#E74C3C; color:white; cursor:default; }
+/* Report modal */
+.report-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center; padding:20px; }
+.report-overlay.open { display:flex; }
+.report-modal { background:#fff; border-radius:var(--radius); padding:24px; max-width:400px; width:100%; box-shadow:0 12px 40px rgba(0,0,0,0.2); animation:fadeIn 0.2s ease; }
+.report-modal h3 { font-family:'Baloo 2',cursive; font-size:18px; font-weight:800; margin-bottom:6px; color:var(--text); }
+.report-modal p { font-size:13px; color:var(--muted); font-weight:600; margin-bottom:14px; }
+.report-q-preview { background:#F7F3FF; border-radius:var(--radius-sm); padding:10px 12px; font-size:12.5px; font-weight:700; color:var(--text); margin-bottom:14px; border-left:3px solid var(--purple); }
+.report-options { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.report-option { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; font-weight:700; color:var(--text); }
+.report-option input[type=radio] { accent-color:#E74C3C; width:16px; height:16px; cursor:pointer; }
+.report-note { width:100%; border:2px solid var(--border); border-radius:var(--radius-sm); padding:9px 12px; font-family:'Nunito',sans-serif; font-size:13px; font-weight:600; resize:none; outline:none; transition:border-color 0.2s; margin-bottom:14px; }
+.report-note:focus { border-color:var(--purple); }
+.report-actions { display:flex; gap:10px; justify-content:flex-end; }
+.report-cancel { padding:9px 18px; border-radius:var(--radius-sm); border:2px solid var(--border); background:white; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; color:var(--muted); }
+.report-submit { padding:9px 18px; border-radius:var(--radius-sm); border:none; background:#E74C3C; color:white; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; transition:background 0.2s; }
+.report-submit:hover { background:#C0392B; }
+.report-submit:disabled { opacity:0.6; cursor:default; }
 .vault-tag { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--muted); font-weight:700; margin-top:8px; }
 .success-tag { display:flex; align-items:center; gap:6px; font-size:14px; font-weight:800; color:var(--success); }
 
@@ -1992,6 +2012,7 @@ function handleResult(correct, q, chosen) {
         <div class="success-tag">✅ Correct!</div>
         <button class="explain-btn" id="explain-btn" onclick="loadExplanation(this, 'correct')">🧠 Why?</button>
         <button class="easy-btn" id="easy-btn" onclick="markTooEasy(this)">😴 Too Easy</button>
+        <button class="report-btn" id="report-btn" onclick="openReportModal()">🚩 Report</button>
         ${nextBtnHtml}
       </div>
       <div id="explain-content"></div>
@@ -2000,6 +2021,7 @@ function handleResult(correct, q, chosen) {
     feedbackArea.innerHTML = `
       <div class="feedback-row">
         <button class="explain-btn" id="explain-btn" onclick="loadExplanation(this, 'wrong')">🧠 Explain</button>
+        <button class="report-btn" id="report-btn" onclick="openReportModal()">🚩 Report</button>
         ${nextBtnHtml}
       </div>
       <div class="vault-tag">🔐 Saved to Vault — you can retry it later</div>
@@ -2018,6 +2040,72 @@ function markTooEasy(btn) {
   btn.textContent = '😴 Flagged';
   btn.disabled = true;
   saveState();
+}
+
+function openReportModal() {
+  const q = state.questions?.[state.qIndex]
+         || state.battleActive?.questions?.[state.battleActive?.qIdx - 1];
+  if (!q) return;
+  const answerText = q.choices ? q.choices[q.ans] : q.ans;
+  document.getElementById('report-q-preview').textContent =
+    `Q: ${q.q}  |  Marked answer: ${answerText}`;
+  document.getElementById('report-note').value = '';
+  document.querySelector('input[name="report-type"][value="wrong_answer"]').checked = true;
+  document.getElementById('report-submit-btn').disabled = false;
+  document.getElementById('report-submit-btn').textContent = 'Send Report';
+  document.getElementById('report-overlay').classList.add('open');
+}
+
+function closeReportModal() {
+  document.getElementById('report-overlay').classList.remove('open');
+}
+
+async function submitReport() {
+  const btn = document.getElementById('report-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const q = state.questions?.[state.qIndex]
+         || state.battleActive?.questions?.[state.battleActive?.qIdx - 1];
+  const reportType = document.querySelector('input[name="report-type"]:checked')?.value || 'other';
+  const note = document.getElementById('report-note').value.trim();
+  const profile = getProfile();
+  const answerText = q?.choices ? q.choices[q.ans] : q?.ans;
+
+  const report = {
+    questionId: q?.id || 'unknown',
+    questionText: q?.q || '',
+    choices: q?.choices || [],
+    markedAnswer: answerText || '',
+    markedAnswerIndex: q?.ans ?? null,
+    reportType,
+    note,
+    reporter: profile?.name || 'unknown',
+    grade: profile?.grade || 'unknown',
+    topicId: state.topic?.id || state.battleActive?.topic?.id || 'unknown',
+    topicTitle: state.topic?.title || state.battleActive?.topic?.title || 'unknown',
+    reportedAt: new Date().toISOString()
+  };
+
+  try {
+    await db.collection('math_game_reports').add(report);
+    btn.textContent = 'Sent!';
+  } catch(e) {
+    // Firestore offline — store locally as fallback
+    const pending = JSON.parse(localStorage.getItem('pendingReports') || '[]');
+    pending.push(report);
+    localStorage.setItem('pendingReports', JSON.stringify(pending));
+    btn.textContent = 'Saved locally';
+  }
+
+  const reportBtn = document.getElementById('report-btn');
+  if (reportBtn) {
+    reportBtn.classList.add('reported');
+    reportBtn.textContent = '🚩 Reported';
+    reportBtn.onclick = null;
+  }
+
+  setTimeout(closeReportModal, 800);
 }
 
 async function loadExplanation(btn, mode) {
@@ -2507,9 +2595,10 @@ function scoreBattle(correct, timeout) {
   const playerEmoji = b.currentPlayer === 'jenn' ? '🐥' : '🦊';
   const feedback = document.getElementById('feedback-area');
   feedback.innerHTML = `
-    <div style="padding:14px; background:${correct?'#EAFAF1':'#FDEDEC'}; border-radius:10px; display:flex; align-items:center; gap:10px;">
+    <div style="padding:14px; background:${correct?'#EAFAF1':'#FDEDEC'}; border-radius:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
       <span style="font-size:20px;">${correct?'✅':timeout?'⏰':'❌'}</span>
       <span style="font-size:14px; font-weight:800; color:${correct?'#1E8449':'#C0392B'};">${correct?'Correct!':timeout?'Time up!':'Wrong!'}</span>
+      <button class="report-btn" id="report-btn" onclick="openReportModal()" style="margin-left:0;">🚩 Report</button>
       <button class="next-btn" style="margin-left:auto;" onclick="nextBattleQuestion()">Next →</button>
     </div>
   `;
@@ -2642,5 +2731,25 @@ async function loadGrade6Questions() {
   loadGrade6Questions();
 })();
 </script>
+
+<!-- Report Error Modal -->
+<div class="report-overlay" id="report-overlay" onclick="if(event.target===this)closeReportModal()">
+  <div class="report-modal">
+    <h3>🚩 Report an Error</h3>
+    <p>Think this question or answer is wrong? Let us know!</p>
+    <div class="report-q-preview" id="report-q-preview"></div>
+    <div class="report-options">
+      <label class="report-option"><input type="radio" name="report-type" value="wrong_answer" checked> The correct answer shown is wrong</label>
+      <label class="report-option"><input type="radio" name="report-type" value="wrong_question"> The question itself has an error</label>
+      <label class="report-option"><input type="radio" name="report-type" value="bad_choices"> One of the answer choices is wrong/missing</label>
+      <label class="report-option"><input type="radio" name="report-type" value="other"> Other</label>
+    </div>
+    <textarea class="report-note" id="report-note" rows="3" placeholder="Optional: add any details..."></textarea>
+    <div class="report-actions">
+      <button class="report-cancel" onclick="closeReportModal()">Cancel</button>
+      <button class="report-submit" id="report-submit-btn" onclick="submitReport()">Send Report</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
